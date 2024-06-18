@@ -289,6 +289,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7baceb5cfe3bae14ebc5dbf1b57e8fd7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  EnemySpawner: {fileID: 2328552997668316313, guid: 03914be56629494469b7a41047281b9c, type: 3}
   numPoints: 3
   map: {fileID: 1641838877}
   pathTile: {fileID: 11400000, guid: 340e0f383d7e80c4997307d8c3b7c74f, type: 2}

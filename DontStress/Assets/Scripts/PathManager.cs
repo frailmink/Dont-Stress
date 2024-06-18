@@ -2,9 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
+using UnityEngine.InputSystem;
 
 public class PathManager : MonoBehaviour
 {
+    public GameObject EnemySpawner;
+
     public int numPoints;
     // public int rangeX, rangeY;
     private Vector2 pathStart;
@@ -14,6 +17,28 @@ public class PathManager : MonoBehaviour
     public TileBase pathTile, red, green;
 
     private Queue<Vector2> path;
+
+    // private PlayerInput PlayerControls;
+    // private InputAction shoot;
+
+    // private void OnEnable()
+    // {
+    //     PlayerControls = new PlayerInput();
+    //     shoot = PlayerControls.Player.Attack;
+    //     shoot.Enable();
+    //     shoot.performed += Fire;
+    // }
+
+    // private void OnDisable()
+    // {
+    //    shoot.Disable();
+    // }
+
+    // private void Fire(InputAction.CallbackContext context)
+    // {
+    //     map.ClearAllTiles();
+    //     Run();
+    // }
 
     // Start is called before the first frame update
     void Start()
@@ -42,7 +67,13 @@ public class PathManager : MonoBehaviour
         path = OrderQueue(pathStart, pathEnd);
 
         path.Enqueue(pathEnd);
-        CreatePath(pathStart, pathEnd);
+        Queue<Vector2> fullPath = CreatePath(pathStart, pathEnd);
+
+        GameObject insatnce = Instantiate(EnemySpawner, map.CellToWorld(new Vector3Int((int) pathStart.x, (int) pathStart.y, 0)), transform.rotation);
+        EnemySpawner script = insatnce.GetComponent<EnemySpawner>();
+        Queue<Vector2> pathClone = new Queue<Vector2>(fullPath);
+        script.path = fullPath;
+        script.map = map;
     }
 
     private Queue<Vector2> OrderQueue(Vector2 start, Vector2 end)
@@ -76,30 +107,57 @@ public class PathManager : MonoBehaviour
         return orderedQueue;
     }
 
-    private void CreatePath(Vector2 start, Vector2 end)
+    private Queue<Vector2> CreatePath(Vector2 start, Vector2 end)
     {
+        Queue<Vector2> fullPath = new Queue<Vector2>();
+
         Vector2 firstPoint = path.Dequeue();
         Vector2 secondPoint;
 
         while (path.Count != 0)
         {
+            // fullPath.Enqueue(firstPoint);
+
             secondPoint = path.Dequeue();
             int startX = (int)firstPoint.x;
             int endX = (int)secondPoint.x;
             int startY = (int)firstPoint.y;
             int endY = (int)secondPoint.y;
 
+            Queue<Vector2> tempQX = new Queue<Vector2>();
+
             // Create path along X-axis from startX to endX
             for (int x = Mathf.Min(startX, endX); x <= Mathf.Max(startX, endX); x++)
             {
                 map.SetTile(new Vector3Int(x, startY, 0), pathTile);
+                tempQX.Enqueue(new Vector2(x, startY));
             }
+
+            if (Mathf.Min(startX, endX) == endX)
+            {
+                tempQX = ReverseQueue(tempQX);
+            }
+            fullPath = MergeQueueToPath(tempQX, fullPath);
+
+            Queue<Vector2> tempQY = new Queue<Vector2>();
+            int count = 0;
 
             // Create path along Y-axis from startY to endY
             for (int y = Mathf.Min(startY, endY); y <= Mathf.Max(startY, endY); y++)
             {
-                map.SetTile(new Vector3Int(endX, y, 0), pathTile);
+                if (count != 0)
+                {
+                    map.SetTile(new Vector3Int(endX, y, 0), pathTile);
+                    tempQY.Enqueue(new Vector2(endX, y));
+                }
+                count++;
             }
+
+            if (Mathf.Min(startY, endY) == endY)
+            {
+                tempQY = ReverseQueue(tempQY);
+            }
+            fullPath = MergeQueueToPath(tempQY, fullPath);
 
             map.SetTile(new Vector3Int((int) firstPoint.x, (int) firstPoint.y, 0), red);
             map.SetTile(new Vector3Int((int) secondPoint.x, (int) secondPoint.y, 0), red);
@@ -109,5 +167,33 @@ public class PathManager : MonoBehaviour
         }
         map.SetTile(new Vector3Int((int)start.x, (int)start.y, 0), green);
         map.SetTile(new Vector3Int((int)end.x, (int)end.y, 0), green);
+
+        return fullPath;
+    }
+
+    private Queue<Vector2> ReverseQueue(Queue<Vector2> q)
+    {
+        Stack<Vector2> s = new Stack<Vector2>();
+
+        while (q.Count > 0)
+        {
+            s.Push(q.Dequeue());
+        }
+
+        while (s.Count > 0)
+        {
+            q.Enqueue(s.Pop());
+        }
+
+        return q;
+    }
+
+    private Queue<Vector2> MergeQueueToPath(Queue<Vector2> tempQ, Queue<Vector2> fullPath)
+    {
+        while (tempQ.Count > 0)
+        {
+            fullPath.Enqueue(tempQ.Dequeue());
+        }
+        return fullPath;
     }
 }

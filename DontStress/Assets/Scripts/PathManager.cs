@@ -20,7 +20,7 @@ public class PathManager : MonoBehaviour
 
     // private PlayerInput PlayerControls;
     // private InputAction shoot;
-
+    // 
     // private void OnEnable()
     // {
     //     PlayerControls = new PlayerInput();
@@ -28,12 +28,12 @@ public class PathManager : MonoBehaviour
     //     shoot.Enable();
     //     shoot.performed += Fire;
     // }
-
+    // 
     // private void OnDisable()
     // {
     //    shoot.Disable();
     // }
-
+    // 
     // private void Fire(InputAction.CallbackContext context)
     // {
     //     map.ClearAllTiles();
@@ -53,14 +53,33 @@ public class PathManager : MonoBehaviour
         int posX = Random.Range(0, 2) * 2 - 1;
         int posY = Random.Range(0, 2) * 2 - 1;
 
-        pathStart = new Vector2(Random.Range(9, 10) * posX, Random.Range(0, 10) * posY);
+        List<int> listOfX = new List<int>();
+        List<int> listOfY = new List<int>();
+
+        int tempX = Random.Range(9, 10) * posX;
+        int tempY = Random.Range(0, 10) * posY;
+
+        listOfX.Add(tempX);
+        listOfY.Add(tempY);
+
+        pathStart = new Vector2(tempX, tempY);
         path.Enqueue(pathStart);
         int x, y;
 
         for (int i = 0; i < numPoints; i++)
         {
-            x = Random.Range(2, 10) * posX;
-            y = Random.Range(-8, 8);
+            do
+            {
+                x = Random.Range(2, 10) * posX;
+            } while (listOfX.Contains(x));
+            listOfX.Add(x);
+
+            do
+            {
+                y = Random.Range(-8, 8);
+            } while (listOfY.Contains(y));
+            listOfY.Add(y);
+
             path.Enqueue(new Vector2(x, y));
         }
 

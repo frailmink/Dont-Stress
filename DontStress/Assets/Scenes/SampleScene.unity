@@ -289,11 +289,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7baceb5cfe3bae14ebc5dbf1b57e8fd7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  numPoints: 2
-  rangeX: 0
-  rangeY: 0
+  numPoints: 3
   map: {fileID: 1641838877}
   pathTile: {fileID: 11400000, guid: 340e0f383d7e80c4997307d8c3b7c74f, type: 2}
+  red: {fileID: 11400000, guid: 0645e97c8e07f9343aee30afa3efc2a1, type: 2}
+  green: {fileID: 11400000, guid: 9f62db70bfe133f4a8c952ba6160d71c, type: 2}
 --- !u!4 &1232376450
 Transform:
   m_ObjectHideFlags: 0

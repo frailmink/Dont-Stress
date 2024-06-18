@@ -6,66 +6,81 @@ using UnityEngine.Tilemaps;
 public class PathManager : MonoBehaviour
 {
     public int numPoints;
-    public int rangeX, rangeY;
+    // public int rangeX, rangeY;
     private Vector2 pathStart;
     private Vector2 pathEnd = Vector2.zero;
 
     public Tilemap map;
-    public TileBase pathTile;
+    public TileBase pathTile, red, green;
 
     private Queue<Vector2> path;
 
     // Start is called before the first frame update
     void Start()
     {
+        Run();
+    }
+
+    public void Run()
+    {
         // Initialize the path queue
         path = new Queue<Vector2>();
         int posX = Random.Range(0, 2) * 2 - 1;
         int posY = Random.Range(0, 2) * 2 - 1;
 
-        pathStart = new Vector2(Random.Range(0, 10) * posX, Random.Range(9, 10) * posY);
+        pathStart = new Vector2(Random.Range(9, 10) * posX, Random.Range(0, 10) * posY);
         path.Enqueue(pathStart);
         int x, y;
 
         for (int i = 0; i < numPoints; i++)
         {
-            x = Random.Range(0, 10) * posX;
+            x = Random.Range(2, 10) * posX;
             y = Random.Range(-8, 8);
             path.Enqueue(new Vector2(x, y));
         }
 
-        path = OrderQueue();
+        path = OrderQueue(pathStart, pathEnd);
 
         path.Enqueue(pathEnd);
-        CreatePath();
+        CreatePath(pathStart, pathEnd);
     }
 
-    private Queue<Vector2> OrderQueue()
+    private Queue<Vector2> OrderQueue(Vector2 start, Vector2 end)
     {
-        Queue<Vector2> q = new Queue<Vector2>(path);
+        List<Vector2> points = new List<Vector2>(path);
+        Queue<Vector2> orderedQueue = new Queue<Vector2>();
 
-        Vector2 start = q.Dequeue();
-        List<Vector2> list = new List<Vector2>(q);
-        list.Sort((a, b) =>
+        Vector2 currentPoint = start;
+        orderedQueue.Enqueue(currentPoint);
+
+        while (points.Count > 0)
         {
-            float distanceA = Vector2.Distance(a, start);
-            float distanceB = Vector2.Distance(b, start);
-            return distanceA.CompareTo(distanceB);
-        });
-        Queue<Vector2> sortedQueue = new Queue<Vector2>();
-        sortedQueue.Enqueue(start);
-        for (int i = 0; i < list.Count; i++)
-        {
-            sortedQueue.Enqueue(list[i]);
+            Vector2 closestPoint = points[0];
+            float shortestDistance = Mathf.Abs(Vector2.Distance(currentPoint, closestPoint));
+
+            foreach (var point in points)
+            {
+                float distance = Mathf.Abs(Vector2.Distance(currentPoint, point));
+                if (distance < shortestDistance)
+                {
+                    shortestDistance = distance;
+                    closestPoint = point;
+                }
+            }
+
+            orderedQueue.Enqueue(closestPoint);
+            points.Remove(closestPoint);
+            currentPoint = closestPoint;
         }
 
-        return sortedQueue;
+        return orderedQueue;
     }
 
-    private void CreatePath()
+    private void CreatePath(Vector2 start, Vector2 end)
     {
         Vector2 firstPoint = path.Dequeue();
         Vector2 secondPoint;
+
         while (path.Count != 0)
         {
             secondPoint = path.Dequeue();
@@ -86,8 +101,13 @@ public class PathManager : MonoBehaviour
                 map.SetTile(new Vector3Int(endX, y, 0), pathTile);
             }
 
+            map.SetTile(new Vector3Int((int) firstPoint.x, (int) firstPoint.y, 0), red);
+            map.SetTile(new Vector3Int((int) secondPoint.x, (int) secondPoint.y, 0), red);
+
             // Update the firstPoint to be the secondPoint for the next iteration
             firstPoint = secondPoint;
         }
+        map.SetTile(new Vector3Int((int)start.x, (int)start.y, 0), green);
+        map.SetTile(new Vector3Int((int)end.x, (int)end.y, 0), green);
     }
 }

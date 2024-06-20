@@ -6,18 +6,29 @@ using UnityEngine.InputSystem;
 public class PlayerScript : MonoBehaviour
 {
     public float MoveSpeed = 5.0f;
-    Vector2 moveDirection = Vector2.zero;
+    private Vector2 moveDirection = Vector2.zero;
+    private Vector2 mousePosition;
 
     private PlayerInput PlayerControls;
     private InputAction move;
 
     private Rigidbody2D rb;
+    public WeaponScript weapon;
 
     private void Awake()
     {
         PlayerControls = new PlayerInput();
-
         rb = GetComponent<Rigidbody2D>();
+    }
+
+    private void Update()
+    {
+        if(Input.GetMouseButtonDown(0))
+        {
+            weapon.Fire();
+        }
+
+        mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
     }
 
     private void OnEnable()
@@ -35,5 +46,9 @@ public class PlayerScript : MonoBehaviour
     {
         moveDirection = move.ReadValue<Vector2>();
         rb.velocity = new Vector2(moveDirection.x * MoveSpeed, moveDirection.y * MoveSpeed);
+
+        Vector2 aimDirection = mousePosition - rb.position;
+        float aimAngle = Mathf.Atan2(aimDirection.y, aimDirection.x) * Mathf.Rad2Deg - 90f;
+        rb.rotation = aimAngle;
     }
 }

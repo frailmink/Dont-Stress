@@ -12,9 +12,9 @@ public class EnemyHealthBar : MonoBehaviour
         slider.value = currentValue/maxValue;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        slider.value;
-    }
+    // // Update is called once per frame
+    // void Update()
+    // {
+    //     slider.value;
+    // }
 }

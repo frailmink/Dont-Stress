@@ -16,12 +16,16 @@ public class EnemyScript : MonoBehaviour
     public float speed;
     public float maxHealth = 100f;
     private float health;
+    public PlayerHealthScript playerHealth;
+    public int damage = 1;
 
     // public static event Action<EnemyScript> OnEnemyKilled;  
-    [SerializeField] private EnemyHealthBar EnemyHealthBar; 
+    private EnemyHealthBar EnemyHealthBar; 
 
     private void Awake() 
     {
+        playerHealth = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerHealthScript>();
+
         EnemyHealthBar = GetComponentInChildren<EnemyHealthBar>();
         health = maxHealth;
     }
@@ -74,9 +78,18 @@ public class EnemyScript : MonoBehaviour
             }
             else
             {   
-                
+
                 Die();
             }
         }
     }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if(collision.gameObject.tag == "Player")
+        {
+            playerHealth.TakeDamage(damage);
+        }
+    }
+
 }

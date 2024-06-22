@@ -6,6 +6,7 @@ using UnityEngine.Tilemaps;
 
 public class LogicManager : MonoBehaviour
 {
+    public int branchChance;
     public GameObject EnemySpawner;
 
     public int numPointsForInter;
@@ -18,7 +19,10 @@ public class LogicManager : MonoBehaviour
 
     private PlayerInput PlayerControls;
     private InputAction shoot;
-    
+
+    private Vector2 pathStart;
+    private List<int> temp = new List<int> { 0, 1, 2, 3 };
+
     private void OnEnable()
     {
         PlayerControls = new PlayerInput();
@@ -56,117 +60,131 @@ public class LogicManager : MonoBehaviour
             Destroy(spawner);
         }
 
+        List<int> listOfIsToSkip = new List<int>();
         for (int i = 0; i < listOfPaths.Count; i++)
         {
-            Vector2 pathEnd = listOfPaths[i].Peek();
-            Vector2 direction = ReturnDirection(pathEnd);
-            
-            if (direction != Vector2.zero)
+            if (!listOfIsToSkip.Contains(i))
             {
-                Vector2 bottomLeftPoint = new Vector2(listOfBottomLeftPoints[i].x + (GlobalVariables.squareWidth * direction.x) + direction.x, listOfBottomLeftPoints[i].y + (GlobalVariables.squareHeight * direction.y) + direction.y);
-
-                listOfBottomLeftPoints[i] = bottomLeftPoint;
-
-                DrawBackground(GlobalVariables.squareWidth + 1, GlobalVariables.squareHeight + 1, bottomLeftPoint);
-                // List<Vector2> possiblePos = new List<Vector2> {new Vector2(1,1), new Vector2(0,1), new Vector2(1,0), new Vector2(0,0)};
-                // possiblePos.Remove(new Vector2(direction.x * (-1), direction.y * (-1)));
-                // 
-                // int pos = Random.Range(0, possiblePos.Count);
-                // 
-                // int posX = (int) possiblePos[pos].x;
-                // int posY = (int) possiblePos[pos].y;
-                // 
-                // if (posX == 0)
-                // {
-                //     posX = Random.Range(0, 2) * 2 - 1;
-                // }
-                // if (posY == 0)
-                // {
-                //     posY = Random.Range(0, 2) * 2 - 1;
-                // }
-
-                // int tempVal = Random.Range(0, 2);
-
-                // Vector2 topRightPoint = new Vector2(bottomLeftPoint.x + GlobalVariables.squareWidth, bottomLeftPoint.y + GlobalVariables.squareHeight);
-                // Debug.Log(bottomLeftPoint.x);
-                // Debug.Log(bottomLeftPoint.y);
-                // if (tempVal == 0)
-                // {
-                //     int tempX = (GlobalVariables.squareWidth) + (int)bottomLeftPoint.x;
-                //     int tempY = Random.Range(0, (GlobalVariables.squareHeight / 2)) * posY + (int)bottomLeftPoint.y;
-                // 
-                //     Debug.Log(tempVal);
-                // 
-                //     Debug.Log(tempX);
-                //     Debug.Log(tempY);
-                // 
-                //     listOfX.Add(tempX);
-                //     listOfY.Add(tempY);
-                // 
-                //     pathStart = new Vector2(tempX, tempY);
-                //     path.Enqueue(pathStart);
-                // } else
-                // {
-                //     int tempY = (GlobalVariables.squareHeight) + (int)bottomLeftPoint.y;
-                //     int tempX = Random.Range(0, (GlobalVariables.squareWidth / 2)) * posX + (int)bottomLeftPoint.x;
-                // 
-                //     Debug.Log(tempVal);
-                // 
-                //     Debug.Log(tempX);
-                //     Debug.Log(tempY);
-                // 
-                //     listOfX.Add(tempX);
-                //     listOfY.Add(tempY);
-                // 
-                //     pathStart = new Vector2(tempX, tempY);
-                //     path.Enqueue(pathStart);
-                // }
-
-                List<int> listOfX = new List<int>();
-                List<int> listOfY = new List<int>();
-
-                Vector2 randomPoint = GetRandomPointOnSquareEdge(GlobalVariables.squareWidth, GlobalVariables.squareHeight, direction);
-
-                // Vector2 tempVec = direction;
-                // 
-                // if (tempVec.x == 0)
-                // {
-                //     tempVec.x = 1;
-                // } else if (tempVec.y == 0)
-                // {
-                //     tempVec.y = 1;
-                // }
-
-                Vector2 pathStart = new Vector2(bottomLeftPoint.x + randomPoint.x, bottomLeftPoint.y +  randomPoint.y);
-
-                listOfX.Add((int) pathStart.x);
-                listOfY.Add((int) pathStart.y);
-                listOfX.Add((int) pathEnd.x);
-                listOfY.Add((int) pathEnd.y);
-
-                Queue<Vector2> path = new Queue<Vector2>();
-
-                path.Enqueue(pathStart);
-
-                path = PathManager.CreatePoints(listOfX, listOfY, path, pathEnd, pathStart, numPointsForInter, bottomLeftPoint);
-
-                // path = PathManager.OrderQueue(pathStart, pathEnd, path);
-
-                path.Enqueue(pathEnd);
-                Queue<Vector2> fullPath = PathManager.CreatePath(pathStart, pathEnd, map, path, pathTile, red, green);
-
-                while (listOfPaths[i].Count > 0)
+                Vector2 pathEnd = listOfPaths[i].Peek();
+                Vector2 direction = ReturnDirection(pathEnd);
+            
+                if (direction != Vector2.zero)
                 {
-                    fullPath.Enqueue(listOfPaths[i].Dequeue());
+                    Vector2 bottomLeftPoint = new Vector2(listOfBottomLeftPoints[i].x + (GlobalVariables.squareWidth * direction.x) + direction.x, listOfBottomLeftPoints[i].y + (GlobalVariables.squareHeight * direction.y) + direction.y);
+
+                    listOfBottomLeftPoints[i] = bottomLeftPoint;
+
+                    DrawBackground(GlobalVariables.squareWidth + 1, GlobalVariables.squareHeight + 1, bottomLeftPoint);
+                    // List<Vector2> possiblePos = new List<Vector2> {new Vector2(1,1), new Vector2(0,1), new Vector2(1,0), new Vector2(0,0)};
+                    // possiblePos.Remove(new Vector2(direction.x * (-1), direction.y * (-1)));
+                    // 
+                    // int pos = Random.Range(0, possiblePos.Count);
+                    // 
+                    // int posX = (int) possiblePos[pos].x;
+                    // int posY = (int) possiblePos[pos].y;
+                    // 
+                    // if (posX == 0)
+                    // {
+                    //     posX = Random.Range(0, 2) * 2 - 1;
+                    // }
+                    // if (posY == 0)
+                    // {
+                    //     posY = Random.Range(0, 2) * 2 - 1;
+                    // }
+
+                    // int tempVal = Random.Range(0, 2);
+
+                    // Vector2 topRightPoint = new Vector2(bottomLeftPoint.x + GlobalVariables.squareWidth, bottomLeftPoint.y + GlobalVariables.squareHeight);
+                    // Debug.Log(bottomLeftPoint.x);
+                    // Debug.Log(bottomLeftPoint.y);
+                    // if (tempVal == 0)
+                    // {
+                    //     int tempX = (GlobalVariables.squareWidth) + (int)bottomLeftPoint.x;
+                    //     int tempY = Random.Range(0, (GlobalVariables.squareHeight / 2)) * posY + (int)bottomLeftPoint.y;
+                    // 
+                    //     Debug.Log(tempVal);
+                    // 
+                    //     Debug.Log(tempX);
+                    //     Debug.Log(tempY);
+                    // 
+                    //     listOfX.Add(tempX);
+                    //     listOfY.Add(tempY);
+                    // 
+                    //     pathStart = new Vector2(tempX, tempY);
+                    //     path.Enqueue(pathStart);
+                    // } else
+                    // {
+                    //     int tempY = (GlobalVariables.squareHeight) + (int)bottomLeftPoint.y;
+                    //     int tempX = Random.Range(0, (GlobalVariables.squareWidth / 2)) * posX + (int)bottomLeftPoint.x;
+                    // 
+                    //     Debug.Log(tempVal);
+                    // 
+                    //     Debug.Log(tempX);
+                    //     Debug.Log(tempY);
+                    // 
+                    //     listOfX.Add(tempX);
+                    //     listOfY.Add(tempY);
+                    // 
+                    //     pathStart = new Vector2(tempX, tempY);
+                    //     path.Enqueue(pathStart);
+                    // }
+
+                    List<int> listOfX = new List<int>();
+                    List<int> listOfY = new List<int>();
+                    temp = new List<int> { 0, 1, 2, 3 };
+
+                    int branch = Random.Range(0, branchChance);
+                    int num = numPointsForInter;
+                    int tempI = i;
+
+                    if (branch == 0)
+                    {
+                        int rand = Random.Range(1, num);
+                        num -= rand;
+                        // dequeue random num of points
+                        listOfPaths.Add(CreatePath(bottomLeftPoint, direction, listOfX, listOfY, pathEnd, i, rand));
+                        listOfBottomLeftPoints.Add(bottomLeftPoint);
+                        listOfIsToSkip.Add(listOfPaths.Count - 1);
+                        PathManager.CreateEnemySpawner(EnemySpawner, map, pathStart, transform.rotation, listOfPaths[listOfPaths.Count - 1]);
+                    }
+                
+                    listOfPaths[tempI] = CreatePath(bottomLeftPoint, direction, listOfX, listOfY, pathEnd, tempI, num);
+                    PathManager.CreateEnemySpawner(EnemySpawner, map, pathStart, transform.rotation, listOfPaths[tempI]);
+
+                    // Debug.Log(listOfPaths);
                 }
-
-                listOfPaths[i] = fullPath;
-
-                PathManager.CreateEnemySpawner(EnemySpawner, map, pathStart, transform.rotation, listOfPaths[i]);
-
-                // Debug.Log(listOfPaths);
             }
         }
+    }
+
+    private Queue<Vector2> CreatePath(Vector2 bottomLeftPoint, Vector2 direction, List<int> listOfX, List<int> listOfY, Vector2 pathEnd, int i, int num)
+    {
+        Vector2 randomPoint = GetRandomPointOnSquareEdge(GlobalVariables.squareWidth, GlobalVariables.squareHeight, direction);
+
+        pathStart = new Vector2(bottomLeftPoint.x + randomPoint.x, bottomLeftPoint.y + randomPoint.y);
+
+        listOfX.Add((int)pathStart.x);
+        listOfY.Add((int)pathStart.y);
+        listOfX.Add((int)pathEnd.x);
+        listOfY.Add((int)pathEnd.y);
+
+        Queue<Vector2> path = new Queue<Vector2>();
+
+        path.Enqueue(pathStart);
+
+        path = PathManager.CreatePoints(listOfX, listOfY, path, pathEnd, pathStart, num, bottomLeftPoint);
+
+        // path = PathManager.OrderQueue(pathStart, pathEnd, path);
+
+        path.Enqueue(pathEnd);
+        Queue<Vector2> fullPath = PathManager.CreatePath(pathStart, pathEnd, map, path, pathTile, red, green);
+
+        while (listOfPaths[i].Count > 0)
+        {
+            fullPath.Enqueue(listOfPaths[i].Dequeue());
+        }
+
+        return fullPath;
     }
 
     Vector2 GetRandomPointOnSquareEdge(int width, int height, Vector2 direction)
@@ -188,18 +206,22 @@ public class LogicManager : MonoBehaviour
             case 0: // Bottom edge
                 x = Random.Range(1, width);
                 y = 0;
+                temp.Remove(0);
                 break;
             case 1: // Right edge
                 x = width;
                 y = Random.Range(1, height);
+                temp.Remove(1);
                 break;
             case 2: // Top edge
                 x = Random.Range(1, width);
                 y = height;
+                temp.Remove(2);
                 break;
             case 3: // Left edge
                 x = 0;
                 y = Random.Range(1, height);
+                temp.Remove(3);
                 break;
         }
 
@@ -209,7 +231,6 @@ public class LogicManager : MonoBehaviour
     private List<int> RemoveEdge(Vector2 direction)
     {
         // edge (0: bottom, 1: right, 2: top, 3: left)
-        List<int> temp = new List<int> { 0, 1, 2, 3 };
 
         if (direction.x == 1)
         {

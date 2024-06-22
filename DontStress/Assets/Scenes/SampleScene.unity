@@ -244,6 +244,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3892a2251a0d3664099ac7ac9c94b76d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  branchChance: 1
   EnemySpawner: {fileID: 2328552997668316313, guid: 03914be56629494469b7a41047281b9c, type: 3}
   numPointsForInter: 2
   numPoints: 3

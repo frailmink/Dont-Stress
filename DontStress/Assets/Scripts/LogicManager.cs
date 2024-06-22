@@ -146,7 +146,7 @@ public class LogicManager : MonoBehaviour
 
                 path.Enqueue(pathStart);
 
-                // path = PathManager.CreatePoints(listOfX, listOfY, path, pathEnd, pathStart, numPointsForInter, bottomLeftPoint);
+                path = PathManager.CreatePoints(listOfX, listOfY, path, pathEnd, pathStart, numPointsForInter, bottomLeftPoint);
 
                 path = PathManager.OrderQueue(pathStart, pathEnd, path);
 

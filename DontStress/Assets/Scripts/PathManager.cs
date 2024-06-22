@@ -95,14 +95,15 @@ public class PathManager : MonoBehaviour
         {
             do
             {
-                x = Random.Range(-((GlobalVariables.squareWidth / 2) - 2), (GlobalVariables.squareWidth / 2)- 2);
+                // this spawns them in the range 2-19
+                x = Random.Range(2, GlobalVariables.squareWidth - 1);
                 x += (int) offset.x;
             } while (listOfX.Contains(x));
             listOfX.Add(x);
 
             do
             {
-                y = Random.Range(-((GlobalVariables.squareHeight / 2) - 2), (GlobalVariables.squareHeight / 2) - 2);
+                y = Random.Range(2, GlobalVariables.squareHeight - 1);
                 y += (int) offset.y;
             } while (listOfY.Contains(y));
             listOfY.Add(y);

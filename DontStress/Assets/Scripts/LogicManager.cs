@@ -141,6 +141,8 @@ public class LogicManager : MonoBehaviour
 
                 listOfX.Add((int) pathStart.x);
                 listOfY.Add((int) pathStart.y);
+                listOfX.Add((int) pathEnd.x);
+                listOfY.Add((int) pathEnd.y);
 
                 Queue<Vector2> path = new Queue<Vector2>();
 
@@ -148,7 +150,7 @@ public class LogicManager : MonoBehaviour
 
                 path = PathManager.CreatePoints(listOfX, listOfY, path, pathEnd, pathStart, numPointsForInter, bottomLeftPoint);
 
-                path = PathManager.OrderQueue(pathStart, pathEnd, path);
+                // path = PathManager.OrderQueue(pathStart, pathEnd, path);
 
                 path.Enqueue(pathEnd);
                 Queue<Vector2> fullPath = PathManager.CreatePath(pathStart, pathEnd, map, path, pathTile, red, green);

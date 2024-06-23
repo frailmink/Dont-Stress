@@ -6,17 +6,17 @@ using UnityEngine.InputSystem;
 
 public class PathManager : MonoBehaviour
 {
-    public GameObject EnemySpawner;
-
-    public int numPoints;
-    // public int rangeX, rangeY;
-    private Vector2 pathStart;
-    private Vector2 pathEnd = Vector2.zero;
-
-    public Tilemap map;
-    public TileBase pathTile, red, green;
-
-    private Queue<Vector2> path;
+    // public GameObject EnemySpawner;
+    // 
+    // public int numPoints;
+    // // public int rangeX, rangeY;
+    // private Vector2 pathStart;
+    // private Vector2 pathEnd = Vector2.zero;
+    // 
+    // public Tilemap map;
+    // public TileBase pathTile, red, green;
+    // 
+    // private Queue<Vector2> path;
 
     // private PlayerInput PlayerControls;
     // private InputAction shoot;
@@ -40,29 +40,23 @@ public class PathManager : MonoBehaviour
     //     Run();
     // }
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        Run();
-    }
-
-    public void Run()
+    public static Queue<Vector2> InitialRun(Vector2 pathEnd, int numPoints, Tilemap map, TileBase pathTile, TileBase red, TileBase green, Quaternion rotation, GameObject EnemySpawner)
     {
         // Initialize the path queue
-        path = new Queue<Vector2>();
+        Queue<Vector2> path = new Queue<Vector2>();
         int posX = Random.Range(0, 2) * 2 - 1;
         int posY = Random.Range(0, 2) * 2 - 1;
 
         List<int> listOfX = new List<int>();
         List<int> listOfY = new List<int>();
 
-        int tempX = Random.Range(9, 10) * posX;
-        int tempY = Random.Range(0, 10) * posY;
+        int tempX = (GlobalVariables.squareWidth / 2) * posX;
+        int tempY = Random.Range(0, (GlobalVariables.squareHeight / 2)) * posY;
 
         listOfX.Add(tempX);
         listOfY.Add(tempY);
 
-        pathStart = new Vector2(tempX, tempY);
+        Vector2 pathStart = new Vector2(tempX, tempY);
         path.Enqueue(pathStart);
         int x, y;
 
@@ -70,32 +64,69 @@ public class PathManager : MonoBehaviour
         {
             do
             {
-                x = Random.Range(2, 10) * posX;
+                x = Random.Range(2, (GlobalVariables.squareWidth / 2)) * posX;
             } while (listOfX.Contains(x));
             listOfX.Add(x);
 
             do
             {
-                y = Random.Range(-8, 8);
+                y = Random.Range(-((GlobalVariables.squareHeight / 2) - 2), (GlobalVariables.squareHeight / 2) - 2);
             } while (listOfY.Contains(y));
             listOfY.Add(y);
 
             path.Enqueue(new Vector2(x, y));
         }
 
-        path = OrderQueue(pathStart, pathEnd);
+        path = OrderQueue(pathStart, pathEnd, path);
 
         path.Enqueue(pathEnd);
-        Queue<Vector2> fullPath = CreatePath(pathStart, pathEnd);
+        Queue<Vector2> fullPath = CreatePath(pathStart, pathEnd, map, path, pathTile, red, green);
 
-        GameObject insatnce = Instantiate(EnemySpawner, map.CellToWorld(new Vector3Int((int) pathStart.x, (int) pathStart.y, 0)), transform.rotation);
+        CreateEnemySpawner(EnemySpawner, map, pathStart, rotation, fullPath);
+
+        return fullPath;
+    }
+
+    public static Queue<Vector2> CreatePoints(List<int> listOfX, List<int> listOfY, Queue<Vector2> path, Vector2 pathEnd, Vector2 pathStart, int numPoints, Vector2 offset)
+    {
+        int x, y;
+
+        for (int i = 0; i < numPoints; i++)
+        {
+            do
+            {
+                // this spawns them in the range 2-19
+                x = Random.Range(2, GlobalVariables.squareWidth - 1);
+                x += (int) offset.x;
+            } while (listOfX.Contains(x));
+            listOfX.Add(x);
+
+            do
+            {
+                y = Random.Range(2, GlobalVariables.squareHeight - 1);
+                y += (int) offset.y;
+            } while (listOfY.Contains(y));
+            listOfY.Add(y);
+
+            path.Enqueue(new Vector2(x, y));
+        }
+
+        path = OrderQueue(pathStart, pathEnd, path);
+
+        path.Enqueue(pathEnd);
+        return path;
+    }
+
+    public static void CreateEnemySpawner(GameObject EnemySpawner, Tilemap map, Vector2 pathStart, Quaternion rotation, Queue<Vector2> fullPath)
+    {
+        GameObject insatnce = Instantiate(EnemySpawner, map.CellToWorld(new Vector3Int((int)pathStart.x, (int)pathStart.y, 0)), rotation);
         EnemySpawner script = insatnce.GetComponent<EnemySpawner>();
         Queue<Vector2> pathClone = new Queue<Vector2>(fullPath);
-        script.path = fullPath;
+        script.path = pathClone;
         script.map = map;
     }
 
-    private Queue<Vector2> OrderQueue(Vector2 start, Vector2 end)
+    public static Queue<Vector2> OrderQueue(Vector2 start, Vector2 end, Queue<Vector2> path)
     {
         List<Vector2> points = new List<Vector2>(path);
         Queue<Vector2> orderedQueue = new Queue<Vector2>();
@@ -126,18 +157,18 @@ public class PathManager : MonoBehaviour
         return orderedQueue;
     }
 
-    private Queue<Vector2> CreatePath(Vector2 start, Vector2 end)
+    public static Queue<Vector2> CreatePath(Vector2 start, Vector2 end, Tilemap map, Queue<Vector2> pathPoints, TileBase pathTile, TileBase red, TileBase green)
     {
         Queue<Vector2> fullPath = new Queue<Vector2>();
 
-        Vector2 firstPoint = path.Dequeue();
+        Vector2 firstPoint = pathPoints.Dequeue();
         Vector2 secondPoint;
 
-        while (path.Count != 0)
+        while (pathPoints.Count != 0)
         {
             // fullPath.Enqueue(firstPoint);
 
-            secondPoint = path.Dequeue();
+            secondPoint = pathPoints.Dequeue();
             int startX = (int)firstPoint.x;
             int endX = (int)secondPoint.x;
             int startY = (int)firstPoint.y;
@@ -190,7 +221,7 @@ public class PathManager : MonoBehaviour
         return fullPath;
     }
 
-    private Queue<Vector2> ReverseQueue(Queue<Vector2> q)
+    private static Queue<Vector2> ReverseQueue(Queue<Vector2> q)
     {
         Stack<Vector2> s = new Stack<Vector2>();
 
@@ -207,7 +238,7 @@ public class PathManager : MonoBehaviour
         return q;
     }
 
-    private Queue<Vector2> MergeQueueToPath(Queue<Vector2> tempQ, Queue<Vector2> fullPath)
+    private static Queue<Vector2> MergeQueueToPath(Queue<Vector2> tempQ, Queue<Vector2> fullPath)
     {
         while (tempQ.Count > 0)
         {

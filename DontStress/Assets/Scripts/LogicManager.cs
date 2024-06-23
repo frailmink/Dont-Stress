@@ -6,10 +6,13 @@ using UnityEngine.Tilemaps;
 
 public class LogicManager : MonoBehaviour
 {
+    public GameObject[] towers;
+
     public int numPathPointsRemoved;
     public int pathEndChance;
     public int branchChance;
     public GameObject EnemySpawner;
+    public GameObject BuildManager;
 
     public int numPointsForInter;
     public int numPoints;
@@ -21,6 +24,10 @@ public class LogicManager : MonoBehaviour
 
     private PlayerInput PlayerControls;
     private InputAction shoot;
+    private InputAction build;
+
+    private bool buildingModeOn = false;
+    private GameObject buildManager;
 
     private Vector2 pathStart;
     private List<int> temp = new List<int> { 0, 1, 2, 3 };
@@ -31,16 +38,42 @@ public class LogicManager : MonoBehaviour
         shoot = PlayerControls.Testing.N;
         shoot.Enable();
         shoot.performed += Fire;
+
+        build = PlayerControls.Player.Build;
+        build.Enable();
+        build.performed += Build;
     }
     
     private void OnDisable()
     {
-       shoot.Disable();
+        if (shoot != null)
+        {
+            shoot.Disable();
+        }
     }
     
     private void Fire(InputAction.CallbackContext context)
     {
         NextRound();
+    }
+
+    private void Build(InputAction.CallbackContext context)
+    {
+        if (!buildingModeOn)
+        {
+            buildManager = Instantiate(BuildManager, transform.position, transform.rotation);
+            PlacementScript script = buildManager.GetComponent<PlacementScript>();
+            script.map = map;
+            script.tower = towers[0];
+            script.ground = floor;
+            buildingModeOn = true;
+        } else
+        {
+            PlacementScript script = buildManager.GetComponent<PlacementScript>();
+            script.DeleteTower();
+            Destroy(buildManager);
+            buildingModeOn = false;
+        }
     }
 
     // Start is called before the first frame update

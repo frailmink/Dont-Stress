@@ -60,7 +60,7 @@ public class EnemyScript : MonoBehaviour
         if (path != null && path.Count > 0)
         {
             Vector2 temp = path.Dequeue();
-            objective = map.CellToWorld(new Vector3Int((int)temp.x, (int)temp.y, 0));
+            objective = map.GetCellCenterWorld(new Vector3Int((int)temp.x, (int)temp.y, 0));
         }
     }
 
@@ -79,7 +79,7 @@ public class EnemyScript : MonoBehaviour
             if (path != null && path.Count > 0)
             {
                 Vector2 temp = path.Dequeue();
-                objective = map.CellToWorld(new Vector3Int((int)temp.x, (int)temp.y, 0));
+                objective = map.GetCellCenterWorld(new Vector3Int((int)temp.x, (int)temp.y, 0));
             }
             else
             {   

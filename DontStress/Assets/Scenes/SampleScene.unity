@@ -745,10 +745,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3892a2251a0d3664099ac7ac9c94b76d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  towers:
+  - {fileID: 607801719444412279, guid: 20d0af8320afbc34da190553c74b46d6, type: 3}
   numPathPointsRemoved: 5
   pathEndChance: 20
   branchChance: 1
   EnemySpawner: {fileID: 2328552997668316313, guid: 03914be56629494469b7a41047281b9c, type: 3}
+  BuildManager: {fileID: 6084967962051960621, guid: c08d8a4a568ac2542bebcae2a1a4221a, type: 3}
   numPointsForInter: 2
   numPoints: 3
   map: {fileID: 1641838877}

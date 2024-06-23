@@ -11,6 +11,7 @@ public class PlayerScript : MonoBehaviour
 
     private PlayerInput PlayerControls;
     private InputAction move;
+    private InputAction shoot;
 
     private Rigidbody2D rb;
     public WeaponScript weapon;
@@ -23,16 +24,14 @@ public class PlayerScript : MonoBehaviour
 
     private void Update()
     {
-        if(Input.GetMouseButtonDown(0))
-        {
-            weapon.Fire();
-        }
-
         mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
     }
 
     private void OnEnable()
     {
+        shoot = PlayerControls.Player.Attack;
+        shoot.Enable();
+        shoot.performed += Fire;
         move = PlayerControls.Player.Move;
         move.Enable();
     }
@@ -40,6 +39,12 @@ public class PlayerScript : MonoBehaviour
     private void OnDisable()
     {
         move.Disable();
+        shoot.Disable();
+    }
+
+    private void Fire(InputAction.CallbackContext context)
+    {
+        weapon.Fire();
     }
 
     private void FixedUpdate()

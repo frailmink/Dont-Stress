@@ -19,12 +19,13 @@ public class EnemyScript : MonoBehaviour
     public PlayerHealthScript playerHealth;
     public int damage = 1;
 
-    // public static event Action<EnemyScript> OnEnemyKilled;  
+    private BaseHealthScript baseHealth; 
     private EnemyHealthBar EnemyHealthBar; 
 
     private void Awake() 
     {
         playerHealth = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerHealthScript>();
+        baseHealth = GameObject.FindGameObjectWithTag("Base").GetComponent<BaseHealthScript>();
 
         EnemyHealthBar = GetComponentInChildren<EnemyHealthBar>();
         health = maxHealth;
@@ -89,6 +90,11 @@ public class EnemyScript : MonoBehaviour
         if(collision.gameObject.tag == "Player")
         {
             playerHealth.TakeDamage(damage);
+        }
+        if(collision.gameObject.tag == "Base")
+        {
+            Destroy(gameObject);
+            baseHealth.TakeDamage(damage);
         }
     }
 

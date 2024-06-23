@@ -14,9 +14,43 @@ public class EnemyScript : MonoBehaviour
     public Tilemap map;
 
     public float speed;
+    public float maxHealth = 100f;
+    private float health;
+    public PlayerHealthScript playerHealth;
+    public int damage = 1;
+
+    private BaseHealthScript baseHealth; 
+    private EnemyHealthBar EnemyHealthBar; 
+
+    private void Awake() 
+    {
+        playerHealth = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerHealthScript>();
+        baseHealth = GameObject.FindGameObjectWithTag("Base").GetComponent<BaseHealthScript>();
+
+        EnemyHealthBar = GetComponentInChildren<EnemyHealthBar>();
+        health = maxHealth;
+    }
+
+    public void TakeDamage(float damageAmount)
+    {
+        health -= damageAmount;
+        EnemyHealthBar.UpdateHealth(health,maxHealth);
+        if (health <= 0)
+        {
+            Die();
+        }
+    }
+
+    void Die()
+    {
+        // GetComponent<LootBag>().InstantiateLoot(transform.position);
+        Destroy(gameObject);
+    }
 
     private void Start()
     {
+        
+        EnemyHealthBar.UpdateHealth(health,maxHealth);
         rb = GetComponent<Rigidbody2D>();
         // Ensure the initial objective is set at the start
         if (path != null && path.Count > 0)
@@ -43,6 +77,25 @@ public class EnemyScript : MonoBehaviour
                 Vector2 temp = path.Dequeue();
                 objective = map.CellToWorld(new Vector3Int((int)temp.x, (int)temp.y, 0));
             }
+            else
+            {   
+
+                Die();
+            }
         }
     }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if(collision.gameObject.tag == "Player")
+        {
+            playerHealth.TakeDamage(damage);
+        }
+        if(collision.gameObject.tag == "Base")
+        {
+            Destroy(gameObject);
+            baseHealth.TakeDamage(damage);
+        }
+    }
+
 }

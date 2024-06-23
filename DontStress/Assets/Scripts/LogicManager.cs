@@ -6,6 +6,8 @@ using UnityEngine.Tilemaps;
 
 public class LogicManager : MonoBehaviour
 {
+    public int numPathPointsRemoved;
+    public int pathEndChance;
     public int branchChance;
     public GameObject EnemySpawner;
 
@@ -26,7 +28,7 @@ public class LogicManager : MonoBehaviour
     private void OnEnable()
     {
         PlayerControls = new PlayerInput();
-        shoot = PlayerControls.Player.Attack;
+        shoot = PlayerControls.Testing.N;
         shoot.Enable();
         shoot.performed += Fire;
     }
@@ -137,7 +139,7 @@ public class LogicManager : MonoBehaviour
 
                     if (branch == 0)
                     {
-                        Queue<Vector2> tempQ = new Queue<Vector2>(listOfPaths[i]);
+                        // Queue<Vector2> tempQ = new Queue<Vector2>(listOfPaths[i]);
                         int num = numPointsForInter;
                         int rand = Random.Range(1, num);
                         num -= rand;
@@ -146,7 +148,11 @@ public class LogicManager : MonoBehaviour
                         PathManager.CreateEnemySpawner(EnemySpawner, map, pathStart, transform.rotation, listOfPaths[i]);
 
                         // dequeue random num of points
-                        Queue<Vector2> temporaryQueue = CreatePath(bottomLeftPoint, direction, listOfX, listOfY, pathEnd, tempQ, rand);
+                        Vector2 topRightCorner = new Vector2(bottomLeftPoint.x + GlobalVariables.squareWidth + 1, bottomLeftPoint.y + GlobalVariables.squareHeight + 1);
+                        Queue<Vector2> Q = RandomPathEnd(topRightCorner, listOfPaths[i]);
+                        pathEnd = Q.Peek();
+
+                        Queue<Vector2> temporaryQueue = CreatePath(bottomLeftPoint, direction, listOfX, listOfY, pathEnd, Q, rand);
 
                         listOfPaths.Add(temporaryQueue);
                         listOfBottomLeftPoints.Add(bottomLeftPoint);
@@ -157,9 +163,34 @@ public class LogicManager : MonoBehaviour
                         listOfPaths[i] = CreatePath(bottomLeftPoint, direction, listOfX, listOfY, pathEnd, listOfPaths[i], numPointsForInter);
                         PathManager.CreateEnemySpawner(EnemySpawner, map, pathStart, transform.rotation, listOfPaths[i]);
                     }
+                } else
+                {
+                    pathStart = listOfPaths[i].Peek();
+                    PathManager.CreateEnemySpawner(EnemySpawner, map, pathStart, transform.rotation, listOfPaths[i]);
                 }
             }
         }
+    }
+
+    private Queue<Vector2> RandomPathEnd(Vector2 topRightCorner, Queue<Vector2> Q)
+    {
+        Queue<Vector2> tempQ = new Queue<Vector2>(Q);
+        Vector2 point;
+        int count = 0;
+        do
+        {
+            point = tempQ.Dequeue();
+            count++;
+        } while ((point.x < topRightCorner.x) && (point.y < topRightCorner.y) && count != numPathPointsRemoved);
+
+        int randInt;
+        do
+        {
+            randInt = Random.Range(0, pathEndChance);
+            point = tempQ.Dequeue();
+        } while ((point.x < topRightCorner.x) && (point.y < topRightCorner.y) && randInt != 0);
+
+        return tempQ;
     }
 
     private Queue<Vector2> CreatePath(Vector2 bottomLeftPoint, Vector2 direction, List<int> listOfX, List<int> listOfY, Vector2 pathEnd, Queue<Vector2> Q, int num)

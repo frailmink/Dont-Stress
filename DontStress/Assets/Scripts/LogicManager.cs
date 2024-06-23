@@ -134,30 +134,35 @@ public class LogicManager : MonoBehaviour
                     temp = new List<int> { 0, 1, 2, 3 };
 
                     int branch = Random.Range(0, branchChance);
-                    int num = numPointsForInter;
-                    int tempI = i;
 
                     if (branch == 0)
                     {
+                        Queue<Vector2> tempQ = new Queue<Vector2>(listOfPaths[i]);
+                        int num = numPointsForInter;
                         int rand = Random.Range(1, num);
                         num -= rand;
+                        listOfPaths[i] = CreatePath(bottomLeftPoint, direction, listOfX, listOfY, pathEnd, listOfPaths[i], num);
+
+                        PathManager.CreateEnemySpawner(EnemySpawner, map, pathStart, transform.rotation, listOfPaths[i]);
+
                         // dequeue random num of points
-                        listOfPaths.Add(CreatePath(bottomLeftPoint, direction, listOfX, listOfY, pathEnd, i, rand));
+                        Queue<Vector2> temporaryQueue = CreatePath(bottomLeftPoint, direction, listOfX, listOfY, pathEnd, tempQ, rand);
+
+                        listOfPaths.Add(temporaryQueue);
                         listOfBottomLeftPoints.Add(bottomLeftPoint);
                         listOfIsToSkip.Add(listOfPaths.Count - 1);
                         PathManager.CreateEnemySpawner(EnemySpawner, map, pathStart, transform.rotation, listOfPaths[listOfPaths.Count - 1]);
+                    } else
+                    {
+                        listOfPaths[i] = CreatePath(bottomLeftPoint, direction, listOfX, listOfY, pathEnd, listOfPaths[i], numPointsForInter);
+                        PathManager.CreateEnemySpawner(EnemySpawner, map, pathStart, transform.rotation, listOfPaths[i]);
                     }
-                
-                    listOfPaths[tempI] = CreatePath(bottomLeftPoint, direction, listOfX, listOfY, pathEnd, tempI, num);
-                    PathManager.CreateEnemySpawner(EnemySpawner, map, pathStart, transform.rotation, listOfPaths[tempI]);
-
-                    // Debug.Log(listOfPaths);
                 }
             }
         }
     }
 
-    private Queue<Vector2> CreatePath(Vector2 bottomLeftPoint, Vector2 direction, List<int> listOfX, List<int> listOfY, Vector2 pathEnd, int i, int num)
+    private Queue<Vector2> CreatePath(Vector2 bottomLeftPoint, Vector2 direction, List<int> listOfX, List<int> listOfY, Vector2 pathEnd, Queue<Vector2> Q, int num)
     {
         Vector2 randomPoint = GetRandomPointOnSquareEdge(GlobalVariables.squareWidth, GlobalVariables.squareHeight, direction);
 
@@ -179,12 +184,20 @@ public class LogicManager : MonoBehaviour
         path.Enqueue(pathEnd);
         Queue<Vector2> fullPath = PathManager.CreatePath(pathStart, pathEnd, map, path, pathTile, red, green);
 
-        while (listOfPaths[i].Count > 0)
-        {
-            fullPath.Enqueue(listOfPaths[i].Dequeue());
-        }
+        fullPath = EnqueueWholeQueue(Q, fullPath);
 
         return fullPath;
+    }
+
+    private Queue<Vector2> EnqueueWholeQueue(Queue<Vector2> DequeuingQ, Queue<Vector2> QueueingQ)
+    {
+        Queue<Vector2> tempQ = QueueingQ;
+        while (DequeuingQ.Count > 0)
+        {
+            tempQ.Enqueue(DequeuingQ.Dequeue());
+        }
+
+        return tempQ;
     }
 
     Vector2 GetRandomPointOnSquareEdge(int width, int height, Vector2 direction)

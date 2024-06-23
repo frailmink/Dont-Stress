@@ -16,12 +16,14 @@ public class EnemyScript : MonoBehaviour
     public float speed;
     public float maxHealth = 100f;
     private float health;
-    public PlayerHealthScript playerHealth;
+    private PlayerHealthScript playerHealth;
     public int damage = 1;
 
     private BaseHealthScript baseHealth; 
-    private EnemyHealthBar EnemyHealthBar; 
+    private EnemyHealthBar EnemyHealthBar;
 
+    public GameObject canvas;
+    
     private void Awake() 
     {
         playerHealth = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerHealthScript>();
@@ -29,10 +31,12 @@ public class EnemyScript : MonoBehaviour
 
         EnemyHealthBar = GetComponentInChildren<EnemyHealthBar>();
         health = maxHealth;
+        canvas.SetActive(false);
     }
 
     public void TakeDamage(float damageAmount)
     {
+        canvas.SetActive(true);
         health -= damageAmount;
         EnemyHealthBar.UpdateHealth(health,maxHealth);
         if (health <= 0)

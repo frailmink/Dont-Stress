@@ -759,6 +759,7 @@ MonoBehaviour:
   pathTile: {fileID: 11400000, guid: 340e0f383d7e80c4997307d8c3b7c74f, type: 2}
   red: {fileID: 11400000, guid: 0645e97c8e07f9343aee30afa3efc2a1, type: 2}
   green: {fileID: 11400000, guid: 9f62db70bfe133f4a8c952ba6160d71c, type: 2}
+  taken: {fileID: 11400000, guid: ab1407ef8354b1247a3d5703a3f9bce5, type: 2}
 --- !u!4 &631337597
 Transform:
   m_ObjectHideFlags: 0

@@ -2,9 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Tilemaps;
 
 public class PlayerScript : MonoBehaviour
 {
+    public GameObject[] towers;
+
+    public GameObject buildManager;
+    public Tilemap map;
+    public TileBase floor, taken;
+
     public float MoveSpeed = 5.0f;
     private Vector2 moveDirection = Vector2.zero;
     private Vector2 mousePosition;
@@ -12,6 +19,9 @@ public class PlayerScript : MonoBehaviour
     private PlayerInput PlayerControls;
     private InputAction move;
     private InputAction shoot;
+    private InputAction build;
+
+    private GameObject buildManagerInstance;
 
     private Rigidbody2D rb;
     public WeaponScript weapon;
@@ -34,12 +44,38 @@ public class PlayerScript : MonoBehaviour
         shoot.performed += Fire;
         move = PlayerControls.Player.Move;
         move.Enable();
+
+        build = PlayerControls.Player.Build;
+        build.Enable();
+        build.performed += Build;
     }
 
     private void OnDisable()
     {
         move.Disable();
         shoot.Disable();
+        build.Disable();
+    }
+
+    private void Build(InputAction.CallbackContext context)
+    {
+        if (!GlobalVariables.GetBuildingMode())
+        {
+            buildManagerInstance = Instantiate(buildManager, transform.position, Quaternion.Euler(0, 0, 0));
+            PlacementScript script = buildManagerInstance.GetComponent<PlacementScript>();
+            script.map = map;
+            script.tower = towers[0];
+            script.ground = floor;
+            script.taken = taken;
+            GlobalVariables.SetBuildingMode(true);
+        }
+        else if (!PlacementScript.placed)
+        {
+            PlacementScript script = buildManagerInstance.GetComponent<PlacementScript>();
+            script.DeleteTower();
+            Destroy(buildManagerInstance);
+            GlobalVariables.SetBuildingMode(false);
+        }
     }
 
     private void Fire(InputAction.CallbackContext context)

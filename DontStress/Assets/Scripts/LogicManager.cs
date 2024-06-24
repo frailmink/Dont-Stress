@@ -12,7 +12,6 @@ public class LogicManager : MonoBehaviour
     public int pathEndChance;
     public int branchChance;
     public GameObject EnemySpawner;
-    public GameObject BuildManager;
 
     public int numPointsForInter;
     public int numPoints;
@@ -24,9 +23,6 @@ public class LogicManager : MonoBehaviour
 
     private PlayerInput PlayerControls;
     private InputAction shoot;
-    private InputAction build;
-
-    private GameObject buildManager;
 
     private Vector2 pathStart;
     private List<int> temp = new List<int> { 0, 1, 2, 3 };
@@ -37,10 +33,6 @@ public class LogicManager : MonoBehaviour
         shoot = PlayerControls.Testing.N;
         shoot.Enable();
         shoot.performed += Fire;
-
-        build = PlayerControls.Player.Build;
-        build.Enable();
-        build.performed += Build;
     }
     
     private void OnDisable()
@@ -49,32 +41,11 @@ public class LogicManager : MonoBehaviour
         {
             shoot.Disable();
         }
-        build.Disable();
     }
     
     private void Fire(InputAction.CallbackContext context)
     {
         NextRound();
-    }
-
-    private void Build(InputAction.CallbackContext context)
-    {
-        if (!GlobalVariables.GetBuildingMode())
-        {
-            buildManager = Instantiate(BuildManager, transform.position, transform.rotation);
-            PlacementScript script = buildManager.GetComponent<PlacementScript>();
-            script.map = map;
-            script.tower = towers[0];
-            script.ground = floor;
-            script.taken = taken;
-            GlobalVariables.SetBuildingMode(true);
-        } else if (!PlacementScript.placed)
-        {
-            PlacementScript script = buildManager.GetComponent<PlacementScript>();
-            script.DeleteTower();
-            Destroy(buildManager);
-            GlobalVariables.SetBuildingMode(false);
-        }
     }
 
     // Start is called before the first frame update

@@ -45,5 +45,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnRate: 1
+  maxSpawns: 0
   enemyTroupe: {fileID: 7444273399634437796, guid: e974670ec515e224db7c5890f3e1b1ba, type: 3}
   map: {fileID: 0}

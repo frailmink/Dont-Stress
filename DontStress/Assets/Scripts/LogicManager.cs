@@ -17,7 +17,7 @@ public class LogicManager : MonoBehaviour
     public int numPointsForInter;
     public int numPoints;
     public Tilemap map;
-    public TileBase floor, pathTile, red, green;
+    public TileBase floor, pathTile, red, green, taken;
 
     public static List<Queue<Vector2>> listOfPaths;
     public static List<Vector2> listOfBottomLeftPoints;
@@ -26,7 +26,6 @@ public class LogicManager : MonoBehaviour
     private InputAction shoot;
     private InputAction build;
 
-    private bool buildingModeOn = false;
     private GameObject buildManager;
 
     private Vector2 pathStart;
@@ -50,6 +49,7 @@ public class LogicManager : MonoBehaviour
         {
             shoot.Disable();
         }
+        build.Disable();
     }
     
     private void Fire(InputAction.CallbackContext context)
@@ -59,20 +59,21 @@ public class LogicManager : MonoBehaviour
 
     private void Build(InputAction.CallbackContext context)
     {
-        if (!buildingModeOn)
+        if (!GlobalVariables.GetBuildingMode())
         {
             buildManager = Instantiate(BuildManager, transform.position, transform.rotation);
             PlacementScript script = buildManager.GetComponent<PlacementScript>();
             script.map = map;
             script.tower = towers[0];
             script.ground = floor;
-            buildingModeOn = true;
-        } else
+            script.taken = taken;
+            GlobalVariables.SetBuildingMode(true);
+        } else if (!PlacementScript.placed)
         {
             PlacementScript script = buildManager.GetComponent<PlacementScript>();
             script.DeleteTower();
             Destroy(buildManager);
-            buildingModeOn = false;
+            GlobalVariables.SetBuildingMode(false);
         }
     }
 

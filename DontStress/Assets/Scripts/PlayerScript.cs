@@ -44,7 +44,10 @@ public class PlayerScript : MonoBehaviour
 
     private void Fire(InputAction.CallbackContext context)
     {
-        weapon.Fire();
+        if (!GlobalVariables.GetBuildingMode())
+        {
+            weapon.Fire();
+        }
     }
 
     private void FixedUpdate()

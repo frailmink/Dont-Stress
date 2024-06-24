@@ -6,13 +6,17 @@ using UnityEngine.InputSystem;
 
 public class PlacementScript : MonoBehaviour
 {
+    public static bool placed;
+
     public Color greenColor = new Color(0.0f, 1.0f, 0.0f, 0.5f);
     public Color redColor = new Color(1.0f, 0.0f, 0.0f, 0.5f);
+    private Color originalColor;
     // public float opacity = 0.5f;
 
     public GameObject tower;
     public Tilemap map;
     public TileBase ground;
+    public TileBase taken;
 
     private GameObject instance;
     private Vector3 mousePosition;
@@ -20,6 +24,8 @@ public class PlacementScript : MonoBehaviour
 
     private PlayerInput PlayerControls;
     private InputAction shoot;
+
+    private TowerScript script;
 
     private void OnEnable()
     {
@@ -36,15 +42,19 @@ public class PlacementScript : MonoBehaviour
     
     private void Fire(InputAction.CallbackContext context)
     {
-        // Place();
-        Debug.Log("placed");
+        Place();
     }
 
     // Start is called before the first frame update
     void Start()
     {
+        placed = false;
         pos = GetPosition();
         instance = Instantiate(tower, new Vector3(pos.x, pos.y, 0), transform.rotation);
+        originalColor = instance.GetComponent<SpriteRenderer>().color;
+        instance.GetComponent<BoxCollider2D>().enabled = false;
+        script = instance.GetComponent<TowerScript>();
+        script.DisableScript();
         CheckIfPlacable();
     }
 
@@ -64,6 +74,11 @@ public class PlacementScript : MonoBehaviour
 
     private bool CheckIfPlacable()
     {
+        if (instance == null)
+        {
+            return false;
+        }
+
         SpriteRenderer towersColor = instance.GetComponent<SpriteRenderer>();
         Vector3Int point = map.WorldToCell(pos);
         point.z = 0;
@@ -74,6 +89,28 @@ public class PlacementScript : MonoBehaviour
         }
         towersColor.color = redColor;
         return false;
+    }
+
+    private void Place()
+    {
+        if (instance == null)
+        {
+            return;
+        }
+
+        bool placable = CheckIfPlacable();
+        if (placable)
+        {
+            Vector3Int point = map.WorldToCell(pos);
+            point.z = 0;
+            map.SetTile(point, taken);
+            instance.GetComponent<SpriteRenderer>().color = originalColor;
+            instance.GetComponent<BoxCollider2D>().enabled = true;
+            script.EnableScript();
+            placed = true;
+            GlobalVariables.SetBuildingMode(false);
+            Destroy(this);
+        }
     }
 
     public void DeleteTower()

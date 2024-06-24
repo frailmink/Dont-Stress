@@ -30,8 +30,7 @@ public class TowerScript : MonoBehaviour
 
     public void OpenUpgradeUI(GameObject upgradeUI)
     {
-        GameObject instance = Instantiate(upgradeUI);
-        Button[] childButtons = instance.GetComponentsInChildren<Button>();
+        Button[] childButtons = upgradeUI.GetComponentsInChildren<Button>();
         foreach (Button btn in childButtons)
         {
             if (btn.gameObject.name == "Strength")
@@ -40,15 +39,8 @@ public class TowerScript : MonoBehaviour
             } else if (btn.gameObject.name == "Speed")
             {
                 btn.onClick.AddListener(() => IncreaseSpeed(10));
-            } else if (btn.gameObject.name == "Exit")
-            {
-                btn.onClick.AddListener(() => DestroyUpgradeUI(instance));
             }
         }
-    }
-
-    public void DestroyUpgradeUI(GameObject g)
-    {
-        Destroy(g);
+        upgradeUI.SetActive(true);
     }
 }

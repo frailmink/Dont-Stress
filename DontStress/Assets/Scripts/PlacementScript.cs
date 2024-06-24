@@ -109,7 +109,7 @@ public class PlacementScript : MonoBehaviour
             script.EnableScript();
             placed = true;
             GlobalVariables.SetBuildingMode(false);
-            Destroy(this);
+            Destroy(this.gameObject);
         }
     }
 

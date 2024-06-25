@@ -35,9 +35,11 @@ public class TowerScript : MonoBehaviour
         {
             if (btn.gameObject.name == "Strength")
             {
+                btn.onClick.RemoveAllListeners();
                 btn.onClick.AddListener(() => IncreaseStrength(10));
             } else if (btn.gameObject.name == "Speed")
             {
+                btn.onClick.RemoveAllListeners();
                 btn.onClick.AddListener(() => IncreaseSpeed(10));
             }
         }

@@ -5,13 +5,14 @@ using UnityEngine.InputSystem;
 using UnityEngine.Tilemaps;
 
 public class LogicManager : MonoBehaviour
-{
+{   
+    #region declaring variables
     public GameObject[] towers;
 
     public int numPathPointsRemoved;
     public int pathEndChance;
     public int branchChance;
-    public GameObject EnemySpawner;
+    public GameObject enemySpawner;
 
     public int numPointsForInter;
     public int numPoints;
@@ -27,6 +28,9 @@ public class LogicManager : MonoBehaviour
     private Vector2 pathStart;
     private List<int> temp = new List<int> { 0, 1, 2, 3 };
 
+    private bool startedSpawning = false;
+    #endregion
+    
     private void OnEnable()
     {
         PlayerControls = new PlayerInput();
@@ -54,12 +58,38 @@ public class LogicManager : MonoBehaviour
         listOfPaths = new List<Queue<Vector2>>();
         listOfBottomLeftPoints = new List<Vector2>();
         DrawBackground((GlobalVariables.squareWidth) + 1, (GlobalVariables.squareHeight) + 1, new Vector2(-(GlobalVariables.squareWidth / 2), -(GlobalVariables.squareHeight / 2)));
-        listOfPaths.Add(PathManager.InitialRun(new Vector2(0, 0), numPoints, map, pathTile, red, green, transform.rotation, EnemySpawner));
+        listOfPaths.Add(PathManager.InitialRun(new Vector2(0, 0), numPoints, map, pathTile, red, green, transform.rotation, enemySpawner));
         listOfBottomLeftPoints.Add(new Vector2(-(GlobalVariables.squareWidth / 2), -(GlobalVariables.squareHeight / 2)));
     }
 
+    public void Update()
+    {
+        GameObject[] enemySpawners = GameObject.FindGameObjectsWithTag("EnemySpawner");
+        GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
+
+        bool allFinished = true;
+        foreach (GameObject spawner in enemySpawners)
+        {
+            EnemySpawner script = spawner.GetComponent<EnemySpawner>();
+            // Debug.Log("Number of enemies: " + enemies.Length);
+            if (script.spawnCount != script.maxSpawns)
+            {
+                allFinished = false;
+                // Debug.Log("All enemies killed, starting next round.");
+            }
+        }
+
+        if (allFinished && enemies.Length == 0)
+        {
+            NextRound();
+        }
+    }
     private void NextRound()
     {
+        EnemySpawner.speed *= 1.1f;
+        EnemySpawner.health *=1f;
+        Debug.Log("Enemy level increased");
+
         GameObject[] enemySpawners = GameObject.FindGameObjectsWithTag("EnemySpawner");
 
         foreach (GameObject spawner in enemySpawners)
@@ -150,7 +180,7 @@ public class LogicManager : MonoBehaviour
                         num -= rand;
                         listOfPaths[i] = CreatePath(bottomLeftPoint, direction, listOfX, listOfY, pathEnd, listOfPaths[i], num);
 
-                        PathManager.CreateEnemySpawner(EnemySpawner, map, pathStart, transform.rotation, listOfPaths[i]);
+                        PathManager.CreateEnemySpawner(enemySpawner, map, pathStart, transform.rotation, listOfPaths[i]);
 
                         // dequeue random num of points
                         Vector2 topRightCorner = new Vector2(bottomLeftPoint.x + GlobalVariables.squareWidth + 1, bottomLeftPoint.y + GlobalVariables.squareHeight + 1);
@@ -162,16 +192,16 @@ public class LogicManager : MonoBehaviour
                         listOfPaths.Add(temporaryQueue);
                         listOfBottomLeftPoints.Add(bottomLeftPoint);
                         listOfIsToSkip.Add(listOfPaths.Count - 1);
-                        PathManager.CreateEnemySpawner(EnemySpawner, map, pathStart, transform.rotation, listOfPaths[listOfPaths.Count - 1]);
+                        PathManager.CreateEnemySpawner(enemySpawner, map, pathStart, transform.rotation, listOfPaths[listOfPaths.Count - 1]);
                     } else
                     {
                         listOfPaths[i] = CreatePath(bottomLeftPoint, direction, listOfX, listOfY, pathEnd, listOfPaths[i], numPointsForInter);
-                        PathManager.CreateEnemySpawner(EnemySpawner, map, pathStart, transform.rotation, listOfPaths[i]);
+                        PathManager.CreateEnemySpawner(enemySpawner, map, pathStart, transform.rotation, listOfPaths[i]);
                     }
                 } else
                 {
                     pathStart = listOfPaths[i].Peek();
-                    PathManager.CreateEnemySpawner(EnemySpawner, map, pathStart, transform.rotation, listOfPaths[i]);
+                    PathManager.CreateEnemySpawner(enemySpawner, map, pathStart, transform.rotation, listOfPaths[i]);
                 }
             }
         }

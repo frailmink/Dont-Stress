@@ -5,22 +5,31 @@ using UnityEngine.Tilemaps;
 
 public class EnemySpawner : MonoBehaviour
 {
+    #region declaring variables
     public Queue<Vector2> path;
 
     private float timer = 0;
-    public float spawnRate;
+    public float spawnRate; //how quick it spawns 
+
+    public int maxSpawns;
+    public int spawnCount; //number of enemies spawned per spawnpoint
+    public static float health = 31;
+    public static float speed = 2;
 
     public GameObject enemyTroupe;
 
     public Tilemap map;
+    #endregion
 
-    // Update is called once per frame
     void FixedUpdate()
     {
-        spawn();
+        if (spawnCount < maxSpawns)
+        {
+            spawn();
+        }
     }
 
-    void spawn()
+    public void spawn()
     {
         if (timer < spawnRate)
         {
@@ -29,13 +38,16 @@ public class EnemySpawner : MonoBehaviour
         else
         {
             GameObject insatnce = Instantiate(enemyTroupe, new Vector3(transform.position.x, transform.position.y, 0), transform.rotation);
-            EnemyScript script = insatnce.GetComponent<EnemyScript>();
+            EnemyScript enemyScript = insatnce.GetComponent<EnemyScript>();
             // Vector2 temp = path.Peek();
             // script.objective = map.CellToWorld(new Vector3Int((int) temp.x, (int) temp.y, 0));
             Queue<Vector2> pathClone = new Queue<Vector2>(path);
-            script.path = pathClone;
-            script.map = map;
+            enemyScript.path = pathClone;
+            enemyScript.map = map;
+            enemyScript.maxHealth = health;
+            enemyScript.speed = speed;
             timer = 0;
+            spawnCount++;
         }
     }
 }

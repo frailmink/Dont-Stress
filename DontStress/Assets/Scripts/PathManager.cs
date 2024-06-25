@@ -6,6 +6,7 @@ using UnityEngine.InputSystem;
 
 public class PathManager : MonoBehaviour
 {
+
     // public GameObject EnemySpawner;
     // 
     // public int numPoints;
@@ -117,13 +118,16 @@ public class PathManager : MonoBehaviour
         return path;
     }
 
-    public static void CreateEnemySpawner(GameObject EnemySpawner, Tilemap map, Vector2 pathStart, Quaternion rotation, Queue<Vector2> fullPath)
+
+      public static void CreateEnemySpawner(GameObject EnemySpawner, Tilemap map, Vector2 pathStart, Quaternion rotation, Queue<Vector2> fullPath)
     {
-        GameObject insatnce = Instantiate(EnemySpawner, map.GetCellCenterWorld(new Vector3Int((int)pathStart.x, (int)pathStart.y, 0)), rotation);
-        EnemySpawner script = insatnce.GetComponent<EnemySpawner>();
+        GameObject instance = Instantiate(EnemySpawner, map.GetCellCenterWorld(new Vector3Int((int)pathStart.x, (int)pathStart.y, 0)), rotation);
+        EnemySpawner enemySpawnerScript = instance.GetComponent<EnemySpawner>();
         Queue<Vector2> pathClone = new Queue<Vector2>(fullPath);
-        script.path = pathClone;
-        script.map = map;
+        enemySpawnerScript.path = pathClone;
+        enemySpawnerScript.map = map;
+    
+        enemySpawnerScript.maxSpawns = 10;
     }
 
     public static Queue<Vector2> OrderQueue(Vector2 start, Vector2 end, Queue<Vector2> path)

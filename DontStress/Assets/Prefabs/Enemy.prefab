@@ -400,7 +400,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7733247230216079660}
-  - component: {fileID: 4100206772041249131}
   - component: {fileID: 2457048122796591545}
   - component: {fileID: 222530377079803646}
   - component: {fileID: -5714932840789961046}
@@ -427,33 +426,6 @@ Transform:
   - {fileID: 5633442912035434127}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!50 &4100206772041249131
-Rigidbody2D:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7444273399634437796}
-  m_BodyType: 0
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
-  m_GravityScale: 0
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 4
 --- !u!212 &2457048122796591545
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -558,5 +530,6 @@ MonoBehaviour:
   enemyPrefab: {fileID: 0}
   speed: 2
   maxHealth: 31
+  damageToBase: 10
   damage: 10
   canvas: {fileID: 7020459963113387707}

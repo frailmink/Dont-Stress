@@ -199,7 +199,7 @@ public class PathManager : MonoBehaviour
             // Create path along Y-axis from startY to endY
             for (int y = Mathf.Min(startY, endY); y <= Mathf.Max(startY, endY); y++)
             {
-                if (count != 0)
+                if (count != 0 || Mathf.Min(startY, endY) == endY)
                 {
                     map.SetTile(new Vector3Int(endX, y, 0), pathTile);
                     tempQY.Enqueue(new Vector2(endX, y));

@@ -10,7 +10,7 @@ public class EnemyScript : MonoBehaviour
     public Vector2 objective;
     public Tilemap map;
 
-    private Rigidbody2D rb;
+    // private Rigidbody2D rb;
 
     public GameObject enemyPrefab;
     public float speed;
@@ -39,7 +39,7 @@ public class EnemyScript : MonoBehaviour
     private void Start()
     {
         health = maxHealth;
-        rb = GetComponent<Rigidbody2D>();
+        // rb = GetComponent<Rigidbody2D>();
         if (path != null && path.Count > 0)
         {
             Vector2 temp = path.Dequeue();
@@ -52,21 +52,23 @@ public class EnemyScript : MonoBehaviour
     {
         if (Vector2.Distance(transform.position, objective) > 0.1f)
         {
-            Vector2 dif = objective - (Vector2)transform.position;
-            rb.velocity = dif.normalized * speed;
+            float maxDistanceDelta = speed * Time.deltaTime;
+            transform.position = Vector2.MoveTowards(transform.position, objective, maxDistanceDelta);
+            // Vector2 dif = objective - (Vector2)transform.position;
+            // rb.velocity = dif.normalized * speed;
         }
         else
         {
-            rb.velocity = Vector2.zero; // Stop the enemy's movement
+            // rb.velocity = Vector2.zero; // Stop the enemy's movement
 
-            if (path != null && path.Count > 0)
+            if (path != null && path.Count > 1)
             {
                 Vector2 temp = path.Dequeue();
                 objective = map.GetCellCenterWorld(new Vector3Int((int)temp.x, (int)temp.y, 0));
             }
             else
-            {   
-
+            {
+                baseHealth.TakeDamage(damageToBase);
                 Die();
             }
         }
@@ -85,11 +87,6 @@ public class EnemyScript : MonoBehaviour
         if(collision.gameObject.tag == "Player")
         {
             playerHealth.TakeDamage(damage);
-        }
-        if(collision.gameObject.tag == "Base")
-        {
-            Destroy(gameObject);
-            baseHealth.TakeDamage(damageToBase);
         }
     }
 

@@ -27,8 +27,6 @@ public class LogicManager : MonoBehaviour
 
     private Vector2 pathStart;
     private List<int> temp = new List<int> { 0, 1, 2, 3 };
-
-    private bool startedSpawning = false;
     #endregion
     
     private void OnEnable()
@@ -86,8 +84,8 @@ public class LogicManager : MonoBehaviour
     }
     private void NextRound()
     {
-        EnemySpawner.speed *= 1.1f;
-        EnemySpawner.health *=1f;
+        EnemySpawner.speed *= 10f;
+        EnemySpawner.health *= 1f;
         Debug.Log("Enemy level increased");
 
         GameObject[] enemySpawners = GameObject.FindGameObjectsWithTag("EnemySpawner");

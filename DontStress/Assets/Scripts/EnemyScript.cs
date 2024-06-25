@@ -17,10 +17,13 @@ public class EnemyScript : MonoBehaviour
     public float maxHealth;
     private float health;
     public int damageToBase = 10;
+    public int damage = 1;
 
     private PlayerHealthScript playerHealth;
     private BaseHealthScript baseHealth; 
-    private EnemyHealthBar EnemyHealthBar; 
+    private EnemyHealthBar enemyHealthBar;
+
+    public GameObject canvas;
     #endregion
 
     private void Awake() 
@@ -28,7 +31,9 @@ public class EnemyScript : MonoBehaviour
         playerHealth = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerHealthScript>();
         baseHealth = GameObject.FindGameObjectWithTag("Base").GetComponent<BaseHealthScript>();
 
-        EnemyHealthBar = GetComponentInChildren<EnemyHealthBar>();
+        enemyHealthBar = GetComponentInChildren<EnemyHealthBar>();
+        health = maxHealth;
+        canvas.SetActive(false);
     }
 
     private void Start()
@@ -38,9 +43,9 @@ public class EnemyScript : MonoBehaviour
         if (path != null && path.Count > 0)
         {
             Vector2 temp = path.Dequeue();
-            objective = map.CellToWorld(new Vector3Int((int)temp.x, (int)temp.y, 0));
+            objective = map.GetCellCenterWorld(new Vector3Int((int)temp.x, (int)temp.y, 0));
         }
-        EnemyHealthBar.UpdateHealth(health, maxHealth);
+        enemyHealthBar.UpdateHealth(health, maxHealth);
     }
 
     void Update()
@@ -57,7 +62,7 @@ public class EnemyScript : MonoBehaviour
             if (path != null && path.Count > 0)
             {
                 Vector2 temp = path.Dequeue();
-                objective = map.CellToWorld(new Vector3Int((int)temp.x, (int)temp.y, 0));
+                objective = map.GetCellCenterWorld(new Vector3Int((int)temp.x, (int)temp.y, 0));
             }
             else
             {   
@@ -79,7 +84,7 @@ public class EnemyScript : MonoBehaviour
     {
         if(collision.gameObject.tag == "Player")
         {
-            playerHealth.TakeDamage(damageToBase);
+            playerHealth.TakeDamage(damage);
         }
         if(collision.gameObject.tag == "Base")
         {
@@ -90,8 +95,9 @@ public class EnemyScript : MonoBehaviour
 
     public void TakeDamage(float damageAmount)
     {
+        canvas.SetActive(true);
         health -= damageAmount;
-        EnemyHealthBar.UpdateHealth(health,maxHealth);
+        enemyHealthBar.UpdateHealth(health,maxHealth);
         if (health <= 0)
         {
             Die();

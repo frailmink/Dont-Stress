@@ -121,7 +121,7 @@ public class PathManager : MonoBehaviour
 
       public static void CreateEnemySpawner(GameObject EnemySpawner, Tilemap map, Vector2 pathStart, Quaternion rotation, Queue<Vector2> fullPath)
     {
-        GameObject instance = Instantiate(EnemySpawner, map.CellToWorld(new Vector3Int((int)pathStart.x, (int)pathStart.y, 0)), rotation);
+        GameObject instance = Instantiate(EnemySpawner, map.GetCellCenterWorld(new Vector3Int((int)pathStart.x, (int)pathStart.y, 0)), rotation);
         EnemySpawner enemySpawnerScript = instance.GetComponent<EnemySpawner>();
         Queue<Vector2> pathClone = new Queue<Vector2>(fullPath);
         enemySpawnerScript.path = pathClone;

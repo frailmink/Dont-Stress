@@ -7,6 +7,8 @@ using UnityEngine.Tilemaps;
 public class LogicManager : MonoBehaviour
 {   
     #region declaring variables
+    public GameObject[] towers;
+
     public int numPathPointsRemoved;
     public int pathEndChance;
     public int branchChance;
@@ -15,7 +17,7 @@ public class LogicManager : MonoBehaviour
     public int numPointsForInter;
     public int numPoints;
     public Tilemap map;
-    public TileBase floor, pathTile, red, green;
+    public TileBase floor, pathTile, red, green, taken;
 
     public static List<Queue<Vector2>> listOfPaths;
     public static List<Vector2> listOfBottomLeftPoints;
@@ -39,7 +41,10 @@ public class LogicManager : MonoBehaviour
     
     private void OnDisable()
     {
-       shoot.Disable();
+        if (shoot != null)
+        {
+            shoot.Disable();
+        }
     }
     
     private void Fire(InputAction.CallbackContext context)
@@ -59,24 +64,30 @@ public class LogicManager : MonoBehaviour
 
     public void Update()
     {
+        GameObject[] enemySpawners = GameObject.FindGameObjectsWithTag("EnemySpawner");
         GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
-        // Debug.Log("Number of enemies: " + enemies.Length);
-        if (enemies.Length == 0 && startedSpawning == true)
+
+        bool allFinished = true;
+        foreach (GameObject spawner in enemySpawners)
         {
-            // Debug.Log("All enemies killed, starting next round.");
-            NextRound();
-            startedSpawning = false;
+            EnemySpawner script = spawner.GetComponent<EnemySpawner>();
+            // Debug.Log("Number of enemies: " + enemies.Length);
+            if (script.spawnCount != script.maxSpawns)
+            {
+                allFinished = false;
+                // Debug.Log("All enemies killed, starting next round.");
+            }
         }
-        else if(startedSpawning == false && enemies.Length > 0)
+
+        if (allFinished && enemies.Length == 0)
         {
-            startedSpawning = true;
-            // Debug.Log("Enemies detected, started spawning.");
+            NextRound();
         }
     }
     private void NextRound()
     {
         EnemySpawner.speed *= 1.1f;
-        EnemySpawner.health *=10f;
+        EnemySpawner.health *=1f;
         Debug.Log("Enemy level increased");
 
         GameObject[] enemySpawners = GameObject.FindGameObjectsWithTag("EnemySpawner");

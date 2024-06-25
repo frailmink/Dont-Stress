@@ -6,6 +6,7 @@ TagManager:
   tags:
   - EnemySpawner
   - Base
+  - Tower
   - Enemy
   layers:
   - Default

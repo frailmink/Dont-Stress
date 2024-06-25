@@ -559,3 +559,4 @@ MonoBehaviour:
   speed: 2
   maxHealth: 31
   damage: 10
+  canvas: {fileID: 7020459963113387707}

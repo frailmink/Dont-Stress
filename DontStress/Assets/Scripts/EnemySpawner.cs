@@ -12,7 +12,7 @@ public class EnemySpawner : MonoBehaviour
     public float spawnRate; //how quick it spawns 
 
     public int maxSpawns;
-    private int spawnCount; //number of enemies spawned per spawnpoint
+    public int spawnCount; //number of enemies spawned per spawnpoint
     public static float health = 31;
     public static float speed = 2;
 

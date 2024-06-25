@@ -8,6 +8,7 @@ public class BaseHealthScript : MonoBehaviour
     [SerializeField] private Image barImage; // Use SerializeField to ensure it can be set in the inspector
     public float maxHealth = 100f;
     private float health;
+    public GameOverManager gameOverManager;
 
     private void Awake()
     {
@@ -23,10 +24,12 @@ public class BaseHealthScript : MonoBehaviour
     public void TakeDamage(float damage)
     {
         health -= damage;
-        if (health < 0)
+        Debug.Log("Base Taking damage !!!");
+        if (health <= 0)
         {
             health = 0;
             // Optional: Add logic for when the base is destroyed
+            gameOverManager.TriggerGameOver();
             Debug.Log("Base Destroyed");
         }
         UpdateHealthBar();
@@ -38,9 +41,9 @@ public class BaseHealthScript : MonoBehaviour
         {
             barImage.fillAmount = health / maxHealth;
         }
-        else
-        {
-            Debug.LogError("barImage is not assigned.");
-        }
+        // else
+        // {
+        //     Debug.Log("No image");
+        // }
     }
 }

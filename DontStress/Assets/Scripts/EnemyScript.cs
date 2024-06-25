@@ -12,7 +12,6 @@ public class EnemyScript : MonoBehaviour
 
     private Rigidbody2D rb;
 
-    public GameObject enemyPrefab;
     public float speed;
     public float maxHealth;
     private float health;
@@ -24,6 +23,7 @@ public class EnemyScript : MonoBehaviour
     private EnemyHealthBar enemyHealthBar;
 
     public GameObject canvas;
+    public GameObject coinPrefab;
     #endregion
 
     private void Awake() 
@@ -71,14 +71,6 @@ public class EnemyScript : MonoBehaviour
             }
         }
     }
-
-    public void SpawnEnemy()
-    {
-        GameObject enemy = Instantiate(enemyPrefab, transform.position, Quaternion.identity);
-        enemy.GetComponent<EnemyScript>().path = new Queue<Vector2>(path);
-        enemy.GetComponent<EnemyScript>().map = map;
-    }
-
     
     private void OnCollisionEnter2D(Collision2D collision)
     {
@@ -101,12 +93,14 @@ public class EnemyScript : MonoBehaviour
         if (health <= 0)
         {
             Die();
+
         }
     }
 
     void Die()
     {
         // GetComponent<LootBag>().InstantiateLoot(transform.position);
+        Instantiate(coinPrefab, transform.position, Quaternion.identity);
         Destroy(gameObject);
     }
 }

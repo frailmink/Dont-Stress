@@ -13,6 +13,7 @@ public class EnemyScript : MonoBehaviour
     private Rigidbody2D rb;
 
     public float speed;
+    private float originalSpeed;
     public float maxHealth;
     private float health;
     public int damageToBase = 10;
@@ -21,7 +22,7 @@ public class EnemyScript : MonoBehaviour
     private PlayerHealthScript playerHealth;
     private BaseHealthScript baseHealth; 
     private EnemyHealthBar enemyHealthBar;
-
+    private Coroutine slowCoroutine;
     public GameObject canvas;
     public GameObject coinPrefab;
     #endregion
@@ -38,6 +39,7 @@ public class EnemyScript : MonoBehaviour
 
     private void Start()
     {
+        originalSpeed = speed;
         health = maxHealth;
         rb = GetComponent<Rigidbody2D>();
         if (path != null && path.Count > 0)
@@ -95,6 +97,22 @@ public class EnemyScript : MonoBehaviour
             Die();
 
         }
+    }
+
+    public void ApplySlow(float slowAmount, float duration)
+    {
+        if (slowCoroutine != null)
+        {
+            StopCoroutine(slowCoroutine);
+        }
+        slowCoroutine = StartCoroutine(SlowEffect(slowAmount, duration));
+    }
+
+    private IEnumerator SlowEffect(float slowAmount, float duration)
+    {
+        speed = originalSpeed * slowAmount;
+        yield return new WaitForSeconds(duration);
+        speed = originalSpeed;
     }
 
     void Die()

@@ -20,11 +20,15 @@ public class PlayerScript : MonoBehaviour
     private InputAction move;
     private InputAction shoot;
     private InputAction build;
+    private InputAction nextTower;
+    private InputAction previousTower;
 
     private GameObject buildManagerInstance;
 
     private Rigidbody2D rb;
     public WeaponScript weapon;
+
+    private int currentTowerIndex = 0;  // Track the current tower index
 
     private void Awake()
     {
@@ -42,12 +46,21 @@ public class PlayerScript : MonoBehaviour
         shoot = PlayerControls.Player.Attack;
         shoot.Enable();
         shoot.performed += Fire;
+
         move = PlayerControls.Player.Move;
         move.Enable();
 
         build = PlayerControls.Player.Build;
         build.Enable();
         build.performed += Build;
+
+        nextTower = PlayerControls.Player.NextTower;
+        nextTower.Enable();
+        nextTower.performed += SwapToNextTower;  // Add listener for next tower swapping
+
+        previousTower = PlayerControls.Player.PreviousTower;
+        previousTower.Enable();
+        previousTower.performed += SwapToPreviousTower;  // Add listener for previous tower swapping
     }
 
     private void OnDisable()
@@ -55,19 +68,15 @@ public class PlayerScript : MonoBehaviour
         move.Disable();
         shoot.Disable();
         build.Disable();
+        nextTower.Disable();
+        previousTower.Disable();
     }
 
     private void Build(InputAction.CallbackContext context)
     {
         if (!GlobalVariables.GetBuildingMode())
         {
-            buildManagerInstance = Instantiate(buildManager, transform.position, Quaternion.Euler(0, 0, 0));
-            PlacementScript script = buildManagerInstance.GetComponent<PlacementScript>();
-            script.map = map;
-            script.tower = towers[0];
-            script.ground = floor;
-            script.taken = taken;
-            GlobalVariables.SetBuildingMode(true);
+            InstantiateBuildManager();
         }
         else if (!PlacementScript.placed)
         {
@@ -76,6 +85,48 @@ public class PlayerScript : MonoBehaviour
             Destroy(buildManagerInstance);
             GlobalVariables.SetBuildingMode(false);
         }
+    }
+
+    private void SwapToNextTower(InputAction.CallbackContext context)
+    {
+        // Cycle to the next tower index
+        currentTowerIndex = (currentTowerIndex + 1) % towers.Length;
+        Debug.Log("Current Tower Index: " + currentTowerIndex);
+        
+        if (GlobalVariables.GetBuildingMode())
+        {
+            InstantiateBuildManager();
+        }
+    }
+
+    private void SwapToPreviousTower(InputAction.CallbackContext context)
+    {
+        // Cycle to the previous tower index
+        currentTowerIndex = (currentTowerIndex - 1 + towers.Length) % towers.Length;
+        Debug.Log("Current Tower Index: " + currentTowerIndex);
+
+        if (GlobalVariables.GetBuildingMode())
+        {
+            InstantiateBuildManager();
+        }
+    }
+
+    private void InstantiateBuildManager()
+    {
+        if (buildManagerInstance != null)
+        {
+            PlacementScript script = buildManagerInstance.GetComponent<PlacementScript>();
+            script.DeleteTower();
+            Destroy(buildManagerInstance);
+        }
+        
+        buildManagerInstance = Instantiate(buildManager, transform.position, Quaternion.Euler(0, 0, 0));
+        PlacementScript newScript = buildManagerInstance.GetComponent<PlacementScript>();
+        newScript.map = map;
+        newScript.tower = towers[currentTowerIndex];
+        newScript.ground = floor;
+        newScript.taken = taken;
+        GlobalVariables.SetBuildingMode(true);
     }
 
     private void Fire(InputAction.CallbackContext context)

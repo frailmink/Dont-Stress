@@ -53,7 +53,7 @@ public class PlacementScript : MonoBehaviour
         instance = Instantiate(tower, new Vector3(pos.x, pos.y, 0), transform.rotation);
         originalColor = instance.GetComponent<SpriteRenderer>().color;
         instance.GetComponent<BoxCollider2D>().enabled = false;
-        script = instance.GetComponent<TowerScript>();
+        script = instance.GetComponentInChildren<TowerScript>();
         script.DisableScript();
         CheckIfPlacable();
     }

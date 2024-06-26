@@ -1255,8 +1255,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   target: {fileID: 2092584917}
   offset: {x: 0, y: 0, z: -10}
-  scrollSpeed: 5
-  zoomSpeed: 2
+  scrollSpeed: 10
+  zoomSpeed: 10
   minZoom: 2
   maxZoom: 100
 --- !u!1 &577625535
@@ -3514,6 +3514,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   towers:
   - {fileID: 607801719444412279, guid: 20d0af8320afbc34da190553c74b46d6, type: 3}
+  - {fileID: 607801719444412279, guid: 6959cfa3795bc8f4980601c5af4c1b57, type: 3}
   buildManager: {fileID: 6084967962051960621, guid: c08d8a4a568ac2542bebcae2a1a4221a, type: 3}
   map: {fileID: 1641838877}
   floor: {fileID: 11400000, guid: ac3784543f957694fb058f701b66549f, type: 2}

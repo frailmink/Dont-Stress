@@ -66,13 +66,13 @@ public class ShootingTowerScript : TowerScript
             if (target != null)
             {
                 GameObject bullet = Instantiate(bulletPrefab, firePoint.position, Quaternion.identity);
-                TowerBulletScript towerBulletScript = bullet.GetComponent<TowerBulletScript>();
+                BulletScript towerBulletScript = bullet.GetComponent<BulletScript>();
 
                 // FastShootingTower fastShootingTower = GetComponent<FastShootingTower>();
                 // HighDamageShootingTower highDamageShootingTower = GetComponent<HighDamageShootingTower>();
                 if (towerBulletScript != null)
                 {
-                    towerBulletScript.Initialize(target.transform, bulletSpeed, bulletDamage);
+                    towerBulletScript.Initialize(bulletDamage * strength);
                     Debug.Log("Bullet initialized in ShootingScript with damage: " + bulletDamage);
 
                     // if (fastShootingTower != null)

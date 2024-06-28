@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 7431684737167806812}
   - component: {fileID: -2259848830524464128}
   m_Layer: 0
-  m_Name: Bullets
+  m_Name: fastBulletPrefab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -161,5 +161,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 19c7ed6edd4e49e46bfaaf3a2b5ba764, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 10
-  maxDistance: 20

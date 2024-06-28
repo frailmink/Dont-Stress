@@ -4,11 +4,17 @@ using UnityEngine;
 
 public class ShootingTowerScript : TowerScript
 {
-    public float maxTimer = 0.1f;
     private float timer = 0f;
-    public float bulletSpeed = 1f; 
+
+    public  float maxTimer;
+    public  float bulletSpeed = 10f;
+    public  float bulletDamage;
     public GameObject bulletPrefab;
     public Transform firePoint;
+
+    public float getTowerDamage (){
+        return bulletDamage;
+    }
 
     private List<GameObject> enemiesInRange = new List<GameObject>();
 
@@ -22,7 +28,6 @@ public class ShootingTowerScript : TowerScript
         if (collision.gameObject.CompareTag("Enemy"))
         {
             enemiesInRange.Add(collision.gameObject);
-            Debug.Log("Tower sees the enemy: " + collision.gameObject.name);  
         }
     }
 
@@ -31,7 +36,6 @@ public class ShootingTowerScript : TowerScript
         if (collision.gameObject.CompareTag("Enemy"))
         {
             enemiesInRange.Remove(collision.gameObject);
-            Debug.Log("Enemies left: " + collision.gameObject.name);
         }
     }
 
@@ -41,12 +45,17 @@ public class ShootingTowerScript : TowerScript
         {
             timer = 0;
             Shoot();
-            Debug.Log("Shoot?");
         }
         else
         {
             timer += Time.deltaTime;
         }
+    }
+    public void SetTowerStats(float damage, float speed)
+    {
+        bulletDamage = damage;
+        bulletSpeed = speed;
+        Debug.Log("SetTowerStats called. Damage: " + bulletDamage + ", Speed: " + bulletSpeed);
     }
 
     void Shoot()
@@ -58,9 +67,23 @@ public class ShootingTowerScript : TowerScript
             {
                 GameObject bullet = Instantiate(bulletPrefab, firePoint.position, Quaternion.identity);
                 TowerBulletScript towerBulletScript = bullet.GetComponent<TowerBulletScript>();
+
+                // FastShootingTower fastShootingTower = GetComponent<FastShootingTower>();
+                // HighDamageShootingTower highDamageShootingTower = GetComponent<HighDamageShootingTower>();
                 if (towerBulletScript != null)
                 {
-                    towerBulletScript.Initialize(target.transform, bulletSpeed);
+                    towerBulletScript.Initialize(target.transform, bulletSpeed, bulletDamage);
+                    Debug.Log("Bullet initialized in ShootingScript with damage: " + bulletDamage);
+
+                    // if (fastShootingTower != null)
+                    // {
+                    //     Debug.Log("Fast Bullet Damage: " + fastShootingTower.bulletDamage);
+                    // }
+
+                    // if (highDamageShootingTower != null)
+                    // {
+                    //     Debug.Log("High Damage Bullet Damage: " + highDamageShootingTower.bulletDamage);
+                    // }
                 }
 
                 Vector2 direction = (target.transform.position - firePoint.position).normalized;
@@ -73,41 +96,3 @@ public class ShootingTowerScript : TowerScript
         }
     }
 }
-//     void Shoot()
-//     {
-//         if (enemiesInRange.Count > 0)
-//         {
-//             GameObject target = enemiesInRange[0]; // Choose the first enemy in range
-//             if (target != null)
-//             {
-//                 // Instantiate bullet and shoot it towards the target
-//                 GameObject bullet = Instantiate(bulletPrefab, firePoint.position, Quaternion.identity);
-//                 TowerBulletScript towerBulletScript = bullet.GetComponent<TowerBulletScript>();
-//                 if (towerBulletScript != null)
-//                 {
-//                     towerBulletScript.Initialize(target.transform, bulletSpeed);
-//                 }
-
-//                 // Calculate direction towards the target
-//                 Vector2 direction = (target.transform.position - firePoint.position).normalized;
-
-//                 // Set bullet velocity
-//                 Rigidbody2D bulletRb = bullet.GetComponent<Rigidbody2D>();
-//                 if (bulletRb != null)
-//                 {
-//                     bulletRb.velocity = direction * bulletSpeed;
-//                 }
-
-//                 // Instantiate bullet and shoot it towards the target
-//             //     GameObject bullet = Instantiate(bulletPrefab, firePoint.position, Quaternion.identity);
-//             //     while (target.transform.position != null && enemiesInRange.Count > 0)
-//             //     {
-//             //         enemiesInRange.Remove(target);
-//             //     }
-//             //     bullet.GetComponent<Rigidbody2D>().velocity = new Vector2(target.transform.position.x - 
-//             //     firePoint.position.x, target.transform.position.y - firePoint.position.y).normalized*bulletSpeed;
-//             //     // bullet.GetComponent<towerBulletScript>().Initialize(target.transform.position);
-//             }
-//         }
-//     }
-// }

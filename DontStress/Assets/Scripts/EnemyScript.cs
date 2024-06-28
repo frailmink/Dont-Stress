@@ -92,6 +92,7 @@ public class EnemyScript : MonoBehaviour
         canvas.SetActive(true);
         health -= damageAmount;
         enemyHealthBar.UpdateHealth(health,maxHealth);
+        Debug.Log("Damage = " + damageAmount);
         if (health <= 0)
         {
             Die();

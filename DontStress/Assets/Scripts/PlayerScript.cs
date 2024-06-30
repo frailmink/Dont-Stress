@@ -6,7 +6,7 @@ using UnityEngine.Tilemaps;
 
 public class PlayerScript : MonoBehaviour
 {
-    public GameObject[] towers;
+    public List<GameObject> towers = new List<GameObject>();
 
     public GameObject buildManager;
     public Tilemap map;
@@ -59,7 +59,7 @@ public class PlayerScript : MonoBehaviour
 
     private void Build(InputAction.CallbackContext context)
     {
-        if (!GlobalVariables.GetBuildingMode())
+        if (!GlobalVariables.GetBuildingMode() && !GlobalVariables.Paused && towers.Count > 0)
         {
             buildManagerInstance = Instantiate(buildManager, transform.position, Quaternion.Euler(0, 0, 0));
             PlacementScript script = buildManagerInstance.GetComponent<PlacementScript>();
@@ -67,9 +67,10 @@ public class PlayerScript : MonoBehaviour
             script.tower = towers[0];
             script.ground = floor;
             script.taken = taken;
+            script.playerScript = this;
             GlobalVariables.SetBuildingMode(true);
         }
-        else if (!PlacementScript.placed)
+        else if (!PlacementScript.placed && towers.Count > 0)
         {
             PlacementScript script = buildManagerInstance.GetComponent<PlacementScript>();
             script.DeleteTower();
@@ -80,7 +81,7 @@ public class PlayerScript : MonoBehaviour
 
     private void Fire(InputAction.CallbackContext context)
     {
-        if (!GlobalVariables.GetBuildingMode())
+        if (!GlobalVariables.GetBuildingMode() && !GlobalVariables.Paused)
         {
             weapon.Fire();
         }
@@ -94,5 +95,10 @@ public class PlayerScript : MonoBehaviour
         Vector2 aimDirection = mousePosition - rb.position;
         float aimAngle = Mathf.Atan2(aimDirection.y, aimDirection.x) * Mathf.Rad2Deg - 90f;
         rb.rotation = aimAngle;
+    }
+
+    public void IncreaseMoveSpeed(int differnce)
+    {
+        MoveSpeed += differnce;
     }
 }

@@ -6,6 +6,8 @@ using UnityEngine.InputSystem;
 
 public class PlacementScript : MonoBehaviour
 {
+    public PlayerScript playerScript;
+
     public static bool placed;
 
     public Color greenColor = new Color(0.0f, 1.0f, 0.0f, 0.5f);
@@ -107,6 +109,7 @@ public class PlacementScript : MonoBehaviour
             instance.GetComponent<SpriteRenderer>().color = originalColor;
             instance.GetComponent<BoxCollider2D>().enabled = true;
             script.EnableScript();
+            playerScript.towers.Remove(tower);
             placed = true;
             GlobalVariables.SetBuildingMode(false);
             Destroy(this.gameObject);

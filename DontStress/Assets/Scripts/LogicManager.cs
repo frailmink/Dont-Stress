@@ -7,7 +7,8 @@ using UnityEngine.Tilemaps;
 public class LogicManager : MonoBehaviour
 {   
     #region declaring variables
-    public GameObject[] towers;
+    public GameObject upgradeCards;
+    public TowerCardScript towerCardScript;
 
     public int numPathPointsRemoved;
     public int pathEndChance;
@@ -58,6 +59,7 @@ public class LogicManager : MonoBehaviour
         DrawBackground((GlobalVariables.squareWidth) + 1, (GlobalVariables.squareHeight) + 1, new Vector2(-(GlobalVariables.squareWidth / 2), -(GlobalVariables.squareHeight / 2)));
         listOfPaths.Add(PathManager.InitialRun(new Vector2(0, 0), numPoints, map, pathTile, red, green, transform.rotation, enemySpawner));
         listOfBottomLeftPoints.Add(new Vector2(-(GlobalVariables.squareWidth / 2), -(GlobalVariables.squareHeight / 2)));
+        towerCardScript = upgradeCards.GetComponentInChildren<TowerCardScript>();
     }
 
     public void Update()
@@ -80,6 +82,8 @@ public class LogicManager : MonoBehaviour
         if (allFinished && enemies.Length == 0)
         {
             NextRound();
+            upgradeCards.SetActive(true);
+            // towerCardScript.NewCards();
         }
     }
     private void NextRound()

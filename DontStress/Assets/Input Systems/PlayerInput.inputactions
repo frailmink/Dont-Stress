@@ -31,6 +31,24 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "PreviousTower",
+                    "type": "Button",
+                    "id": "47c58eb4-9237-44df-8193-34a409e578b1",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "NextTower",
+                    "type": "Button",
+                    "id": "a92b31f4-b45e-47a6-828e-5c658ad7a774",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -108,6 +126,28 @@
                     "processors": "",
                     "groups": "",
                     "action": "Build",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "03508157-9b58-4156-90b9-942fd64bcbaf",
+                    "path": "<Keyboard>/q",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "PreviousTower",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "3eeac899-d2a3-4bb1-8dad-90de52500123",
+                    "path": "<Keyboard>/e",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "NextTower",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

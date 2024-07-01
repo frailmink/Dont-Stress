@@ -12,8 +12,8 @@ public class EnemyScript : MonoBehaviour
 
     private Rigidbody2D rb;
 
-    public GameObject enemyPrefab;
     public float speed;
+    private float originalSpeed;
     public float maxHealth;
     private float health;
     public int damageToBase = 10;
@@ -22,8 +22,9 @@ public class EnemyScript : MonoBehaviour
     private PlayerHealthScript playerHealth;
     private BaseHealthScript baseHealth; 
     private EnemyHealthBar enemyHealthBar;
-
+    private Coroutine slowCoroutine;
     public GameObject canvas;
+    public GameObject coinPrefab;
     #endregion
 
     private void Awake() 
@@ -38,6 +39,7 @@ public class EnemyScript : MonoBehaviour
 
     private void Start()
     {
+        originalSpeed = speed;
         health = maxHealth;
         rb = GetComponent<Rigidbody2D>();
         if (path != null && path.Count > 0)
@@ -71,14 +73,6 @@ public class EnemyScript : MonoBehaviour
             }
         }
     }
-
-    public void SpawnEnemy()
-    {
-        GameObject enemy = Instantiate(enemyPrefab, transform.position, Quaternion.identity);
-        enemy.GetComponent<EnemyScript>().path = new Queue<Vector2>(path);
-        enemy.GetComponent<EnemyScript>().map = map;
-    }
-
     
     private void OnCollisionEnter2D(Collision2D collision)
     {
@@ -98,15 +92,34 @@ public class EnemyScript : MonoBehaviour
         canvas.SetActive(true);
         health -= damageAmount;
         enemyHealthBar.UpdateHealth(health,maxHealth);
+        Debug.Log("Damage = " + damageAmount);
         if (health <= 0)
         {
             Die();
+
         }
+    }
+
+    public void ApplySlow(float slowAmount, float duration)
+    {
+        if (slowCoroutine != null)
+        {
+            StopCoroutine(slowCoroutine);
+        }
+        slowCoroutine = StartCoroutine(SlowEffect(slowAmount, duration));
+    }
+
+    private IEnumerator SlowEffect(float slowAmount, float duration)
+    {
+        speed = originalSpeed * slowAmount;
+        yield return new WaitForSeconds(duration);
+        speed = originalSpeed;
     }
 
     void Die()
     {
         // GetComponent<LootBag>().InstantiateLoot(transform.position);
+        Instantiate(coinPrefab, transform.position, Quaternion.identity);
         Destroy(gameObject);
     }
 }

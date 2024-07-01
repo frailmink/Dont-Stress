@@ -9,6 +9,12 @@ public class BulletScript : MonoBehaviour
 
     private Vector3 startPosition;
 
+    public void Initialize(float damage)
+    {
+        this.damage = damage;
+        Debug.Log("Bullet initialized in BulletScript with damage: " + damage);
+    }
+
     private void Start()
     {
         startPosition = transform.position;

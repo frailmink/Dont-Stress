@@ -53,6 +53,24 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""PreviousTower"",
+                    ""type"": ""Button"",
+                    ""id"": ""47c58eb4-9237-44df-8193-34a409e578b1"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""NextTower"",
+                    ""type"": ""Button"",
+                    ""id"": ""a92b31f4-b45e-47a6-828e-5c658ad7a774"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -132,6 +150,28 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                     ""action"": ""Build"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""03508157-9b58-4156-90b9-942fd64bcbaf"",
+                    ""path"": ""<Keyboard>/q"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""PreviousTower"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""3eeac899-d2a3-4bb1-8dad-90de52500123"",
+                    ""path"": ""<Keyboard>/e"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""NextTower"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -171,6 +211,8 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         m_Player_Move = m_Player.FindAction("Move", throwIfNotFound: true);
         m_Player_Attack = m_Player.FindAction("Attack", throwIfNotFound: true);
         m_Player_Build = m_Player.FindAction("Build", throwIfNotFound: true);
+        m_Player_PreviousTower = m_Player.FindAction("PreviousTower", throwIfNotFound: true);
+        m_Player_NextTower = m_Player.FindAction("NextTower", throwIfNotFound: true);
         // Testing
         m_Testing = asset.FindActionMap("Testing", throwIfNotFound: true);
         m_Testing_N = m_Testing.FindAction("N", throwIfNotFound: true);
@@ -238,6 +280,8 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Move;
     private readonly InputAction m_Player_Attack;
     private readonly InputAction m_Player_Build;
+    private readonly InputAction m_Player_PreviousTower;
+    private readonly InputAction m_Player_NextTower;
     public struct PlayerActions
     {
         private @PlayerInput m_Wrapper;
@@ -245,6 +289,8 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         public InputAction @Move => m_Wrapper.m_Player_Move;
         public InputAction @Attack => m_Wrapper.m_Player_Attack;
         public InputAction @Build => m_Wrapper.m_Player_Build;
+        public InputAction @PreviousTower => m_Wrapper.m_Player_PreviousTower;
+        public InputAction @NextTower => m_Wrapper.m_Player_NextTower;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -263,6 +309,12 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
             @Build.started += instance.OnBuild;
             @Build.performed += instance.OnBuild;
             @Build.canceled += instance.OnBuild;
+            @PreviousTower.started += instance.OnPreviousTower;
+            @PreviousTower.performed += instance.OnPreviousTower;
+            @PreviousTower.canceled += instance.OnPreviousTower;
+            @NextTower.started += instance.OnNextTower;
+            @NextTower.performed += instance.OnNextTower;
+            @NextTower.canceled += instance.OnNextTower;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -276,6 +328,12 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
             @Build.started -= instance.OnBuild;
             @Build.performed -= instance.OnBuild;
             @Build.canceled -= instance.OnBuild;
+            @PreviousTower.started -= instance.OnPreviousTower;
+            @PreviousTower.performed -= instance.OnPreviousTower;
+            @PreviousTower.canceled -= instance.OnPreviousTower;
+            @NextTower.started -= instance.OnNextTower;
+            @NextTower.performed -= instance.OnNextTower;
+            @NextTower.canceled -= instance.OnNextTower;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -344,6 +402,8 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         void OnMove(InputAction.CallbackContext context);
         void OnAttack(InputAction.CallbackContext context);
         void OnBuild(InputAction.CallbackContext context);
+        void OnPreviousTower(InputAction.CallbackContext context);
+        void OnNextTower(InputAction.CallbackContext context);
     }
     public interface ITestingActions
     {

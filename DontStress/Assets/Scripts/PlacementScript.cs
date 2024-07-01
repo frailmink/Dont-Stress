@@ -27,6 +27,9 @@ public class PlacementScript : MonoBehaviour
 
     private TowerScript script;
 
+    public int towerCost = 10;
+    private CoinManager coinManager;
+
     private void OnEnable()
     {
         PlayerControls = new PlayerInput();
@@ -48,12 +51,17 @@ public class PlacementScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        coinManager = CoinManager.Instance;
+        if (coinManager == null)
+        {
+            Debug.LogError("CoinManager not found in the scene!");
+        }
         placed = false;
         pos = GetPosition();
         instance = Instantiate(tower, new Vector3(pos.x, pos.y, 0), transform.rotation);
         originalColor = instance.GetComponent<SpriteRenderer>().color;
         instance.GetComponent<BoxCollider2D>().enabled = false;
-        script = instance.GetComponent<TowerScript>();
+        script = instance.GetComponentInChildren<TowerScript>();
         script.DisableScript();
         CheckIfPlacable();
     }
@@ -82,7 +90,7 @@ public class PlacementScript : MonoBehaviour
         SpriteRenderer towersColor = instance.GetComponent<SpriteRenderer>();
         Vector3Int point = map.WorldToCell(pos);
         point.z = 0;
-        if (map.GetTile(point) == ground)
+        if (map.GetTile(point) == ground && coinManager.HasEnoughCoins(towerCost))
         {
             towersColor.color = greenColor;
             return true;
@@ -101,6 +109,7 @@ public class PlacementScript : MonoBehaviour
         bool placable = CheckIfPlacable();
         if (placable)
         {
+            coinManager.SpendCoins(towerCost);
             Vector3Int point = map.WorldToCell(pos);
             point.z = 0;
             map.SetTile(point, taken);

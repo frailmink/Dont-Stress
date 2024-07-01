@@ -22,6 +22,23 @@ public class CoinManager : MonoBehaviour
         }
     }
 
+    public bool HasEnoughCoins(int amount)
+    {
+        return coinCount >= amount;
+    }
+
+    public void SpendCoins(int amount)
+    {
+        if (HasEnoughCoins(amount))
+        {
+            coinCount -= amount;
+            UpdateUI();
+        }
+        else
+        {
+            Debug.LogWarning("Not enough coins!");
+        }
+    }
     public void AddCoin()
     {
         coinCount++;

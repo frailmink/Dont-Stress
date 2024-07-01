@@ -405,7 +405,7 @@ GameObject:
   - component: {fileID: 222530377079803646}
   - component: {fileID: -5714932840789961046}
   m_Layer: 7
-  m_Name: Enemy
+  m_Name: Bomb Enemy
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -495,7 +495,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -897018967, guid: 201902e7bcb910341b4a62e3cfe99fb7, type: 3}
+  m_Sprite: {fileID: 163982910, guid: 201902e7bcb910341b4a62e3cfe99fb7, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -560,4 +560,4 @@ MonoBehaviour:
   damageToBase: 10
   damage: 1
   canvas: {fileID: 7020459963113387707}
-  coinPrefab: {fileID: 7418957154082270118, guid: 4fe1d569f2fd1ee4c81fdf81c37aa189, type: 3}
+  coinPrefab: {fileID: 7418957154082270118, guid: 12e1eb34c259fd04694f3f87319a34f4, type: 3}

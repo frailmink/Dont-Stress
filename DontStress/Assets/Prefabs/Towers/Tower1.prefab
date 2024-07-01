@@ -245,8 +245,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   strength: 1
   speed: 1
-  maxTimer: 0.1
+  maxTimer: 0.5
   bulletSpeed: 20
-  bulletDamage: 1
+  bulletDamage: 5
   bulletPrefab: {fileID: 4334497035476919904, guid: ef0e9a90a9e099a498b0aef18a709fc9, type: 3}
   firePoint: {fileID: 5347553851585537065}

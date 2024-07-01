@@ -119,15 +119,36 @@ public class PathManager : MonoBehaviour
     }
 
 
-      public static void CreateEnemySpawner(GameObject EnemySpawner, Tilemap map, Vector2 pathStart, Quaternion rotation, Queue<Vector2> fullPath)
-    {
-        GameObject instance = Instantiate(EnemySpawner, map.GetCellCenterWorld(new Vector3Int((int)pathStart.x, (int)pathStart.y, 0)), rotation);
-        EnemySpawner enemySpawnerScript = instance.GetComponent<EnemySpawner>();
-        Queue<Vector2> pathClone = new Queue<Vector2>(fullPath);
-        enemySpawnerScript.path = pathClone;
-        enemySpawnerScript.map = map;
+    //   public static void CreateEnemySpawner(GameObject EnemySpawner, Tilemap map, Vector2 pathStart, Quaternion rotation, Queue<Vector2> fullPath)
+    // {
+    //     GameObject instance = Instantiate(EnemySpawner, map.GetCellCenterWorld(new Vector3Int((int)pathStart.x, (int)pathStart.y, 0)), rotation);
+    //     EnemySpawner enemySpawnerScript = instance.GetComponent<EnemySpawner>();
+    //     Queue<Vector2> pathClone = new Queue<Vector2>(fullPath);
+    //     enemySpawnerScript.path = pathClone;
+    //     enemySpawnerScript.map = map;
     
-        enemySpawnerScript.maxSpawns = 10;
+    //     enemySpawnerScript.maxSpawns = 10;
+    // }
+
+    public static void CreateEnemySpawner(GameObject EnemySpawnerPrefab, Tilemap map, Vector2 pathStart, Quaternion rotation, Queue<Vector2> fullPath)
+    {
+        GameObject instance = Instantiate(EnemySpawnerPrefab, map.GetCellCenterWorld(new Vector3Int((int)pathStart.x, (int)pathStart.y, 0)), rotation);
+        EnemySpawner enemySpawnerScript = instance.GetComponent<EnemySpawner>();
+
+        // Create a new SpawnPoint
+        EnemySpawner.SpawnPoint newSpawnPoint = new EnemySpawner.SpawnPoint();
+        newSpawnPoint.point = instance.transform;
+        newSpawnPoint.path = new Queue<Vector2>(fullPath);
+
+        // Add the new SpawnPoint to the spawner's list
+        if (enemySpawnerScript.spawnPoints == null)
+        {
+            enemySpawnerScript.spawnPoints = new List<EnemySpawner.SpawnPoint>();
+        }
+        enemySpawnerScript.spawnPoints.Add(newSpawnPoint);
+
+        enemySpawnerScript.map = map;
+        enemySpawnerScript.maxSpawns = 10;  // You might want to make this configurable
     }
 
     public static Queue<Vector2> OrderQueue(Vector2 start, Vector2 end, Queue<Vector2> path)

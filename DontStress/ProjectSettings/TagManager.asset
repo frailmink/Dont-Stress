@@ -8,15 +8,16 @@ TagManager:
   - Base
   - Tower
   - Enemy
+  - Coins
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Tower
   - Water
   - UI
-  - 
-  - 
+  - Background
+  - Enemy
   - 
   - 
   - 

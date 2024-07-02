@@ -44,7 +44,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c73e67d389a1af74e8fafb56d157ce83, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  spawnPoints: []
+  enemyTypes:
+  - prefab: {fileID: 7444273399634437796, guid: e974670ec515e224db7c5890f3e1b1ba, type: 3}
+    spawnChance: 0.8
+    health: 31
+    speed: 5
+  - prefab: {fileID: 7444273399634437796, guid: 38c5642d4d9247e49b5275144df9c573, type: 3}
+    spawnChance: 0.1
+    health: 100
+    speed: 2
+  - prefab: {fileID: 7444273399634437796, guid: ce3ecfcf71e14c34bb49052f433d961b, type: 3}
+    spawnChance: 0.1
+    health: 1
+    speed: 10
   spawnRate: 1
   maxSpawns: 0
-  enemyTroupe: {fileID: 7444273399634437796, guid: e974670ec515e224db7c5890f3e1b1ba, type: 3}
   map: {fileID: 0}

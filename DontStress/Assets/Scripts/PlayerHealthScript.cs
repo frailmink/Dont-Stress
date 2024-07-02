@@ -8,6 +8,7 @@ public class PlayerHealthScript : MonoBehaviour
     public float maxHealth = 4;
 
     public SpriteRenderer playerSr;
+    public GameOverManager gameOverManager;
     public PlayerScript playerMovement;
 
     public Collider2D playerCollider;
@@ -18,6 +19,7 @@ public class PlayerHealthScript : MonoBehaviour
     void Start()
     {
         health = maxHealth;
+        gameOverManager.TriggerGameOverFalse();
     }
 
     public void TakeDamage(int damage)
@@ -30,6 +32,7 @@ public class PlayerHealthScript : MonoBehaviour
             playerMovement.enabled = false;
             playerCollider.enabled = false;
             rb.velocity = Vector2.zero;
+            gameOverManager.TriggerGameOver();
             // weaponScript.enabled = false;
         }
     }

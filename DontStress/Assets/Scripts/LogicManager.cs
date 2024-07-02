@@ -62,6 +62,29 @@ public class LogicManager : MonoBehaviour
         towerCardScript = upgradeCards.GetComponentInChildren<TowerCardScript>();
     }
 
+    // public void Update()
+    // {
+    //     GameObject[] enemySpawners = GameObject.FindGameObjectsWithTag("EnemySpawner");
+    //     GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
+
+    //     bool allFinished = true;
+    //     foreach (GameObject spawner in enemySpawners)
+    //     {
+    //         EnemySpawner script = spawner.GetComponent<EnemySpawner>();
+    //         // Debug.Log("Number of enemies: " + enemies.Length);
+    //         if (script.spawnCount != script.maxSpawns)
+    //         {
+    //             allFinished = false;
+    //             // Debug.Log("All enemies killed, starting next round.");
+    //         }
+    //     }
+
+    //     if (allFinished && enemies.Length == 0)
+    //     {
+    //         NextRound();
+    //     }
+    // }
+
     public void Update()
     {
         GameObject[] enemySpawners = GameObject.FindGameObjectsWithTag("EnemySpawner");
@@ -71,11 +94,9 @@ public class LogicManager : MonoBehaviour
         foreach (GameObject spawner in enemySpawners)
         {
             EnemySpawner script = spawner.GetComponent<EnemySpawner>();
-            // Debug.Log("Number of enemies: " + enemies.Length);
-            if (script.spawnCount != script.maxSpawns)
+            if (script.totalSpawnCount != script.maxSpawns)
             {
                 allFinished = false;
-                // Debug.Log("All enemies killed, starting next round.");
             }
         }
 
@@ -86,6 +107,7 @@ public class LogicManager : MonoBehaviour
             // towerCardScript.NewCards();
         }
     }
+
     private void NextRound()
     {
         EnemySpawner.speed *= 10f;
@@ -96,6 +118,12 @@ public class LogicManager : MonoBehaviour
 
         foreach (GameObject spawner in enemySpawners)
         {
+            EnemySpawner script = spawner.GetComponent<EnemySpawner>();
+            foreach (EnemySpawner.EnemyType enemyType in script.enemyTypes)
+            {
+                enemyType.speed *= 1.1f;
+                enemyType.health *= 1.5f;
+            }
             Destroy(spawner);
         }
 

@@ -247,7 +247,7 @@ public class PlayerScript : MonoBehaviour
         if (GlobalVariables.GetBuildingMode())
         {
             // Cycle to the next tower index
-            currentTowerIndex = (currentTowerIndex + 1) % towers.Length;
+            currentTowerIndex = (currentTowerIndex + 1) % towers.Count;
             Debug.Log("Current Tower Index: " + currentTowerIndex);
             
             InstantiateBuildManager(); // Ensure build manager is updated
@@ -259,7 +259,7 @@ public class PlayerScript : MonoBehaviour
         if (GlobalVariables.GetBuildingMode())
         {
             // Cycle to the previous tower index
-            currentTowerIndex = (currentTowerIndex - 1 + towers.Length) % towers.Length;
+            currentTowerIndex = (currentTowerIndex - 1 + towers.Count) % towers.Count;
             Debug.Log("Current Tower Index: " + currentTowerIndex);
 
             InstantiateBuildManager(); // Ensure build manager is updated

@@ -110,8 +110,8 @@ public class LogicManager : MonoBehaviour
 
     private void NextRound()
     {
-        EnemySpawner.speed *= 10f;
-        EnemySpawner.health *= 1f;
+        // EnemySpawner.speed *= 10f;
+        // EnemySpawner.health *= 1f;
         Debug.Log("Enemy level increased");
 
         GameObject[] enemySpawners = GameObject.FindGameObjectsWithTag("EnemySpawner");

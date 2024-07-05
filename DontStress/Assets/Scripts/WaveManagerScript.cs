@@ -20,8 +20,6 @@
 //         while (true)
 //         {
 //             int enemiesToSpawn = initialEnemyCount; // 10 enemies per wave
-//             Debug.Log($"Spawning {enemiesToSpawn} enemies");
-
 //             for (int i = 0; i < enemiesToSpawn; i++)
 //             {
 //                 foreach (Transform spawner in spawners)

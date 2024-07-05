@@ -14,7 +14,6 @@ public class TowerBulletScript : MonoBehaviour
         this.target = target;
         this.speed = speed;
         this.damage = damage;
-        Debug.Log("Bullet initialized in BulletScript with damage: " + damage);
     }
 
     void Update()
@@ -34,7 +33,6 @@ public class TowerBulletScript : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Enemy"))
         {
-            // Debug.Log("Bullet collided with enemy: " + collision.gameObject.name);
             EnemyScript enemy = collision.gameObject.GetComponent<EnemyScript>();
             if (enemy != null)
             {

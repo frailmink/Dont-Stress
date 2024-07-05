@@ -18,11 +18,6 @@ public class ShootingTowerScript : TowerScript
 
     private List<GameObject> enemiesInRange = new List<GameObject>();
 
-    void Start()
-    {
-        Debug.Log("Placed inside tower");
-    }
-
     void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("Enemy"))
@@ -55,7 +50,6 @@ public class ShootingTowerScript : TowerScript
     {
         bulletDamage = damage;
         bulletSpeed = speed;
-        Debug.Log("SetTowerStats called. Damage: " + bulletDamage + ", Speed: " + bulletSpeed);
     }
 
     void Shoot()
@@ -73,17 +67,6 @@ public class ShootingTowerScript : TowerScript
                 if (towerBulletScript != null)
                 {
                     towerBulletScript.Initialize(bulletDamage * strength);
-                    Debug.Log("Bullet initialized in ShootingScript with damage: " + bulletDamage);
-
-                    // if (fastShootingTower != null)
-                    // {
-                    //     Debug.Log("Fast Bullet Damage: " + fastShootingTower.bulletDamage);
-                    // }
-
-                    // if (highDamageShootingTower != null)
-                    // {
-                    //     Debug.Log("High Damage Bullet Damage: " + highDamageShootingTower.bulletDamage);
-                    // }
                 }
 
                 Vector2 direction = (target.transform.position - firePoint.position).normalized;

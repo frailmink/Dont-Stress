@@ -11,17 +11,11 @@ public class SlowingTowerScript : TowerScript
 
     private List<GameObject> enemiesInRange = new List<GameObject>();
 
-    void Start()
-    {
-        Debug.Log("Placed inside slowing tower");
-    }
-
     void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("Enemy"))
         {
             enemiesInRange.Add(collision.gameObject);
-            Debug.Log("Slowing tower sees the enemy: " + collision.gameObject.name);
         }
     }
 
@@ -30,7 +24,6 @@ public class SlowingTowerScript : TowerScript
         if (collision.gameObject.CompareTag("Enemy"))
         {
             enemiesInRange.Remove(collision.gameObject);
-            Debug.Log("No enemies: " + collision.gameObject.name);
         }
     }
 
@@ -40,7 +33,6 @@ public class SlowingTowerScript : TowerScript
         {
             timer = 0;
             ApplySlowToEnemies();
-            Debug.Log("Apply slow?");
         }
         else
         {

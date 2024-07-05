@@ -24,13 +24,11 @@ public class BaseHealthScript : MonoBehaviour
     public void TakeDamage(float damage)
     {
         health -= damage;
-        Debug.Log("Base Taking damage !!!");
         if (health <= 0)
         {
             health = 0;
             // Optional: Add logic for when the base is destroyed
             gameOverManager.TriggerGameOver();
-            Debug.Log("Base Destroyed");
         }
         UpdateHealthBar();
     }
@@ -43,7 +41,6 @@ public class BaseHealthScript : MonoBehaviour
         }
         // else
         // {
-        //     Debug.Log("No image");
         // }
     }
 }

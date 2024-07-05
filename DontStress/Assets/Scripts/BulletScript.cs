@@ -12,7 +12,6 @@ public class BulletScript : MonoBehaviour
     public void Initialize(float damage)
     {
         this.damage = damage;
-        Debug.Log("Bullet initialized in BulletScript with damage: " + damage);
     }
 
     private void Start()

@@ -22,7 +22,7 @@ public class ManaBarScript : MonoBehaviour
     {
         mana.Update();
 
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space) && !GlobalVariables.Paused)
         {
             mana.SpendMana(manaLoss); // Adjust the amount of mana spent as needed
         }

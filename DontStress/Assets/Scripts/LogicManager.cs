@@ -7,7 +7,8 @@ using UnityEngine.Tilemaps;
 public class LogicManager : MonoBehaviour
 {   
     #region declaring variables
-    public GameObject[] towers;
+    public GameObject upgradeCards;
+    public TowerCardScript towerCardScript;
 
     public int numPathPointsRemoved;
     public int pathEndChance;
@@ -58,30 +59,8 @@ public class LogicManager : MonoBehaviour
         DrawBackground((GlobalVariables.squareWidth) + 1, (GlobalVariables.squareHeight) + 1, new Vector2(-(GlobalVariables.squareWidth / 2), -(GlobalVariables.squareHeight / 2)));
         listOfPaths.Add(PathManager.InitialRun(new Vector2(0, 0), numPoints, map, pathTile, red, green, transform.rotation, enemySpawner));
         listOfBottomLeftPoints.Add(new Vector2(-(GlobalVariables.squareWidth / 2), -(GlobalVariables.squareHeight / 2)));
+        towerCardScript = upgradeCards.GetComponentInChildren<TowerCardScript>();
     }
-
-    // public void Update()
-    // {
-    //     GameObject[] enemySpawners = GameObject.FindGameObjectsWithTag("EnemySpawner");
-    //     GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
-
-    //     bool allFinished = true;
-    //     foreach (GameObject spawner in enemySpawners)
-    //     {
-    //         EnemySpawner script = spawner.GetComponent<EnemySpawner>();
-    //         // Debug.Log("Number of enemies: " + enemies.Length);
-    //         if (script.spawnCount != script.maxSpawns)
-    //         {
-    //             allFinished = false;
-    //             // Debug.Log("All enemies killed, starting next round.");
-    //         }
-    //     }
-
-    //     if (allFinished && enemies.Length == 0)
-    //     {
-    //         NextRound();
-    //     }
-    // }
 
     public void Update()
     {
@@ -101,11 +80,16 @@ public class LogicManager : MonoBehaviour
         if (allFinished && enemies.Length == 0)
         {
             NextRound();
+            upgradeCards.SetActive(true);
+            // towerCardScript.NewCards();
         }
     }
 
     private void NextRound()
     {
+        // EnemySpawner.speed *= 10f;
+        // EnemySpawner.health *= 1f;
+
         GameObject[] enemySpawners = GameObject.FindGameObjectsWithTag("EnemySpawner");
 
         foreach (GameObject spawner in enemySpawners)
@@ -134,59 +118,6 @@ public class LogicManager : MonoBehaviour
                     listOfBottomLeftPoints[i] = bottomLeftPoint;
 
                     DrawBackground(GlobalVariables.squareWidth + 1, GlobalVariables.squareHeight + 1, bottomLeftPoint);
-                    // List<Vector2> possiblePos = new List<Vector2> {new Vector2(1,1), new Vector2(0,1), new Vector2(1,0), new Vector2(0,0)};
-                    // possiblePos.Remove(new Vector2(direction.x * (-1), direction.y * (-1)));
-                    // 
-                    // int pos = Random.Range(0, possiblePos.Count);
-                    // 
-                    // int posX = (int) possiblePos[pos].x;
-                    // int posY = (int) possiblePos[pos].y;
-                    // 
-                    // if (posX == 0)
-                    // {
-                    //     posX = Random.Range(0, 2) * 2 - 1;
-                    // }
-                    // if (posY == 0)
-                    // {
-                    //     posY = Random.Range(0, 2) * 2 - 1;
-                    // }
-
-                    // int tempVal = Random.Range(0, 2);
-
-                    // Vector2 topRightPoint = new Vector2(bottomLeftPoint.x + GlobalVariables.squareWidth, bottomLeftPoint.y + GlobalVariables.squareHeight);
-                    // Debug.Log(bottomLeftPoint.x);
-                    // Debug.Log(bottomLeftPoint.y);
-                    // if (tempVal == 0)
-                    // {
-                    //     int tempX = (GlobalVariables.squareWidth) + (int)bottomLeftPoint.x;
-                    //     int tempY = Random.Range(0, (GlobalVariables.squareHeight / 2)) * posY + (int)bottomLeftPoint.y;
-                    // 
-                    //     Debug.Log(tempVal);
-                    // 
-                    //     Debug.Log(tempX);
-                    //     Debug.Log(tempY);
-                    // 
-                    //     listOfX.Add(tempX);
-                    //     listOfY.Add(tempY);
-                    // 
-                    //     pathStart = new Vector2(tempX, tempY);
-                    //     path.Enqueue(pathStart);
-                    // } else
-                    // {
-                    //     int tempY = (GlobalVariables.squareHeight) + (int)bottomLeftPoint.y;
-                    //     int tempX = Random.Range(0, (GlobalVariables.squareWidth / 2)) * posX + (int)bottomLeftPoint.x;
-                    // 
-                    //     Debug.Log(tempVal);
-                    // 
-                    //     Debug.Log(tempX);
-                    //     Debug.Log(tempY);
-                    // 
-                    //     listOfX.Add(tempX);
-                    //     listOfY.Add(tempY);
-                    // 
-                    //     pathStart = new Vector2(tempX, tempY);
-                    //     path.Enqueue(pathStart);
-                    // }
 
                     List<int> listOfX = new List<int>();
                     List<int> listOfY = new List<int>();

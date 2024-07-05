@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class GlobalVariables : MonoBehaviour
 {
+    public static bool Paused = false;
     public static int squareWidth, squareHeight;
     private static bool buildingModeOn;
 

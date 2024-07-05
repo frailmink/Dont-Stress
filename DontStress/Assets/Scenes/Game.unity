@@ -3976,7 +3976,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e66eb4004eb3c741b7fe920c93972d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  upgradeUI: {fileID: 0}
+  upgradeUI: {fileID: 1858485404}
 --- !u!4 &867104068
 Transform:
   m_ObjectHideFlags: 0
@@ -9810,7 +9810,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4549380fc578b2446ba4e096ebbe00e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  towers: []
+  towers:
+  - {fileID: 607801719444412279, guid: 20d0af8320afbc34da190553c74b46d6, type: 3}
   buildManager: {fileID: 6084967962051960621, guid: c08d8a4a568ac2542bebcae2a1a4221a, type: 3}
   map: {fileID: 1641838877}
   floor: {fileID: 11400000, guid: ac3784543f957694fb058f701b66549f, type: 2}

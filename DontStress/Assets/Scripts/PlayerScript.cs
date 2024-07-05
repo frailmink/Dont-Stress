@@ -121,9 +121,11 @@ public class PlayerScript : MonoBehaviour
         buildManagerInstance = Instantiate(buildManager, transform.position, Quaternion.Euler(0, 0, 0));
         PlacementScript newScript = buildManagerInstance.GetComponent<PlacementScript>();
         newScript.map = map;
+        currentTowerIndex = currentTowerIndex % towers.Count;
         newScript.tower = towers[currentTowerIndex];
         newScript.ground = floor;
         newScript.taken = taken;
+        newScript.playerScript = this;
         GlobalVariables.SetBuildingMode(true);
     }
 

@@ -403,7 +403,7 @@ GameObject:
   - component: {fileID: 2457048122796591545}
   - component: {fileID: 222530377079803646}
   - component: {fileID: -5714932840789961046}
-  - component: {fileID: 1099252426413868922}
+  - component: {fileID: 3196636419101575760}
   m_Layer: 7
   m_Name: Enemy
   m_TagString: Enemy
@@ -533,9 +533,8 @@ MonoBehaviour:
   damageToBase: 10
   damage: 1
   canvas: {fileID: 7020459963113387707}
-  coinPrefab: {fileID: 7418957154082270118, guid: 4fe1d569f2fd1ee4c81fdf81c37aa189,
-    type: 3}
---- !u!50 &1099252426413868922
+  coinPrefab: {fileID: 7418957154082270118, guid: 4fe1d569f2fd1ee4c81fdf81c37aa189, type: 3}
+--- !u!50 &3196636419101575760
 Rigidbody2D:
   serializedVersion: 4
   m_ObjectHideFlags: 0
@@ -547,7 +546,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 15
+  m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 0
@@ -561,4 +560,4 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 4
+  m_Constraints: 7

@@ -1,12 +1,12 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using System.Collections.Generic;
 using UnityEngine.InputSystem;
 using UnityEngine.Tilemaps;
 
 public class PlayerScript : MonoBehaviour
 {
-    public List<GameObject> towers = new List<GameObject>();
+    public List<GameObject> towers;
 
     public GameObject buildManager;
     public Tilemap map;
@@ -30,10 +30,25 @@ public class PlayerScript : MonoBehaviour
 
     private int currentTowerIndex = 0;  // Track the current tower index
 
+    private InputAction teleport;
+    public float teleportDistance = 5f; // Distance to teleport
+    public float teleportCooldown = 3f; // Cooldown time between teleports
+    public int teleportManaCost = 20;
+    private bool canTeleport = true; 
+    public ManaBarScript manaBar;
+
+    private InputAction rapidFire; 
+
     private void Awake()
     {
         PlayerControls = new PlayerInput();
         rb = GetComponent<Rigidbody2D>();
+        
+        if (manaBar == null)
+        {
+            Debug.LogError("ManaBarScript is null. Teleportation failed. Please ensure ManaBarScript is assigned.");
+            return;
+        }
     }
 
     private void Update()
@@ -61,6 +76,16 @@ public class PlayerScript : MonoBehaviour
         previousTower = PlayerControls.Player.PreviousTower;
         previousTower.Enable();
         previousTower.performed += SwapToPreviousTower; 
+
+        teleport = PlayerControls.Player.Teleport;
+        teleport.Enable();
+        teleport.performed += Teleport;
+        Debug.Log("Teleport action enabled and bound");
+
+        rapidFire = PlayerControls.Player.RapidFire; 
+        rapidFire.Enable();
+        rapidFire.performed += weapon.StartRapidFire; 
+        rapidFire.canceled += weapon.StopRapidFire; 
     }
 
     private void OnDisable()
@@ -70,15 +95,17 @@ public class PlayerScript : MonoBehaviour
         build.Disable();
         nextTower.Disable();
         previousTower.Disable();
+        teleport.Disable();
+        rapidFire.Disable(); 
     }
 
     private void Build(InputAction.CallbackContext context)
     {
-        if (!GlobalVariables.GetBuildingMode() && !GlobalVariables.Paused && towers.Count > 0)
+        if (!GlobalVariables.GetBuildingMode())
         {
             InstantiateBuildManager();
         }
-        else if (!PlacementScript.placed && towers.Count > 0)
+        else if (!PlacementScript.placed)
         {
             PlacementScript script = buildManagerInstance.GetComponent<PlacementScript>();
             script.DeleteTower();
@@ -93,6 +120,7 @@ public class PlayerScript : MonoBehaviour
         {
             // Cycle to the next tower index
             currentTowerIndex = (currentTowerIndex + 1) % towers.Count;
+            Debug.Log("Current Tower Index: " + currentTowerIndex);
             
             InstantiateBuildManager(); // Ensure build manager is updated
         }
@@ -104,6 +132,7 @@ public class PlayerScript : MonoBehaviour
         {
             // Cycle to the previous tower index
             currentTowerIndex = (currentTowerIndex - 1 + towers.Count) % towers.Count;
+            Debug.Log("Current Tower Index: " + currentTowerIndex);
 
             InstantiateBuildManager(); // Ensure build manager is updated
         }
@@ -117,24 +146,71 @@ public class PlayerScript : MonoBehaviour
             script.DeleteTower();
             Destroy(buildManagerInstance);
         }
-        
         buildManagerInstance = Instantiate(buildManager, transform.position, Quaternion.Euler(0, 0, 0));
         PlacementScript newScript = buildManagerInstance.GetComponent<PlacementScript>();
         newScript.map = map;
-        currentTowerIndex = currentTowerIndex % towers.Count;
         newScript.tower = towers[currentTowerIndex];
         newScript.ground = floor;
         newScript.taken = taken;
-        newScript.playerScript = this;
         GlobalVariables.SetBuildingMode(true);
     }
 
     private void Fire(InputAction.CallbackContext context)
     {
-        if (!GlobalVariables.GetBuildingMode() && !GlobalVariables.Paused)
+        if (!GlobalVariables.GetBuildingMode())
         {
             weapon.Fire();
         }
+    }
+
+    private void Teleport(InputAction.CallbackContext context)
+    {
+        // if (manaBar == null)
+        // {
+        //     Debug.LogError("ManaBarScript is null. Teleportation failed. Please ensure ManaBarScript is assigned.");
+        //     return;
+        // }
+
+        if (!GlobalVariables.GetBuildingMode() && manaBar.HasEnoughMana(teleportManaCost))
+        {
+            Vector2 teleportDirection = moveDirection.normalized;
+            if (teleportDirection == Vector2.zero)
+            {
+                teleportDirection = transform.up; // Teleport forward if not moving
+            }
+
+            Vector2 teleportPosition = rb.position + teleportDirection * teleportDistance;
+
+            // Debugging the teleport position
+            Debug.Log($"Attempting to teleport to position: {teleportPosition}");
+
+            // Define the layer mask to ignore the NonObstructing layer
+            int layerMask = LayerMask.GetMask("NonObstructing");
+
+            // Check if the teleport position is valid
+            Collider2D hitCollider = Physics2D.OverlapCircle(teleportPosition, 0.5f, ~layerMask);
+            if (hitCollider == null)
+            {
+                rb.position = teleportPosition;
+                manaBar.SpendMana(teleportManaCost);
+            }
+            else
+            {
+                Debug.Log($"Teleportation failed: destination obstructed by {hitCollider.name}.");
+            }
+        }
+        else
+        {
+            Debug.Log("Teleportation failed: not enough mana or in building mode.");
+        }
+    }
+
+
+    private IEnumerator TeleportCooldown()
+    {
+        canTeleport = false;
+        yield return new WaitForSeconds(teleportCooldown);
+        canTeleport = true;
     }
 
     private void FixedUpdate()
@@ -145,10 +221,5 @@ public class PlayerScript : MonoBehaviour
         Vector2 aimDirection = mousePosition - rb.position;
         float aimAngle = Mathf.Atan2(aimDirection.y, aimDirection.x) * Mathf.Rad2Deg - 90f;
         rb.rotation = aimAngle;
-    }
-
-    public void IncreaseMoveSpeed(int differnce)
-    {
-        MoveSpeed += differnce;
     }
 }

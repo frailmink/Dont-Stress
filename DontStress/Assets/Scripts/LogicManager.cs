@@ -89,7 +89,7 @@ public class LogicManager : MonoBehaviour
     {
         // EnemySpawner.speed *= 10f;
         // EnemySpawner.health *= 1f;
-
+        WaveManager.Instance.AddWave();
         GameObject[] enemySpawners = GameObject.FindGameObjectsWithTag("EnemySpawner");
 
         foreach (GameObject spawner in enemySpawners)

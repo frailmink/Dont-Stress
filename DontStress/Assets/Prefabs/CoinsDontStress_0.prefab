@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1061727020205321141}
   - component: {fileID: 7814512220497585165}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: CoinsDontStress_0
   m_TagString: Untagged
   m_Icon: {fileID: 0}

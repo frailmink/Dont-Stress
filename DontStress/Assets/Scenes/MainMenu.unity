@@ -228,6 +228,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e9fbaf6a863af74ba5f1d2ca67c0d1e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mainCamera: {fileID: 218856306}
+  eventSystems: {fileID: 1998676309}
 --- !u!1 &423564218
 GameObject:
   m_ObjectHideFlags: 0
@@ -816,7 +818,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.6543176, g: 0.754717, b: 0.62418413, a: 1}
+  m_Color: {r: 0.7529412, g: 0.71599543, b: 0.62352943, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1

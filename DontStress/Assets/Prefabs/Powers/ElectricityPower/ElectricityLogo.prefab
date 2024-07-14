@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 5986002889939183052}
   - component: {fileID: 6724395827628715137}
   m_Layer: 0
-  m_Name: TestPower
+  m_Name: ElectricityLogo
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -74,8 +74,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -2413806693520163455, guid: 7d16c8c15263df746b6c11fb36038d36, type: 3}
-  m_Color: {r: 0.21960786, g: 0.21960786, b: 0.21960786, a: 1}
+  m_Sprite: {fileID: 2123695174, guid: b9593c6756316cf4880a58011f9493ec, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -97,3 +97,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 053cfeb9c4141c740908aec07e7c16d3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Electricity: {fileID: 613545446258364808, guid: 58f9c462b6430544cb06e0ea0826a1f7, type: 3}

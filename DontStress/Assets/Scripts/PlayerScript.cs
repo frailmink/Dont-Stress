@@ -26,6 +26,7 @@ public class PlayerScript : MonoBehaviour
     private GameObject buildManagerInstance;
 
     private Rigidbody2D rb;
+    public Transform playerTransform;
     public WeaponScript weapon;
 
     private int currentTowerIndex = 0;  // Track the current tower index
@@ -218,8 +219,17 @@ public class PlayerScript : MonoBehaviour
         moveDirection = move.ReadValue<Vector2>();
         rb.velocity = new Vector2(moveDirection.x * MoveSpeed, moveDirection.y * MoveSpeed);
 
-        Vector2 aimDirection = mousePosition - rb.position;
-        float aimAngle = Mathf.Atan2(aimDirection.y, aimDirection.x) * Mathf.Rad2Deg - 90f;
-        rb.rotation = aimAngle;
+        if (moveDirection.x > 0)
+        {
+            playerTransform.localScale = new Vector3(-1, 1, 1);
+        }
+        else if (moveDirection.x < 0)
+        {
+            playerTransform.localScale = new Vector3(1, 1, 1);
+        }
     }
+    //     Vector2 aimDirection = mousePosition - rb.position;
+    //     float aimAngle = Mathf.Atan2(aimDirection.y, aimDirection.x) * Mathf.Rad2Deg - 90f;
+    //     rb.rotation = aimAngle;
+    // }
 }

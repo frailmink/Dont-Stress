@@ -10,6 +10,26 @@ public class WeaponScript : MonoBehaviour
     public float rapidFireRate = 0f; // Time between each shot in rapid fire mode
 
     private Coroutine rapidFireCoroutine;
+    private Vector2 mousePosition;
+    private Rigidbody2D rb; // Reference to the player's Rigidbody2D
+
+    void Start()
+    {
+        rb = GetComponentInParent<Rigidbody2D>();
+    }
+
+    void Update()
+    {
+        // Update the mouse position
+        mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+
+        // Calculate the aiming direction
+        Vector2 aimDirection = mousePosition - rb.position;
+        float aimAngle = Mathf.Atan2(aimDirection.y, aimDirection.x) * Mathf.Rad2Deg - 90f;
+
+        // Rotate the weapon
+        transform.rotation = Quaternion.Euler(0f, 0f, aimAngle);
+    }
 
     public void Fire()
     {
@@ -43,3 +63,4 @@ public class WeaponScript : MonoBehaviour
         }
     }
 }
+

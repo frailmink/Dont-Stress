@@ -28,6 +28,8 @@ public class LogicManager : MonoBehaviour
 
     private Vector2 pathStart;
     private List<int> temp = new List<int> { 0, 1, 2, 3 };
+
+    private int waveNumber = 1;
     #endregion
     
     private void OnEnable()
@@ -79,16 +81,23 @@ public class LogicManager : MonoBehaviour
 
         if (allFinished && enemies.Length == 0)
         {
-            NextRound();
-            upgradeCards.SetActive(true);
-            // towerCardScript.NewCards();
+            StartCoroutine(DelayedNextRound());
         }
+    }
+
+    private IEnumerator DelayedNextRound()
+    {
+        yield return new WaitForSeconds(0f); 
+        upgradeCards.SetActive(true);
+        // towerCardScript.NewCards();
+        NextRound();
     }
 
     private void NextRound()
     {
         // EnemySpawner.speed *= 10f;
         // EnemySpawner.health *= 1f;
+        waveNumber++;
         WaveManager.Instance.AddWave();
         GameObject[] enemySpawners = GameObject.FindGameObjectsWithTag("EnemySpawner");
 

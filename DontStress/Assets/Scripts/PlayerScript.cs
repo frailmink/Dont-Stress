@@ -6,6 +6,7 @@ using UnityEngine.Tilemaps;
 
 public class PlayerScript : MonoBehaviour
 {
+    private Animator animator;
     public List<GameObject> towers;
 
     public GameObject buildManager;
@@ -33,7 +34,7 @@ public class PlayerScript : MonoBehaviour
 
     private InputAction teleport;
     public float teleportDistance = 5f; // Distance to teleport
-    public float teleportCooldown = 3f; // Cooldown time between teleports
+    public float teleportCooldown = 1.5f; // Cooldown time between teleports
     public int teleportManaCost = 20;
     private bool canTeleport = true; 
     public ManaBarScript manaBar;
@@ -42,8 +43,10 @@ public class PlayerScript : MonoBehaviour
 
     private void Awake()
     {
+
         PlayerControls = new PlayerInput();
         rb = GetComponent<Rigidbody2D>();
+        animator = GetComponent<Animator>();  // Get the Animator component
         
         if (manaBar == null)
         {
@@ -54,7 +57,99 @@ public class PlayerScript : MonoBehaviour
 
     private void Update()
     {
-        mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        moveDirection = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
+
+        Vector2 aimDirection = mousePosition - rb.position;
+        float aimAngle = Mathf.Atan2(aimDirection.y, aimDirection.x) * Mathf.Rad2Deg - 90f;
+
+        UpdateAnimatorParameters();
+    }
+
+    private void FixedUpdate()
+    {
+        moveDirection = move.ReadValue<Vector2>();
+        rb.velocity = new Vector2(moveDirection.x * MoveSpeed, moveDirection.y * MoveSpeed);
+        #region extraCode
+        // animator.SetFloat("MoveX", moveDirection.x);
+        // animator.SetFloat("MoveY", moveDirection.y);
+
+        // Determine the direction and update the Animator parameter
+        // int direction = 0;
+
+        // if (moveDirection.y > 0)
+        // {
+        //     if (moveDirection.x > 0)
+        //     {
+        //         direction = 1; // UpRight
+        //     }
+        //     else if (moveDirection.x < 0)
+        //     {
+        //         direction = 2; // UpLeft
+        //     }
+        //     else
+        //     {
+        //         direction = 7; // Up
+        //     }
+        // }
+        // else if (moveDirection.y < 0)
+        // {
+        //     if (moveDirection.x > 0)
+        //     {
+        //         direction = 3; // DownRight
+        //     }
+        //     else if (moveDirection.x < 0)
+        //     {
+        //         direction = 4; // DownLeft
+        //     }
+        //     else
+        //     {
+        //         direction = 8; // Down
+        //     }
+        // }
+        // else if (moveDirection.x > 0)
+        // {
+        //     direction = 5; // Right
+        // }
+        // else if (moveDirection.x < 0)
+        // {
+        //     direction = 6; // Left
+        // }
+
+        // animator.SetInteger("Direction", direction);
+
+        // Flip the player sprite based on the horizontal movement direction
+        // if (moveDirection.x > 0)
+        // {
+        //     playerTransform.localScale = new Vector3(1, 1, 1); // Face right
+        // }
+        // else if (moveDirection.x < 0)
+        // {
+        //     playerTransform.localScale = new Vector3(-1, 1, 1); // Face left
+        // }
+        #endregion
+
+    }
+    //     Vector2 aimDirection = mousePosition - rb.position;
+    //     float aimAngle = Mathf.Atan2(aimDirection.y, aimDirection.x) * Mathf.Rad2Deg - 90f;
+    //     rb.rotation = aimAngle;
+    // }
+
+    private void UpdateAnimatorParameters()
+    {
+        float horizontal = moveDirection.x;
+        float vertical = moveDirection.y;
+
+        // Normalize the move direction to handle movement speed consistency
+        if (moveDirection.magnitude > 0)
+        {
+            moveDirection.Normalize();
+        }
+
+        // Set parameters for the Blend Tree
+        animator.SetFloat("DirectionX", moveDirection.x);
+        animator.SetFloat("DirectionY", moveDirection.y);
+        // Debugging: Output direction values
+        Debug.Log($"Direction: {moveDirection}");
     }
 
     private void OnEnable()
@@ -163,23 +258,28 @@ public class PlayerScript : MonoBehaviour
             weapon.Fire();
         }
     }
-
-    private void Teleport(InputAction.CallbackContext context)
+    public void Teleport(InputAction.CallbackContext context)
     {
-        // if (manaBar == null)
-        // {
-        //     Debug.LogError("ManaBarScript is null. Teleportation failed. Please ensure ManaBarScript is assigned.");
-        //     return;
-        // }
+        if (!canTeleport)
+        {
+            Debug.Log("Teleportation is on cooldown.");
+            return;
+        }
 
         if (!GlobalVariables.GetBuildingMode() && manaBar.HasEnoughMana(teleportManaCost))
         {
-            Vector2 teleportDirection = moveDirection.normalized;
-            if (teleportDirection == Vector2.zero)
+            // Vector2 aimDirection = (mousePosition - rb.position).normalized;
+            // Vector2 teleportDirection = weapon.GetAimDirection();// Using aim (mouse)
+            Vector2 teleportDirection = moveDirection.normalized;// Using move (keyboard)
+
+            if (teleportDirection == Vector2.zero )
             {
-                teleportDirection = transform.up; // Teleport forward if not moving
+                // aimDirection = transform.up;
+                teleportDirection = transform.up;
+                Debug.Log("Vector2.zero");
             }
 
+            // Vector2 teleportPosition = rb.position + aimDirection * teleportDistance;
             Vector2 teleportPosition = rb.position + teleportDirection * teleportDistance;
 
             // Debugging the teleport position
@@ -187,6 +287,7 @@ public class PlayerScript : MonoBehaviour
 
             // Define the layer mask to ignore the NonObstructing layer
             int layerMask = LayerMask.GetMask("NonObstructing");
+            int playerLayer = LayerMask.NameToLayer("Player");
 
             // Check if the teleport position is valid
             Collider2D hitCollider = Physics2D.OverlapCircle(teleportPosition, 0.5f, ~layerMask);
@@ -194,6 +295,7 @@ public class PlayerScript : MonoBehaviour
             {
                 rb.position = teleportPosition;
                 manaBar.SpendMana(teleportManaCost);
+                StartCoroutine(TeleportCooldown());
             }
             else
             {
@@ -213,23 +315,4 @@ public class PlayerScript : MonoBehaviour
         yield return new WaitForSeconds(teleportCooldown);
         canTeleport = true;
     }
-
-    private void FixedUpdate()
-    {
-        moveDirection = move.ReadValue<Vector2>();
-        rb.velocity = new Vector2(moveDirection.x * MoveSpeed, moveDirection.y * MoveSpeed);
-
-        if (moveDirection.x > 0)
-        {
-            playerTransform.localScale = new Vector3(-1, 1, 1);
-        }
-        else if (moveDirection.x < 0)
-        {
-            playerTransform.localScale = new Vector3(1, 1, 1);
-        }
-    }
-    //     Vector2 aimDirection = mousePosition - rb.position;
-    //     float aimAngle = Mathf.Atan2(aimDirection.y, aimDirection.x) * Mathf.Rad2Deg - 90f;
-    //     rb.rotation = aimAngle;
-    // }
 }

@@ -12,6 +12,7 @@ public class WeaponScript : MonoBehaviour
     private Coroutine rapidFireCoroutine;
     private Vector2 mousePosition;
     private Rigidbody2D rb; // Reference to the player's Rigidbody2D
+    private Vector2 aimDirection;
 
     void Start()
     {
@@ -20,15 +21,18 @@ public class WeaponScript : MonoBehaviour
 
     void Update()
     {
-        // Update the mouse position
-        mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        aimDirection = (mousePosition - (Vector2)transform.position).normalized;
+        //Calculate the aiming direction
+        //Vector2 aimDirection = mousePosition - rb.position;
 
-        // Calculate the aiming direction
-        Vector2 aimDirection = mousePosition - rb.position;
         float aimAngle = Mathf.Atan2(aimDirection.y, aimDirection.x) * Mathf.Rad2Deg - 90f;
-
-        // Rotate the weapon
         transform.rotation = Quaternion.Euler(0f, 0f, aimAngle);
+    }
+
+    public Vector2 GetAimDirection()
+    {
+        return aimDirection;
     }
 
     public void Fire()

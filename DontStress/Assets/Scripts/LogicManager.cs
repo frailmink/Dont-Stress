@@ -9,6 +9,7 @@ public class LogicManager : MonoBehaviour
     #region declaring variables
     public GameObject upgradeCards;
     public TowerCardScript towerCardScript;
+    private bool isWaitingForRoundStart = false;
 
     public int numPathPointsRemoved;
     public int pathEndChance;
@@ -79,7 +80,11 @@ public class LogicManager : MonoBehaviour
             }
         }
 
-        if (allFinished && enemies.Length == 0)
+        // if (allFinished && enemies.Length == 0)
+        // {
+        //     StartCoroutine(DelayedNextRound());
+        // }
+            if (allFinished && enemies.Length == 0 && !isWaitingForRoundStart)
         {
             StartCoroutine(DelayedNextRound());
         }
@@ -87,10 +92,12 @@ public class LogicManager : MonoBehaviour
 
     private IEnumerator DelayedNextRound()
     {
-        yield return new WaitForSeconds(0f); 
+        isWaitingForRoundStart = true;
+        yield return new WaitForSeconds(5f); 
         upgradeCards.SetActive(true);
         // towerCardScript.NewCards();
         NextRound();
+        isWaitingForRoundStart = false;
     }
 
     private void NextRound()

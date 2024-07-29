@@ -92,7 +92,7 @@ public class PlacementScript : MonoBehaviour
         SpriteRenderer towersColor = instance.GetComponent<SpriteRenderer>();
         Vector3Int point = map.WorldToCell(pos);
         point.z = 0;
-        if (map.GetTile(point) == ground && coinManager.HasEnoughCoins(towerCost))
+        if (map.GetTile(point) == ground) // && coinManager.HasEnoughCoins(towerCost)
         {
             towersColor.color = greenColor;
             return true;
@@ -111,7 +111,7 @@ public class PlacementScript : MonoBehaviour
         bool placable = CheckIfPlacable();
         if (placable)
         {
-            coinManager.SpendCoins(towerCost);
+            // coinManager.SpendCoins(towerCost);
             Vector3Int point = map.WorldToCell(pos);
             point.z = 0;
             map.SetTile(point, taken);

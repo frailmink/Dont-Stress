@@ -10811,6 +10811,7 @@ GameObject:
   - component: {fileID: 2092584919}
   - component: {fileID: 2092584920}
   - component: {fileID: 2092584918}
+  - component: {fileID: 2092584921}
   - component: {fileID: 2092584922}
   - component: {fileID: 2092584923}
   m_Layer: 9
@@ -11037,7 +11038,7 @@ CapsuleCollider2D:
   m_Offset: {x: 0, y: 0}
   m_Size: {x: 0.95, y: 2.17}
   m_Direction: 0
---- !u!114 &2092584922
+--- !u!114 &2092584921
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

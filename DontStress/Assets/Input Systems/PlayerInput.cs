@@ -89,6 +89,15 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Power"",
+                    ""type"": ""Button"",
+                    ""id"": ""1ec27da4-131a-4122-a687-c90fab89e59e"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -212,6 +221,17 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                     ""action"": ""RapidFire"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""49d24e37-3779-4dc5-a349-eb20462e4eef"",
+                    ""path"": ""<Keyboard>/q"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Power"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -255,6 +275,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         m_Player_NextTower = m_Player.FindAction("NextTower", throwIfNotFound: true);
         m_Player_Teleport = m_Player.FindAction("Teleport", throwIfNotFound: true);
         m_Player_RapidFire = m_Player.FindAction("RapidFire", throwIfNotFound: true);
+        m_Player_Power = m_Player.FindAction("Power", throwIfNotFound: true);
         // Testing
         m_Testing = asset.FindActionMap("Testing", throwIfNotFound: true);
         m_Testing_N = m_Testing.FindAction("N", throwIfNotFound: true);
@@ -326,6 +347,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_NextTower;
     private readonly InputAction m_Player_Teleport;
     private readonly InputAction m_Player_RapidFire;
+    private readonly InputAction m_Player_Power;
     public struct PlayerActions
     {
         private @PlayerInput m_Wrapper;
@@ -337,6 +359,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         public InputAction @NextTower => m_Wrapper.m_Player_NextTower;
         public InputAction @Teleport => m_Wrapper.m_Player_Teleport;
         public InputAction @RapidFire => m_Wrapper.m_Player_RapidFire;
+        public InputAction @Power => m_Wrapper.m_Player_Power;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -367,6 +390,9 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
             @RapidFire.started += instance.OnRapidFire;
             @RapidFire.performed += instance.OnRapidFire;
             @RapidFire.canceled += instance.OnRapidFire;
+            @Power.started += instance.OnPower;
+            @Power.performed += instance.OnPower;
+            @Power.canceled += instance.OnPower;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -392,6 +418,9 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
             @RapidFire.started -= instance.OnRapidFire;
             @RapidFire.performed -= instance.OnRapidFire;
             @RapidFire.canceled -= instance.OnRapidFire;
+            @Power.started -= instance.OnPower;
+            @Power.performed -= instance.OnPower;
+            @Power.canceled -= instance.OnPower;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -464,6 +493,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         void OnNextTower(InputAction.CallbackContext context);
         void OnTeleport(InputAction.CallbackContext context);
         void OnRapidFire(InputAction.CallbackContext context);
+        void OnPower(InputAction.CallbackContext context);
     }
     public interface ITestingActions
     {

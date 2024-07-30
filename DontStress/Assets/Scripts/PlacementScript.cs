@@ -30,7 +30,7 @@ public class PlacementScript : MonoBehaviour
     private TowerScript script;
 
     public int towerCost = 10;
-    private CoinManager coinManager;
+    // private CoinManager coinManager;
 
     private void OnEnable()
     {
@@ -53,11 +53,11 @@ public class PlacementScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        coinManager = CoinManager.Instance;
-        if (coinManager == null)
-        {
-            Debug.LogError("CoinManager not found in the scene!");
-        }
+        // coinManager = CoinManager.Instance;
+        // if (coinManager == null)
+        // {
+        //     Debug.LogError("CoinManager not found in the scene!");
+        // }
         placed = false;
         pos = GetPosition();
         instance = Instantiate(tower, new Vector3(pos.x, pos.y, 0), transform.rotation);

@@ -248,6 +248,7 @@ public class PlayerScript : MonoBehaviour
         newScript.tower = towers[currentTowerIndex];
         newScript.ground = floor;
         newScript.taken = taken;
+        newScript.playerScript = this;
         GlobalVariables.SetBuildingMode(true);
     }
 

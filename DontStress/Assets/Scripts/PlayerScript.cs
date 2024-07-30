@@ -30,7 +30,7 @@ public class PlayerScript : MonoBehaviour
     public Transform playerTransform;
     public WeaponScript weapon;
 
-    private int currentTowerIndex = 0;  // Track the current tower index
+    public int currentTowerIndex = 0;  // Track the current tower index
 
     private InputAction teleport;
     public float teleportDistance = 5f; // Distance to teleport
@@ -197,11 +197,11 @@ public class PlayerScript : MonoBehaviour
 
     private void Build(InputAction.CallbackContext context)
     {
-        if (!GlobalVariables.GetBuildingMode())
+        if (!GlobalVariables.GetBuildingMode() && towers.Count != 0)
         {
             InstantiateBuildManager();
         }
-        else if (!PlacementScript.placed)
+        else if (!PlacementScript.placed && towers.Count != 0)
         {
             PlacementScript script = buildManagerInstance.GetComponent<PlacementScript>();
             script.DeleteTower();

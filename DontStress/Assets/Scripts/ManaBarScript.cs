@@ -3,12 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ManaBarScript : MonoBehaviour
+public class ManaBarScript : MonoBehaviour 
 {
     private Image barImage;
     private Mana mana;
-
-    public int manaLoss = 20;
 
     private void Awake()
     {
@@ -21,22 +19,29 @@ public class ManaBarScript : MonoBehaviour
     private void Update()
     {
         mana.Update();
+        UpdateManaBar();
+    }
 
-        if (Input.GetKeyDown(KeyCode.Space) && !GlobalVariables.Paused)
-        {
-            mana.SpendMana(manaLoss); // Adjust the amount of mana spent as needed
-        }
-
+    private void UpdateManaBar()
+    {
         barImage.fillAmount = mana.GetManaNormalized();
     }
 
+    public bool HasEnoughMana(int amount)
+    {
+        return mana.GetManaAmount() >= amount;
+    }
+
+    public void SpendMana(int amount)
+    {
+        mana.SpendMana(amount);
+        UpdateManaBar();
+    }
 }
 
 public class Mana
 {
-
     public const int manaMax = 100;
-
     private float manaAmount;
     private float manaRegen;
 
@@ -57,7 +62,7 @@ public class Mana
 
     public void SpendMana(int amount)
     {
-        if(manaAmount >= amount)
+        if (manaAmount >= amount)
         {
             manaAmount -= amount;
         }
@@ -67,8 +72,13 @@ public class Mana
         }
     }
 
+    public float GetManaAmount()
+    {
+        return manaAmount;
+    }
+
     public float GetManaNormalized()
     {
-        return manaAmount/manaMax;
+        return manaAmount / manaMax;
     }
 }

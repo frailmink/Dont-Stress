@@ -73,6 +73,24 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
+                    ""name"": ""Teleport"",
+                    ""type"": ""Button"",
+                    ""id"": ""08564434-9a0b-48d4-9dde-d36e033e57d3"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""RapidFire"",
+                    ""type"": ""Button"",
+                    ""id"": ""04eeb2c5-5718-4bae-ac8e-a2729ec0a4eb"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
                     ""name"": ""Power"",
                     ""type"": ""Button"",
                     ""id"": ""1ec27da4-131a-4122-a687-c90fab89e59e"",
@@ -184,6 +202,28 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
+                    ""id"": ""d014b51c-93e6-47da-9e96-bc58df24d9cd"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Teleport"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""812b519b-d0cd-4a7b-83a6-73ca4e266b68"",
+                    ""path"": ""<Mouse>/rightButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""RapidFire"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
                     ""id"": ""49d24e37-3779-4dc5-a349-eb20462e4eef"",
                     ""path"": ""<Keyboard>/q"",
                     ""interactions"": """",
@@ -233,6 +273,8 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         m_Player_Build = m_Player.FindAction("Build", throwIfNotFound: true);
         m_Player_PreviousTower = m_Player.FindAction("PreviousTower", throwIfNotFound: true);
         m_Player_NextTower = m_Player.FindAction("NextTower", throwIfNotFound: true);
+        m_Player_Teleport = m_Player.FindAction("Teleport", throwIfNotFound: true);
+        m_Player_RapidFire = m_Player.FindAction("RapidFire", throwIfNotFound: true);
         m_Player_Power = m_Player.FindAction("Power", throwIfNotFound: true);
         // Testing
         m_Testing = asset.FindActionMap("Testing", throwIfNotFound: true);
@@ -303,6 +345,8 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Build;
     private readonly InputAction m_Player_PreviousTower;
     private readonly InputAction m_Player_NextTower;
+    private readonly InputAction m_Player_Teleport;
+    private readonly InputAction m_Player_RapidFire;
     private readonly InputAction m_Player_Power;
     public struct PlayerActions
     {
@@ -313,6 +357,8 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         public InputAction @Build => m_Wrapper.m_Player_Build;
         public InputAction @PreviousTower => m_Wrapper.m_Player_PreviousTower;
         public InputAction @NextTower => m_Wrapper.m_Player_NextTower;
+        public InputAction @Teleport => m_Wrapper.m_Player_Teleport;
+        public InputAction @RapidFire => m_Wrapper.m_Player_RapidFire;
         public InputAction @Power => m_Wrapper.m_Player_Power;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
@@ -338,6 +384,12 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
             @NextTower.started += instance.OnNextTower;
             @NextTower.performed += instance.OnNextTower;
             @NextTower.canceled += instance.OnNextTower;
+            @Teleport.started += instance.OnTeleport;
+            @Teleport.performed += instance.OnTeleport;
+            @Teleport.canceled += instance.OnTeleport;
+            @RapidFire.started += instance.OnRapidFire;
+            @RapidFire.performed += instance.OnRapidFire;
+            @RapidFire.canceled += instance.OnRapidFire;
             @Power.started += instance.OnPower;
             @Power.performed += instance.OnPower;
             @Power.canceled += instance.OnPower;
@@ -360,6 +412,12 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
             @NextTower.started -= instance.OnNextTower;
             @NextTower.performed -= instance.OnNextTower;
             @NextTower.canceled -= instance.OnNextTower;
+            @Teleport.started -= instance.OnTeleport;
+            @Teleport.performed -= instance.OnTeleport;
+            @Teleport.canceled -= instance.OnTeleport;
+            @RapidFire.started -= instance.OnRapidFire;
+            @RapidFire.performed -= instance.OnRapidFire;
+            @RapidFire.canceled -= instance.OnRapidFire;
             @Power.started -= instance.OnPower;
             @Power.performed -= instance.OnPower;
             @Power.canceled -= instance.OnPower;
@@ -433,6 +491,8 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         void OnBuild(InputAction.CallbackContext context);
         void OnPreviousTower(InputAction.CallbackContext context);
         void OnNextTower(InputAction.CallbackContext context);
+        void OnTeleport(InputAction.CallbackContext context);
+        void OnRapidFire(InputAction.CallbackContext context);
         void OnPower(InputAction.CallbackContext context);
     }
     public interface ITestingActions

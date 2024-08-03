@@ -9,6 +9,9 @@ public class PlayerScript : MonoBehaviour
     private Animator animator;
     public List<GameObject> towers;
 
+    public List<GameObject> books;
+    private int currentBook = 0;
+
     public GameObject buildManager;
     public Tilemap map;
     public TileBase floor, taken;
@@ -149,14 +152,13 @@ public class PlayerScript : MonoBehaviour
         animator.SetFloat("DirectionX", moveDirection.x);
         animator.SetFloat("DirectionY", moveDirection.y);
         // Debugging: Output direction values
-        Debug.Log($"Direction: {moveDirection}");
     }
 
     private void OnEnable()
     {
-        shoot = PlayerControls.Player.Attack;
-        shoot.Enable();
-        shoot.performed += Fire;
+        // shoot = PlayerControls.Player.Attack;
+        // shoot.Enable();
+        // shoot.performed += Fire;
 
         move = PlayerControls.Player.Move;
         move.Enable();
@@ -168,15 +170,16 @@ public class PlayerScript : MonoBehaviour
         nextTower = PlayerControls.Player.NextTower;
         nextTower.Enable();
         nextTower.performed += SwapToNextTower;
+        nextTower.performed += SwapToNextBook;
 
         previousTower = PlayerControls.Player.PreviousTower;
         previousTower.Enable();
-        previousTower.performed += SwapToPreviousTower; 
+        previousTower.performed += SwapToPreviousTower;
+        previousTower.performed += SwapToPreviousBook;
 
         teleport = PlayerControls.Player.Teleport;
         teleport.Enable();
         teleport.performed += Teleport;
-        Debug.Log("Teleport action enabled and bound");
 
         rapidFire = PlayerControls.Player.RapidFire; 
         rapidFire.Enable();
@@ -187,7 +190,7 @@ public class PlayerScript : MonoBehaviour
     private void OnDisable()
     {
         move.Disable();
-        shoot.Disable();
+        // shoot.Disable();
         build.Disable();
         nextTower.Disable();
         previousTower.Disable();
@@ -216,7 +219,6 @@ public class PlayerScript : MonoBehaviour
         {
             // Cycle to the next tower index
             currentTowerIndex = (currentTowerIndex + 1) % towers.Count;
-            Debug.Log("Current Tower Index: " + currentTowerIndex);
             
             InstantiateBuildManager(); // Ensure build manager is updated
         }
@@ -228,9 +230,28 @@ public class PlayerScript : MonoBehaviour
         {
             // Cycle to the previous tower index
             currentTowerIndex = (currentTowerIndex - 1 + towers.Count) % towers.Count;
-            Debug.Log("Current Tower Index: " + currentTowerIndex);
 
             InstantiateBuildManager(); // Ensure build manager is updated
+        }
+    }
+
+    private void SwapToNextBook(InputAction.CallbackContext context)
+    {
+        if (!GlobalVariables.GetBuildingMode())
+        {
+            books[currentBook].GetComponent<BookClass>().SetSelectedFalse();
+            currentBook = (currentBook + 1) % books.Count;
+            books[currentBook].GetComponent<BookClass>().SetSelectedTrue();
+        }
+    }
+
+    private void SwapToPreviousBook(InputAction.CallbackContext context)
+    {
+        if (!GlobalVariables.GetBuildingMode())
+        {
+            books[currentBook].GetComponent<BookClass>().SetSelectedFalse();
+            currentBook = (currentBook - 1 + books.Count) % books.Count;
+            books[currentBook].GetComponent<BookClass>().SetSelectedTrue();
         }
     }
 
@@ -263,7 +284,6 @@ public class PlayerScript : MonoBehaviour
     {
         if (!canTeleport)
         {
-            Debug.Log("Teleportation is on cooldown.");
             return;
         }
 
@@ -277,14 +297,10 @@ public class PlayerScript : MonoBehaviour
             {
                 // aimDirection = transform.up;
                 teleportDirection = transform.up;
-                Debug.Log("Vector2.zero");
             }
 
             // Vector2 teleportPosition = rb.position + aimDirection * teleportDistance;
             Vector2 teleportPosition = rb.position + teleportDirection * teleportDistance;
-
-            // Debugging the teleport position
-            Debug.Log($"Attempting to teleport to position: {teleportPosition}");
 
             // Define the layer mask to ignore the NonObstructing layer
             int layerMask = LayerMask.GetMask("NonObstructing");

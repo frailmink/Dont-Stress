@@ -640,9 +640,9 @@ RectTransform:
   - {fileID: 646409952}
   m_Father: {fileID: 180809896}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -131, y: 466}
+  m_AnchorMin: {x: 0.5, y: 1}
+  m_AnchorMax: {x: 0.5, y: 1}
+  m_AnchoredPosition: {x: -6, y: -158}
   m_SizeDelta: {x: 340, y: 65}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &122626210
@@ -1697,9 +1697,9 @@ RectTransform:
   - {fileID: 253270070}
   m_Father: {fileID: 180809896}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 960, y: -534}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &322153408
@@ -2963,9 +2963,9 @@ RectTransform:
   - {fileID: 1931153740}
   m_Father: {fileID: 180809896}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 800, y: 470}
+  m_AnchorMin: {x: 1, y: 1}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: -160, y: -53}
   m_SizeDelta: {x: 160, y: 160}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &609221135
@@ -8951,9 +8951,9 @@ RectTransform:
   - {fileID: 1014147122}
   m_Father: {fileID: 180809896}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -720, y: 240}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 240, y: -274}
   m_SizeDelta: {x: 340, y: 65}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1773129177
@@ -10834,6 +10834,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   towers: []
+  books: []
   buildManager: {fileID: 6084967962051960621, guid: c08d8a4a568ac2542bebcae2a1a4221a, type: 3}
   map: {fileID: 1641838877}
   floor: {fileID: 11400000, guid: ac3784543f957694fb058f701b66549f, type: 2}
@@ -10841,6 +10842,7 @@ MonoBehaviour:
   MoveSpeed: 5
   playerTransform: {fileID: 2092584917}
   weapon: {fileID: 1187663514}
+  currentTowerIndex: 0
   teleportDistance: 5
   teleportCooldown: 1
   teleportManaCost: 20
@@ -10982,6 +10984,18 @@ MonoBehaviour:
   playerMovement: {fileID: 2092584915}
   playerCollider: {fileID: 2092584923}
   rb: {fileID: 2092584918}
+--- !u!114 &2092584921
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2092584914}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2433554aa97dd9b43897a215831a19c3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!95 &2092584922
 Animator:
   serializedVersion: 5
@@ -11038,18 +11052,6 @@ CapsuleCollider2D:
   m_Offset: {x: 0, y: 0}
   m_Size: {x: 0.95, y: 2.17}
   m_Direction: 0
---- !u!114 &2092584921
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2092584914}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2433554aa97dd9b43897a215831a19c3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &2105633077
 GameObject:
   m_ObjectHideFlags: 0
@@ -11486,6 +11488,63 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2122301775}
   m_CullTransparentMesh: 1
+--- !u!1001 &2066183883171980045
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1655891027468345319, guid: 22ed21aef786c5d40bfe66966ed7358c, type: 3}
+      propertyPath: m_Name
+      value: FireBook
+      objectReference: {fileID: 0}
+    - target: {fileID: 5165568967205705832, guid: 22ed21aef786c5d40bfe66966ed7358c, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 2.0874262
+      objectReference: {fileID: 0}
+    - target: {fileID: 5165568967205705832, guid: 22ed21aef786c5d40bfe66966ed7358c, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 2.4483416
+      objectReference: {fileID: 0}
+    - target: {fileID: 5165568967205705832, guid: 22ed21aef786c5d40bfe66966ed7358c, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.10813725
+      objectReference: {fileID: 0}
+    - target: {fileID: 5165568967205705832, guid: 22ed21aef786c5d40bfe66966ed7358c, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5165568967205705832, guid: 22ed21aef786c5d40bfe66966ed7358c, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5165568967205705832, guid: 22ed21aef786c5d40bfe66966ed7358c, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5165568967205705832, guid: 22ed21aef786c5d40bfe66966ed7358c, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5165568967205705832, guid: 22ed21aef786c5d40bfe66966ed7358c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5165568967205705832, guid: 22ed21aef786c5d40bfe66966ed7358c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5165568967205705832, guid: 22ed21aef786c5d40bfe66966ed7358c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 22ed21aef786c5d40bfe66966ed7358c, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -11502,3 +11561,4 @@ SceneRoots:
   - {fileID: 1085741801}
   - {fileID: 1860777720}
   - {fileID: 9369161}
+  - {fileID: 2066183883171980045}

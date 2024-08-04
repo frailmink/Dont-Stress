@@ -308,7 +308,7 @@ public class PlayerScript : MonoBehaviour
 
             // Check if the teleport position is valid
             Collider2D hitCollider = Physics2D.OverlapCircle(teleportPosition, 0.5f, ~layerMask);
-            if (hitCollider == null)
+            if (hitCollider == null && map.GetTile(new Vector3Int((int) teleportPosition.x, (int) teleportPosition.y, 0)) != null)
             {
                 rb.position = teleportPosition;
                 manaBar.SpendMana(teleportManaCost);
@@ -316,7 +316,8 @@ public class PlayerScript : MonoBehaviour
             }
             else
             {
-                Debug.Log($"Teleportation failed: destination obstructed by {hitCollider.name}.");
+                // Debug.Log($"Teleportation failed: destination obstructed by {hitCollider.name}.");
+                Debug.Log($"Teleportation failed: destination obstructed");
             }
         }
         else

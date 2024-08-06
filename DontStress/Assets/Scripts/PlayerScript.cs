@@ -58,6 +58,11 @@ public class PlayerScript : MonoBehaviour
         }
     }
 
+    private void Start()
+    {
+        books[0].GetComponent<BookClass>().SetSelectedTrue();
+    }
+
     private void Update()
     {
         moveDirection = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));

@@ -6,6 +6,11 @@ using UnityEngine.Tilemaps;
 
 public class PlayerScript : MonoBehaviour
 {
+    public GameObject upgradeUI;
+    public GameObject InteractionText;
+    public float interactionRadius = 3.5f;
+    private LayerMask interactionLayer;
+
     private Animator animator;
     public List<GameObject> towers;
 
@@ -24,6 +29,7 @@ public class PlayerScript : MonoBehaviour
     private InputAction move;
     private InputAction shoot;
     private InputAction build;
+    private InputAction interact;
     private InputAction nextTower;
     private InputAction previousTower;
 
@@ -46,7 +52,7 @@ public class PlayerScript : MonoBehaviour
 
     private void Awake()
     {
-
+        interactionLayer = LayerMask.GetMask("Tower");
         PlayerControls = new PlayerInput();
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();  // Get the Animator component
@@ -61,6 +67,7 @@ public class PlayerScript : MonoBehaviour
     private void Start()
     {
         books[0].GetComponent<BookClass>().SetSelectedTrue();
+        InteractionText.SetActive(false);
     }
 
     private void Update()
@@ -70,6 +77,7 @@ public class PlayerScript : MonoBehaviour
         Vector2 aimDirection = mousePosition - rb.position;
         float aimAngle = Mathf.Atan2(aimDirection.y, aimDirection.x) * Mathf.Rad2Deg - 90f;
 
+        CheckIfInteractionPossible();
         UpdateAnimatorParameters();
     }
 
@@ -172,6 +180,10 @@ public class PlayerScript : MonoBehaviour
         build.Enable();
         build.performed += Build;
 
+        interact = PlayerControls.Player.Interact;
+        interact.Enable();
+        interact.performed += Interact;
+
         nextTower = PlayerControls.Player.NextTower;
         nextTower.Enable();
         nextTower.performed += SwapToNextTower;
@@ -200,7 +212,40 @@ public class PlayerScript : MonoBehaviour
         nextTower.Disable();
         previousTower.Disable();
         teleport.Disable();
-        rapidFire.Disable(); 
+        rapidFire.Disable();
+        interact.Disable();
+    }
+
+    void CheckIfInteractionPossible()
+    {
+        Collider2D hit = Physics2D.OverlapCircle(transform.position, interactionRadius, interactionLayer);
+
+        if (hit)
+        {
+            InteractionText.SetActive(true);
+        } else
+        {
+            InteractionText.SetActive(false);
+        }
+    }
+
+    void Interact(InputAction.CallbackContext context)
+    {
+        Collider2D[] hits = Physics2D.OverlapCircleAll(transform.position, interactionRadius, interactionLayer);
+        Collider2D closestHit = null;
+        float closestDistance = Mathf.Infinity;
+
+        foreach (var hit in hits)
+        {
+            float distance = Vector2.Distance(transform.position, hit.transform.position);
+            if (distance < closestDistance)
+            {
+                closestDistance = distance;
+                closestHit = hit;
+            }
+        }
+
+        closestHit?.GetComponentInChildren<IInteractable>()?.Interact(upgradeUI);
     }
 
     private void Build(InputAction.CallbackContext context)

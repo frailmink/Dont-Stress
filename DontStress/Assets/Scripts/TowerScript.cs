@@ -3,10 +3,23 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class TowerScript : MonoBehaviour
+public class TowerScript : MonoBehaviour, IInteractable, IShopItem
 {
     public int strength = 1;
     public int speed = 1;
+
+    public int towerPrice = 1;
+
+    public int price
+    {
+        get => towerPrice;
+    }
+
+    public void Bought()
+    {
+        GameObject player = GameObject.FindGameObjectWithTag("Player");
+        player.GetComponent<PlayerScript>().towers.Add(gameObject.transform.parent.gameObject);
+    }
 
     public virtual void EnableScript()
     {
@@ -26,6 +39,12 @@ public class TowerScript : MonoBehaviour
     public void IncreaseSpeed(int amount)
     {
         speed += amount;
+    }
+
+    public void Interact(GameObject upgradeUI)
+    {
+        Debug.Log("dididi");
+        OpenUpgradeUI(upgradeUI);
     }
 
     public void OpenUpgradeUI(GameObject upgradeUI)

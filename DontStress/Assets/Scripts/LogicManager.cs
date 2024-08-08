@@ -84,7 +84,7 @@ public class LogicManager : MonoBehaviour
         // {
         //     StartCoroutine(DelayedNextRound());
         // }
-            if (allFinished && enemies.Length == 0 && !isWaitingForRoundStart)
+        if (allFinished && enemies.Length == 0 && !isWaitingForRoundStart)
         {
             StartCoroutine(DelayedNextRound());
         }
@@ -94,7 +94,7 @@ public class LogicManager : MonoBehaviour
     {
         isWaitingForRoundStart = true;
         yield return new WaitForSeconds(5f); 
-        upgradeCards.SetActive(true);
+        // upgradeCards.SetActive(true);
         // towerCardScript.NewCards();
         NextRound();
         isWaitingForRoundStart = false;
@@ -190,7 +190,6 @@ public class LogicManager : MonoBehaviour
                         Queue<Vector2> tempQ = new Queue<Vector2>(path);
                         for (int x = 0; x < randPointOnPath; x++)
                         {
-                            Debug.Log(tempQ.Peek());
                             tempQ.Dequeue();
                         }
 

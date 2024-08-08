@@ -69,9 +69,9 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Power",
+                    "name": "Interact",
                     "type": "Button",
-                    "id": "1ec27da4-131a-4122-a687-c90fab89e59e",
+                    "id": "d5c7c1fd-cae4-4c1b-8bfe-8c4f19b05cb6",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -202,12 +202,12 @@
                 },
                 {
                     "name": "",
-                    "id": "49d24e37-3779-4dc5-a349-eb20462e4eef",
-                    "path": "<Keyboard>/q",
+                    "id": "132d2582-0417-4920-9579-f0662d96176a",
+                    "path": "<Keyboard>/f",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Power",
+                    "action": "Interact",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

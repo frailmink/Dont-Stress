@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 3eefa7690643eca4eac08f8ee09f14b1
+guid: 0274c8d638fbb594da17a268c30cf237
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -48,7 +48,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 50
+  spritePixelsToUnits: 7
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -110,253 +110,148 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: TinySkellyWalk-45Left_0
+      name: FireBall_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 576
-        width: 192
-        height: 192
+        x: 33
+        y: 211
+        width: 4
+        height: 9
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b414f292c4c16db45b1a61ef2b4fd4ef
-      internalID: -1589644456
+      spriteID: 969eb5932e3e2ed418d4357447f945fe
+      internalID: -2120310218
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: TinySkellyWalk-45Left_1
+      name: FireBall_1
       rect:
         serializedVersion: 2
-        x: 192
-        y: 576
-        width: 192
-        height: 192
+        x: 123
+        y: 218
+        width: 11
+        height: 5
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c78c61e55b5e29444a5d354bf74ec6ad
-      internalID: 202951282
+      spriteID: 94b5e0ca7225e9d4fb9d09ef245d55b6
+      internalID: -757044589
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: TinySkellyWalk-45Left_2
+      name: FireBall_2
       rect:
         serializedVersion: 2
-        x: 384
-        y: 576
-        width: 192
-        height: 192
+        x: 219
+        y: 212
+        width: 6
+        height: 9
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7a4a0cd040dc8f144bf843ab39a62172
-      internalID: 2036842248
+      spriteID: bea1303f6877cf24687630e5dad19656
+      internalID: 517206426
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: TinySkellyWalk-45Left_3
+      name: FireBall_5
       rect:
         serializedVersion: 2
-        x: 0
-        y: 384
-        width: 192
-        height: 192
+        x: 127
+        y: 121
+        width: 5
+        height: 18
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 620267006956c5c4dbb94208e6dc7dc2
-      internalID: 2063675535
+      spriteID: f59bd49c23599b44a8c73dde4bd40f1d
+      internalID: -72310641
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: TinySkellyWalk-45Left_4
+      name: FireBall_4
       rect:
         serializedVersion: 2
-        x: 192
-        y: 384
-        width: 192
-        height: 192
+        x: 217
+        y: 126
+        width: 5
+        height: 40
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 73fd8c68492ddda478e6e6ffcc60ef2d
-      internalID: 807740808
+      spriteID: bf14c86dc077b0d4bb78cfcaf463ebb8
+      internalID: 708731891
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: TinySkellyWalk-45Left_5
+      name: FireBall_3
       rect:
         serializedVersion: 2
-        x: 384
-        y: 384
-        width: 192
-        height: 192
+        x: 34
+        y: 119
+        width: 8
+        height: 5
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 77f192fe99befdf49bfa00f3b2a443dc
-      internalID: 208850588
+      spriteID: b471ed192ee08d64790e74f39edc87b9
+      internalID: 1203175599
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: TinySkellyWalk-45Left_6
+      name: FireBall_6
       rect:
         serializedVersion: 2
-        x: 0
-        y: 192
-        width: 192
-        height: 192
+        x: 38
+        y: 42
+        width: 3
+        height: 18
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 903959101ae699444b4082c307494498
-      internalID: 1753235520
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: TinySkellyWalk-45Left_7
-      rect:
-        serializedVersion: 2
-        x: 192
-        y: 192
-        width: 192
-        height: 192
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 3f37b8717cd50d344b385794c1a81186
-      internalID: 1383506440
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: TinySkellyWalk-45Left_8
-      rect:
-        serializedVersion: 2
-        x: 384
-        y: 192
-        width: 192
-        height: 192
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 24b968f6e49da18489a54a9bc462b292
-      internalID: -506517344
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: TinySkellyWalk-45Left_9
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 0
-        width: 192
-        height: 192
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: b5964b6654d37ae42a68df7e3d2d12ea
-      internalID: 1839141027
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: TinySkellyWalk-45Left_10
-      rect:
-        serializedVersion: 2
-        x: 192
-        y: 0
-        width: 192
-        height: 192
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 143c8bf57af17ed428e2eeab54be39c9
-      internalID: -780795355
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: TinySkellyWalk-45Left_11
-      rect:
-        serializedVersion: 2
-        x: 384
-        y: 0
-        width: 192
-        height: 192
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: aff18f12b23190343b3a376c6ec7375c
-      internalID: -1864672616
+      spriteID: d3c48a2ecfcc4a24d8dc768423310ee6
+      internalID: -1639160322
       vertices: []
       indices: 
       edges: []
@@ -372,18 +267,13 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      TinySkellyWalk-45Left_0: -1589644456
-      TinySkellyWalk-45Left_1: 202951282
-      TinySkellyWalk-45Left_10: -780795355
-      TinySkellyWalk-45Left_11: -1864672616
-      TinySkellyWalk-45Left_2: 2036842248
-      TinySkellyWalk-45Left_3: 2063675535
-      TinySkellyWalk-45Left_4: 807740808
-      TinySkellyWalk-45Left_5: 208850588
-      TinySkellyWalk-45Left_6: 1753235520
-      TinySkellyWalk-45Left_7: 1383506440
-      TinySkellyWalk-45Left_8: -506517344
-      TinySkellyWalk-45Left_9: 1839141027
+      FireBall_0: -2120310218
+      FireBall_1: -757044589
+      FireBall_2: 517206426
+      FireBall_3: -72310641
+      FireBall_4: 708731891
+      FireBall_5: 1203175599
+      FireBall_6: -1639160322
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

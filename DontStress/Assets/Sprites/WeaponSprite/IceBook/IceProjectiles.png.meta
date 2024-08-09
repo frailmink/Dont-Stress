@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 1fb81da3b3922674ead10d2f497f1e7a
+guid: 0adf3240b3b4b4c4998bc9b488f074b4
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -48,7 +48,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 50
+  spritePixelsToUnits: 10
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -110,76 +110,76 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: TinySkellyWalk+45Left_0
+      name: IceProjectiles_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 192
-        width: 192
-        height: 192
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 24
+        y: 15
+        width: 3
+        height: 15
+      alignment: 2
+      pivot: {x: 0.5, y: 1}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b463864e3632909469754e711b90b847
-      internalID: 1644858387
+      spriteID: fa926c7781b0082408c706adc24cc239
+      internalID: -804102497
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: TinySkellyWalk+45Left_1
+      name: IceProjectiles_1
       rect:
         serializedVersion: 2
-        x: 192
-        y: 192
-        width: 192
-        height: 192
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 39
+        y: 25
+        width: 4
+        height: 25
+      alignment: 2
+      pivot: {x: 0.5, y: 1}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7e03380c01ae21a4caabf5bbafee0c3a
-      internalID: 1035241053
+      spriteID: 3918a95c70440fe4184a8e1018336b30
+      internalID: 662580732
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: TinySkellyWalk+45Left_2
+      name: IceProjectiles_2
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
-        width: 192
-        height: 192
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 55
+        y: 27
+        width: 4
+        height: 37
+      alignment: 9
+      pivot: {x: 0.56267166, y: 0.93023044}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2b25964bc991cc842ab5c0382417f00b
-      internalID: 1132610638
+      spriteID: e77aeb52bee0f254dbd10331ccb28492
+      internalID: 1018733000
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: TinySkellyWalk+45Left_3
+      name: IceProjectiles_3
       rect:
         serializedVersion: 2
-        x: 192
-        y: 0
-        width: 192
-        height: 192
+        x: 71
+        y: 20
+        width: 5
+        height: 37
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -187,8 +187,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d3a91f7cb94533b4c91109a499ea90a9
-      internalID: 398046039
+      spriteID: 5902994ddab5813408bc7b588ec59f14
+      internalID: 1270585972
       vertices: []
       indices: 
       edges: []
@@ -204,10 +204,10 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      TinySkellyWalk+45Left_0: 1644858387
-      TinySkellyWalk+45Left_1: 1035241053
-      TinySkellyWalk+45Left_2: 1132610638
-      TinySkellyWalk+45Left_3: 398046039
+      IceProjectiles_0: -804102497
+      IceProjectiles_1: 662580732
+      IceProjectiles_2: 1018733000
+      IceProjectiles_3: 1270585972
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -8,6 +8,7 @@ public class BulletScript : MonoBehaviour
     public float maxDistance = 20f; // Maximum distance before bullet disappears
 
     private Vector3 startPosition;
+    // public Animator animator;
 
     public void Initialize(float damage)
     {
@@ -17,7 +18,23 @@ public class BulletScript : MonoBehaviour
     private void Start()
     {
         startPosition = transform.position;
+        // animator = GetComponent<Animator>();
+        // animator = GetComponent<Animator>();
+        // Debug.Log("PlayingFireHold");
+        // animator.Play("FireHold");
     }
+
+    // public void PlayHoldAnim(string FireHold)
+    // {
+    //     if (animator == null)
+    //     {
+    //         Debug.LogError("Animator is not assigned, cannot play animation.");
+    //     }
+    //     else
+    //     {
+    //         animator.Play(FireHold);
+    //     }
+    // }
 
     private void Update()
     {
@@ -27,6 +44,11 @@ public class BulletScript : MonoBehaviour
             Destroy(gameObject);
         }
     }
+
+    // public void Shoot()
+    // {
+    //     animator.SetTrigger("Fire");
+    // }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {

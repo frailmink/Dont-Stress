@@ -85,70 +85,7 @@ public class PlayerScript : MonoBehaviour
     {
         moveDirection = move.ReadValue<Vector2>();
         rb.velocity = new Vector2(moveDirection.x * MoveSpeed, moveDirection.y * MoveSpeed);
-        #region extraCode
-        // animator.SetFloat("MoveX", moveDirection.x);
-        // animator.SetFloat("MoveY", moveDirection.y);
-
-        // Determine the direction and update the Animator parameter
-        // int direction = 0;
-
-        // if (moveDirection.y > 0)
-        // {
-        //     if (moveDirection.x > 0)
-        //     {
-        //         direction = 1; // UpRight
-        //     }
-        //     else if (moveDirection.x < 0)
-        //     {
-        //         direction = 2; // UpLeft
-        //     }
-        //     else
-        //     {
-        //         direction = 7; // Up
-        //     }
-        // }
-        // else if (moveDirection.y < 0)
-        // {
-        //     if (moveDirection.x > 0)
-        //     {
-        //         direction = 3; // DownRight
-        //     }
-        //     else if (moveDirection.x < 0)
-        //     {
-        //         direction = 4; // DownLeft
-        //     }
-        //     else
-        //     {
-        //         direction = 8; // Down
-        //     }
-        // }
-        // else if (moveDirection.x > 0)
-        // {
-        //     direction = 5; // Right
-        // }
-        // else if (moveDirection.x < 0)
-        // {
-        //     direction = 6; // Left
-        // }
-
-        // animator.SetInteger("Direction", direction);
-
-        // Flip the player sprite based on the horizontal movement direction
-        // if (moveDirection.x > 0)
-        // {
-        //     playerTransform.localScale = new Vector3(1, 1, 1); // Face right
-        // }
-        // else if (moveDirection.x < 0)
-        // {
-        //     playerTransform.localScale = new Vector3(-1, 1, 1); // Face left
-        // }
-        #endregion
-
     }
-    //     Vector2 aimDirection = mousePosition - rb.position;
-    //     float aimAngle = Mathf.Atan2(aimDirection.y, aimDirection.x) * Mathf.Rad2Deg - 90f;
-    //     rb.rotation = aimAngle;
-    // }
 
     private void UpdateAnimatorParameters()
     {
@@ -352,11 +289,9 @@ public class PlayerScript : MonoBehaviour
             // Vector2 teleportPosition = rb.position + aimDirection * teleportDistance;
             Vector2 teleportPosition = rb.position + teleportDirection * teleportDistance;
 
-            // Define the layer mask to ignore the NonObstructing layer
             int layerMask = LayerMask.GetMask("NonObstructing");
             int playerLayer = LayerMask.NameToLayer("Player");
 
-            // Check if the teleport position is valid
             Collider2D hitCollider = Physics2D.OverlapCircle(teleportPosition, 0.5f, ~layerMask);
             if (hitCollider == null && map.GetTile(new Vector3Int((int) teleportPosition.x, (int) teleportPosition.y, 0)) != null)
             {

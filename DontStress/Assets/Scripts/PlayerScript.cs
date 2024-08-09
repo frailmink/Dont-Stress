@@ -135,10 +135,10 @@ public class PlayerScript : MonoBehaviour
         teleport.Enable();
         teleport.performed += Teleport;
 
-        rapidFire = PlayerControls.Player.RapidFire; 
-        rapidFire.Enable();
-        rapidFire.performed += weapon.StartRapidFire; 
-        rapidFire.canceled += weapon.StopRapidFire; 
+        // rapidFire = PlayerControls.Player.RapidFire; 
+        // rapidFire.Enable();
+        // rapidFire.performed += weapon.StartRapidFire; 
+        // rapidFire.canceled += weapon.StopRapidFire; 
     }
 
     private void OnDisable()
@@ -149,7 +149,7 @@ public class PlayerScript : MonoBehaviour
         nextTower.Disable();
         previousTower.Disable();
         teleport.Disable();
-        rapidFire.Disable();
+        // rapidFire.Disable();
         interact.Disable();
     }
 

@@ -7,6 +7,9 @@ public abstract class BookClass : MonoBehaviour
 {
     protected static int numBooks = 0;
 
+    protected PlayerInput PlayerControls;
+    protected InputAction shoot;
+
     private float angleDif = 0;
     private static float angleDifStatic = 0;
 
@@ -24,8 +27,6 @@ public abstract class BookClass : MonoBehaviour
 
     private Transform player;
     private GameObject playerObject;
-    private PlayerInput PlayerControls;
-    private InputAction shoot;
 
     public bool active = false;
 
@@ -41,19 +42,19 @@ public abstract class BookClass : MonoBehaviour
     public static float rotationSpeed = 100f;
 
     public float cooldown = 0.1f;
-    private void OnEnable()
+    protected virtual void OnEnable()
     {
         shoot = PlayerControls.Player.Attack;
         shoot.Enable();
         shoot.performed += Fire;
     }
 
-    private void OnDisable()
+    protected virtual void OnDisable()
     {
         shoot.Disable();
     }
 
-    private void Awake()
+    protected virtual void Awake()
     {
         PlayerControls = new PlayerInput();
 
@@ -63,7 +64,7 @@ public abstract class BookClass : MonoBehaviour
         playerObject.GetComponent<PlayerScript>().books.Add(gameObject);
     }
 
-    private void Start()
+    protected virtual void Start()
     {
         numBooks++;
         bookIndex = numBooks;
@@ -89,9 +90,9 @@ public abstract class BookClass : MonoBehaviour
         Vector3 perpendicularDirection = line.normalized;
 
         // Set the rotation angle based on the perpendicular vector
-        float angle = Mathf.Atan2(perpendicularDirection.y, perpendicularDirection.x) * Mathf.Rad2Deg;
+        // float angle = Mathf.Atan2(perpendicularDirection.y, perpendicularDirection.x) * Mathf.Rad2Deg;
 
-        transform.rotation = Quaternion.Euler(0, 0, angle + 180);
+        // transform.rotation = Quaternion.Euler(0, 0, angle + 180);
         rb.velocity = new Vector2(speed.x * moveSpeed, speed.y * moveSpeed);
     }
 
@@ -103,9 +104,9 @@ public abstract class BookClass : MonoBehaviour
         Vector3 perpendicularDirection = line.normalized;
 
         // Set the rotation angle based on the perpendicular vector
-        float angle = Mathf.Atan2(perpendicularDirection.y, perpendicularDirection.x) * Mathf.Rad2Deg;
+        // float angle = Mathf.Atan2(perpendicularDirection.y, perpendicularDirection.x) * Mathf.Rad2Deg;
         
-        transform.rotation = Quaternion.Euler(0, 0, angle + 180);
+        // transform.rotation = Quaternion.Euler(0, 0, angle + 180);
 
         transform.position = objective;
     }

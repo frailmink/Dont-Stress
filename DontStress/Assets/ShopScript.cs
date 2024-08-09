@@ -51,10 +51,12 @@ public class ShopScript : MonoBehaviour
 
         itemsInShop.Add(randomItem);
         item.transform.Find("Image").GetComponentInChildren<Image>().sprite = randomItem.GetComponent<SpriteRenderer>().sprite;
+        item.transform.Find("Image").GetComponentInChildren<Image>().color = randomItem.GetComponent<SpriteRenderer>().color;
     }
 
     public void ResetItems()
     {
+        Debug.Log(resetCost);
         if (CoinManager.Instance.HasEnoughCoins(resetCost))
         {
             CoinManager.Instance.SpendCoins(resetCost);
@@ -81,7 +83,7 @@ public class ShopScript : MonoBehaviour
         if (CoinManager.Instance.HasEnoughCoins(shopItem.price))
         {
             CoinManager.Instance.SpendCoins(shopItem.price);
-            itemsInShop.RemoveAt(index);
+            // itemsInShop.RemoveAt(index);
             itemDisplay.SetActive(false);
             shopItem.Bought();
         }

@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 8ae913c3e46ec50489485c5fddc3ef90
+guid: 162b26c685f765a409392374165aa93d
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -48,7 +48,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 50
+  spritePixelsToUnits: 7
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -110,13 +110,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: TinySkellyWalkLeft_0
+      name: FireBookFlying_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 576
-        width: 192
-        height: 192
+        x: 34
+        y: 370
+        width: 13
+        height: 17
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -124,20 +124,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3a60d546121e2cd4b95e2b3c3a879739
-      internalID: 719399058
+      spriteID: 568fdd2b39806a946bb94615af8caf7b
+      internalID: -1056112650
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: TinySkellyWalkLeft_1
+      name: FireBookFlying_1
       rect:
         serializedVersion: 2
-        x: 192
-        y: 576
-        width: 192
-        height: 192
+        x: 124
+        y: 370
+        width: 13
+        height: 22
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -145,20 +145,62 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 82b8a286c9299594ca26b00133604170
-      internalID: -1213540805
+      spriteID: 5c24c64cf181797488dab09bc7e9ebbb
+      internalID: -2005780662
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: TinySkellyWalkLeft_2
+      name: FireBookFlying_2
+      rect:
+        serializedVersion: 2
+        x: 211
+        y: 370
+        width: 16
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 32f7f7b3bee470f419523f78a9ebde64
+      internalID: 1679170387
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireBookFlying_3
+      rect:
+        serializedVersion: 2
+        x: 295
+        y: 365
+        width: 26
+        height: 38
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2c9cf211af8214a4b97be39cb86d2af3
+      internalID: -1809174796
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireBookFlying_4
       rect:
         serializedVersion: 2
         x: 384
-        y: 576
-        width: 192
-        height: 192
+        y: 366
+        width: 27
+        height: 41
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -166,20 +208,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2dde78f983b42404d8d2e64ff8812605
-      internalID: 1264256180
+      spriteID: 8ca1959cbb0b68c409ecffb23601d743
+      internalID: -701824808
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: TinySkellyWalkLeft_3
+      name: FireBookFlying_5
       rect:
         serializedVersion: 2
-        x: 576
-        y: 576
-        width: 192
-        height: 192
+        x: 24
+        y: 276
+        width: 27
+        height: 41
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -187,20 +229,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d9ffb3a2d5555e942b570b73d700f8ec
-      internalID: 1277304147
+      spriteID: 6269bcbc171c40e489e685ec372d6aa5
+      internalID: -631328644
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: TinySkellyWalkLeft_4
+      name: FireBookFlying_6
       rect:
         serializedVersion: 2
-        x: 0
-        y: 384
-        width: 192
-        height: 192
+        x: 117
+        y: 281
+        width: 24
+        height: 19
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -208,20 +250,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 71e7c659b4e1b724c935a12473e8ac15
-      internalID: -1970906629
+      spriteID: 8ec069ad91fa785429c4d761c5966548
+      internalID: 937480351
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: TinySkellyWalkLeft_5
+      name: FireBookFlying_7
       rect:
         serializedVersion: 2
-        x: 192
-        y: 384
-        width: 192
-        height: 192
+        x: 207
+        y: 284
+        width: 24
+        height: 15
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -229,20 +271,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 60376189b18870d4694aec06657dddb5
-      internalID: -1464744371
+      spriteID: d9d2ab2a44a60ab4c8e47d1df4072b24
+      internalID: -371877154
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: TinySkellyWalkLeft_6
+      name: FireBookFlying_8
       rect:
         serializedVersion: 2
-        x: 384
-        y: 384
-        width: 192
-        height: 192
+        x: 297
+        y: 281
+        width: 24
+        height: 18
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -250,20 +292,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 32e33dfd253e97a439142e5ee4a2d9ea
-      internalID: -1092958380
+      spriteID: 0ebfa6622ecceb749aaee869bd59a407
+      internalID: 149597644
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: TinySkellyWalkLeft_7
+      name: FireBookFlying_9
       rect:
         serializedVersion: 2
-        x: 576
-        y: 384
-        width: 192
-        height: 192
+        x: 387
+        y: 276
+        width: 24
+        height: 18
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -271,20 +313,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: be574ab6e54195149aeace5d210dfb12
-      internalID: 587892822
+      spriteID: b3fc191f3b326cc47a2d6e15f78cd664
+      internalID: -1174214592
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: TinySkellyWalkLeft_8
+      name: FireBookFlying_10
       rect:
         serializedVersion: 2
-        x: 0
-        y: 192
-        width: 192
-        height: 192
+        x: 27
+        y: 190
+        width: 24
+        height: 15
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -292,20 +334,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4f65fea41c8810e45a3438d26a14c4af
-      internalID: 1669858514
+      spriteID: 383927abf2def8a41975ad049ae5588c
+      internalID: 1879344268
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: TinySkellyWalkLeft_9
+      name: FireBookFlying_11
       rect:
         serializedVersion: 2
-        x: 192
-        y: 192
-        width: 192
-        height: 192
+        x: 117
+        y: 191
+        width: 24
+        height: 19
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -313,20 +355,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8228e2a778c4d6a4b8a5d2d8def83ef2
-      internalID: -2143854267
+      spriteID: c24985f7c0614f445b7735e9e6e1d6ed
+      internalID: -253725969
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: TinySkellyWalkLeft_10
+      name: FireBookFlying_12
       rect:
         serializedVersion: 2
-        x: 384
-        y: 192
-        width: 192
-        height: 192
+        x: 207
+        y: 194
+        width: 24
+        height: 15
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -334,20 +376,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 450e7dfdcb2008f4795a65e5fd6126dd
-      internalID: -2120937828
+      spriteID: 69ad615270565824487e1c6ab494ae5b
+      internalID: -908087546
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: TinySkellyWalkLeft_11
+      name: FireBookFlying_13
       rect:
         serializedVersion: 2
-        x: 576
-        y: 192
-        width: 192
-        height: 192
+        x: 297
+        y: 191
+        width: 24
+        height: 18
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -355,20 +397,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: aba2416b19181514faeb892fb2bf01ac
-      internalID: -1425648989
+      spriteID: c424bbe59561cb94b9f22e371f87afb4
+      internalID: -1314920733
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: TinySkellyWalkLeft_12
+      name: FireBookFlying_14
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
-        width: 192
-        height: 192
+        x: 387
+        y: 186
+        width: 24
+        height: 18
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -376,20 +418,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5e072aa7d78039d438411a787d44b8a0
-      internalID: -778065612
+      spriteID: f36470939d7cfe841810ae1700556150
+      internalID: -1956643833
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: TinySkellyWalkLeft_13
+      name: FireBookFlying_15
       rect:
         serializedVersion: 2
-        x: 192
-        y: 0
-        width: 192
-        height: 192
+        x: 27
+        y: 96
+        width: 24
+        height: 18
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -397,20 +439,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2ea8ad25e97fa7743b1c92da8f3e4178
-      internalID: 911361667
+      spriteID: d2f1dcd85a584854ebdfac1bd7c11852
+      internalID: -1714964057
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: TinySkellyWalkLeft_14
+      name: FireBookFlying_16
       rect:
         serializedVersion: 2
-        x: 384
-        y: 0
-        width: 192
-        height: 192
+        x: 117
+        y: 96
+        width: 24
+        height: 18
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -418,20 +460,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2edaf3b4c14bc28418eef1e7d3b6e58c
-      internalID: 1511597406
+      spriteID: 88f21a115c11a0442a17ffdf72235ddc
+      internalID: -1572053048
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: TinySkellyWalkLeft_15
+      name: FireBookFlying_17
       rect:
         serializedVersion: 2
-        x: 576
-        y: 0
-        width: 192
-        height: 192
+        x: 207
+        y: 96
+        width: 24
+        height: 18
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -439,8 +481,113 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 44cf13ec7c4461f48b735cd13c8d9ef8
-      internalID: 1535521056
+      spriteID: 45127a5254b34944b9748b132449b092
+      internalID: -1966839716
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireBookFlying_18
+      rect:
+        serializedVersion: 2
+        x: 301
+        y: 100
+        width: 16
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 79b6ef4e3d0bfbe4ba75f7d9c7d2cc30
+      internalID: 171656299
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireBookFlying_19
+      rect:
+        serializedVersion: 2
+        x: 394
+        y: 100
+        width: 13
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e68f6800c2f3c2444a722cf74b0a4251
+      internalID: -1983106710
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireBookFlying_20
+      rect:
+        serializedVersion: 2
+        x: 34
+        y: 8
+        width: 18
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 99ae95f4d9ac44247b2446e68286b3e8
+      internalID: 471305131
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireBookFlying_21
+      rect:
+        serializedVersion: 2
+        x: 124
+        y: 10
+        width: 22
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e699eac6f27e1144586d5e308a4af5bd
+      internalID: 217645128
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireBookFlying_23
+      rect:
+        serializedVersion: 2
+        x: 214
+        y: 10
+        width: 22
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fc0e577d951a90d4693717173817c7a8
+      internalID: 1807609783
       vertices: []
       indices: 
       edges: []
@@ -456,22 +603,31 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      TinySkellyWalkLeft_0: 719399058
-      TinySkellyWalkLeft_1: -1213540805
-      TinySkellyWalkLeft_10: -2120937828
-      TinySkellyWalkLeft_11: -1425648989
-      TinySkellyWalkLeft_12: -778065612
-      TinySkellyWalkLeft_13: 911361667
-      TinySkellyWalkLeft_14: 1511597406
-      TinySkellyWalkLeft_15: 1535521056
-      TinySkellyWalkLeft_2: 1264256180
-      TinySkellyWalkLeft_3: 1277304147
-      TinySkellyWalkLeft_4: -1970906629
-      TinySkellyWalkLeft_5: -1464744371
-      TinySkellyWalkLeft_6: -1092958380
-      TinySkellyWalkLeft_7: 587892822
-      TinySkellyWalkLeft_8: 1669858514
-      TinySkellyWalkLeft_9: -2143854267
+      FireBookFlying_0: -1056112650
+      FireBookFlying_1: -2005780662
+      FireBookFlying_10: 1879344268
+      FireBookFlying_11: -253725969
+      FireBookFlying_12: -908087546
+      FireBookFlying_13: -1314920733
+      FireBookFlying_14: -1956643833
+      FireBookFlying_15: -1714964057
+      FireBookFlying_16: -1572053048
+      FireBookFlying_17: -1966839716
+      FireBookFlying_18: 171656299
+      FireBookFlying_19: -1983106710
+      FireBookFlying_2: 1679170387
+      FireBookFlying_20: 471305131
+      FireBookFlying_21: 217645128
+      FireBookFlying_22: -319276665
+      FireBookFlying_23: 1807609783
+      FireBookFlying_24: 97294601
+      FireBookFlying_3: -1809174796
+      FireBookFlying_4: -701824808
+      FireBookFlying_5: -631328644
+      FireBookFlying_6: 937480351
+      FireBookFlying_7: -371877154
+      FireBookFlying_8: 149597644
+      FireBookFlying_9: -1174214592
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

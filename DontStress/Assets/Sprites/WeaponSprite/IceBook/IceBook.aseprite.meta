@@ -1,0 +1,844 @@
+fileFormatVersion: 2
+guid: 42bae44cf8fb17e41aac4794f340b3ad
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: 11500000, guid: 62a9f0aa5b59740cfbadc7e5f9823bb0, type: 3}
+  textureImporterSettings:
+    alphaSource: 1
+    mipMapMode: 0
+    enableMipMap: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+    convertToNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+    swizzle: 50462976
+    isReadable: 0
+    streamingMipmaps: 0
+    streamingMipmapsPriority: 0
+    vTOnly: 0
+    ignoreMipmapLimit: 0
+    nPOTScale: 1
+    sRGBTexture: 1
+    spriteMode: 2
+    spriteExtrude: 1
+    spriteMeshType: 1
+    alignment: 0
+    spritePivot: {x: 0.5, y: 0.5}
+    spritePixelsToUnits: 7
+    spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+    spriteGenerateFallbackPhysicsShape: 0
+    generateCubemap: 6
+    cubemapConvolution: 0
+    seamlessCubemap: 0
+    alphaIsTransparency: 1
+    spriteTessellationDetail: -1
+    textureType: 8
+    textureShape: 1
+    singleChannelComponent: 0
+    flipbookRows: 0
+    flipbookColumns: 0
+    ignorePngGamma: 0
+    cookieMode: 0
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+    normalMap: 0
+    textureFormat: 0
+    maxTextureSize: 0
+    lightmap: 0
+    compressionQuality: 0
+    linearTexture: 0
+    grayScaleToAlpha: 0
+    rGBM: 0
+    cubemapConvolutionSteps: 0
+    cubemapConvolutionExponent: 0
+    maxTextureSizeSet: 0
+    compressionQualitySet: 0
+    textureFormatSet: 0
+    applyGammaDecoding: 0
+  previousAsepriteImporterSettings:
+    fileImportMode: 1
+    importHiddenLayers: 0
+    layerImportMode: 1
+    defaultPivotSpace: 0
+    defaultPivotAlignment: 7
+    customPivotPosition: {x: 0.5, y: 0.5}
+    spritePadding: 0
+    generateModelPrefab: 1
+    generateAnimationClips: 1
+    addSortingGroup: 1
+    addShadowCasters: 0
+  asepriteImporterSettings:
+    fileImportMode: 1
+    importHiddenLayers: 0
+    layerImportMode: 1
+    defaultPivotSpace: 0
+    defaultPivotAlignment: 7
+    customPivotPosition: {x: 0.5, y: 0.5}
+    spritePadding: 0
+    generateModelPrefab: 1
+    generateAnimationClips: 1
+    addSortingGroup: 1
+    addShadowCasters: 0
+  importFileNodeState: 1
+  platformSettingsDirtyTick: 638587985463891477
+  textureAssetName: 
+  singleSpriteImportData:
+  - name: 
+    originalName: 
+    pivot: {x: 0, y: 0}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    spriteID: 
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 0, y: 0}
+  animatedSpriteImportData:
+  - name: IceBook_Frame_3
+    originalName: 
+    pivot: {x: 0.42857146, y: -0.15151516}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 36
+      y: 4
+      width: 35
+      height: 33
+    spriteID: 9290ac3563d1c1a468f1391999bb8b30
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 36, y: 4}
+  - name: IceBook_Frame_4
+    originalName: 
+    pivot: {x: 0.41176474, y: -0.1875}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 36
+      y: 45
+      width: 34
+      height: 32
+    spriteID: 5e33ec82c8b152d48a83b6ac68dd7179
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 36, y: 45}
+  - name: IceBook_Frame_5
+    originalName: 
+    pivot: {x: 0.48000002, y: -0.27272728}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 79
+      y: 4
+      width: 25
+      height: 22
+    spriteID: 6ff7c625f82c946449498e5b5214d457
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 79, y: 4}
+  - name: IceBook_Frame_6
+    originalName: 
+    pivot: {x: 0.45833328, y: -0.5789474}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 36
+      y: 233
+      width: 24
+      height: 19
+    spriteID: 433f1b0a9dd29c74e9627e4d5ba888ef
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 36, y: 233}
+  - name: IceBook_Frame_7
+    originalName: 
+    pivot: {x: 0.45833328, y: -0.93333334}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 79
+      y: 86
+      width: 24
+      height: 15
+    spriteID: 3afff4290e894224e908f7b53d9b3d38
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 79, y: 86}
+  - name: IceBook_Frame_8
+    originalName: 
+    pivot: {x: 0.45833328, y: -0.61111116}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 79
+      y: 34
+      width: 24
+      height: 18
+    spriteID: 97cfe7a9c9a02d34985076aca7b5dbf7
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 79, y: 34}
+  - name: IceBook_Frame_9
+    originalName: 
+    pivot: {x: 0.45833328, y: -0.33333337}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 79
+      y: 60
+      width: 24
+      height: 18
+    spriteID: 770f331b00c66984895a9d976725e592
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 79, y: 60}
+  - name: IceBook_Frame_10
+    originalName: 
+    pivot: {x: 0.45833328, y: -0.6666667}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 79
+      y: 109
+      width: 24
+      height: 15
+    spriteID: e3ecf55ee251c194791f5cb26c7bea24
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 79, y: 109}
+  - name: IceBook_Frame_11
+    originalName: 
+    pivot: {x: 0.45833328, y: -0.37931037}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 36
+      y: 126
+      width: 24
+      height: 29
+    spriteID: 01ee654884217094c975569e1061497d
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 36, y: 126}
+  - name: IceBook_Frame_12
+    originalName: 
+    pivot: {x: 0.45833328, y: -0.56}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 36
+      y: 200
+      width: 24
+      height: 25
+    spriteID: 8a5e6a6e8839e9a4499620825e1df4b7
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 36, y: 200}
+  - name: IceBook_Frame_13
+    originalName: 
+    pivot: {x: 0.45833328, y: -0.37931037}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 36
+      y: 163
+      width: 24
+      height: 29
+    spriteID: 28aa354003338464bbe1a24dc57a4ff5
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 36, y: 163}
+  - name: IceBook_Frame_14
+    originalName: 
+    pivot: {x: 0.45833328, y: -0.18181819}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 36
+      y: 85
+      width: 24
+      height: 33
+    spriteID: 1807d680538852048abc3f17601036ae
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 36, y: 85}
+  - name: IceBook_Frame_15
+    originalName: 
+    pivot: {x: 0.38983646, y: -0.3359166}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 216
+      width: 24
+      height: 35
+    spriteID: 1c54808a17c91284ca8b3102cdd49cca
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 4, y: 216}
+  - name: IceBook_Frame_16
+    originalName: 
+    pivot: {x: 0.42259556, y: -0.4884206}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 156
+      width: 24
+      height: 52
+    spriteID: 460c5e4861f904a4f97da1e3fd0c611e
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 4, y: 156}
+  - name: IceBook_Frame_17
+    originalName: 
+    pivot: {x: 0.42408493, y: -0.4334082}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 4
+      width: 24
+      height: 69
+    spriteID: 04697cdd28146514b8a36d9817959948
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 4, y: 4}
+  - name: IceBook_Frame_18
+    originalName: 
+    pivot: {x: 0.42408386, y: -0.36353937}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 81
+      width: 24
+      height: 67
+    spriteID: 369a7ed4540989f468146c5f5c35bfbf
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 4, y: 81}
+  - name: IceBook_Frame_0
+    originalName: 
+    pivot: {x: 0.30769238, y: -0.5882353}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 111
+      y: 34
+      width: 13
+      height: 17
+    spriteID: e0329bbfee294ac4db29a377a4ace9f4
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 111, y: 34}
+  - name: IceBook_Frame_1
+    originalName: 
+    pivot: {x: 0.30769238, y: -0.45454547}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 103
+      y: 209
+      width: 13
+      height: 22
+    spriteID: 61bb060a9493a2843ac34edfffe99af5
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 103, y: 209}
+  - name: IceBook_Frame_2
+    originalName: 
+    pivot: {x: 0.43750003, y: -0.47619048}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 79
+      y: 132
+      width: 16
+      height: 21
+    spriteID: 0a5304921a458e94d938d6593ef3b378
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 79, y: 132}
+  - name: IceBook_Frame_19
+    originalName: 
+    pivot: {x: 0.43750003, y: -0.47619048}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 79
+      y: 161
+      width: 16
+      height: 21
+    spriteID: 794e007ef27a5a3408512aaebd2b23ce
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 79, y: 161}
+  - name: IceBook_Frame_20
+    originalName: 
+    pivot: {x: 0.30769238, y: -0.45454547}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 79
+      y: 190
+      width: 13
+      height: 22
+    spriteID: d11c338a69e02d24493305c6f8656d1e
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 79, y: 190}
+  - name: IceBook_Frame_21
+    originalName: 
+    pivot: {x: 0.23529418, y: -0.44444448}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 103
+      y: 132
+      width: 17
+      height: 18
+    spriteID: 94320d21d12f4f146b40d3375105dfe9
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 103, y: 132}
+  - name: IceBook_Frame_22
+    originalName: 
+    pivot: {x: 0.22222228, y: -0.5882353}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 103
+      y: 158
+      width: 18
+      height: 17
+    spriteID: 7e36a5e8ac1007644b85bb0ad736b111
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 103, y: 158}
+  - name: IceBook_Frame_23
+    originalName: 
+    pivot: {x: 0.23529418, y: -0.5555556}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 103
+      y: 183
+      width: 17
+      height: 18
+    spriteID: 6ba13ca2f8ccf2149a998d77809de1b4
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 103, y: 183}
+  spriteSheetImportData: []
+  asepriteLayers:
+  - layerIndex: 0
+    guid: -492643052
+    name: IceBook
+    layerFlags: 0
+    layerType: 0
+    blendMode: 0
+    cells:
+    - name: IceBook_Frame_3
+      frameIndex: 3
+      cellRect:
+        x: 25
+        y: 5
+        width: 35
+        height: 33
+      spriteId: 9290ac3563d1c1a468f1391999bb8b30
+    - name: IceBook_Frame_4
+      frameIndex: 4
+      cellRect:
+        x: 26
+        y: 6
+        width: 34
+        height: 32
+      spriteId: 5e33ec82c8b152d48a83b6ac68dd7179
+    - name: IceBook_Frame_5
+      frameIndex: 5
+      cellRect:
+        x: 28
+        y: 6
+        width: 25
+        height: 22
+      spriteId: 6ff7c625f82c946449498e5b5214d457
+    - name: IceBook_Frame_6
+      frameIndex: 6
+      cellRect:
+        x: 29
+        y: 11
+        width: 24
+        height: 19
+      spriteId: 433f1b0a9dd29c74e9627e4d5ba888ef
+    - name: IceBook_Frame_7
+      frameIndex: 7
+      cellRect:
+        x: 29
+        y: 14
+        width: 24
+        height: 15
+      spriteId: 3afff4290e894224e908f7b53d9b3d38
+    - name: IceBook_Frame_8
+      frameIndex: 8
+      cellRect:
+        x: 29
+        y: 11
+        width: 24
+        height: 18
+      spriteId: 97cfe7a9c9a02d34985076aca7b5dbf7
+    - name: IceBook_Frame_9
+      frameIndex: 9
+      cellRect:
+        x: 29
+        y: 6
+        width: 24
+        height: 18
+      spriteId: 770f331b00c66984895a9d976725e592
+    - name: IceBook_Frame_10
+      frameIndex: 10
+      cellRect:
+        x: 29
+        y: 10
+        width: 24
+        height: 15
+      spriteId: e3ecf55ee251c194791f5cb26c7bea24
+    - name: IceBook_Frame_11
+      frameIndex: 11
+      cellRect:
+        x: 29
+        y: 11
+        width: 24
+        height: 29
+      spriteId: 01ee654884217094c975569e1061497d
+    - name: IceBook_Frame_12
+      frameIndex: 12
+      cellRect:
+        x: 29
+        y: 14
+        width: 24
+        height: 25
+      spriteId: 8a5e6a6e8839e9a4499620825e1df4b7
+    - name: IceBook_Frame_13
+      frameIndex: 13
+      cellRect:
+        x: 29
+        y: 11
+        width: 24
+        height: 29
+      spriteId: 28aa354003338464bbe1a24dc57a4ff5
+    - name: IceBook_Frame_14
+      frameIndex: 14
+      cellRect:
+        x: 29
+        y: 6
+        width: 24
+        height: 33
+      spriteId: 1807d680538852048abc3f17601036ae
+    - name: IceBook_Frame_15
+      frameIndex: 15
+      cellRect:
+        x: 29
+        y: 11
+        width: 24
+        height: 35
+      spriteId: 1c54808a17c91284ca8b3102cdd49cca
+    - name: IceBook_Frame_16
+      frameIndex: 16
+      cellRect:
+        x: 29
+        y: 14
+        width: 24
+        height: 52
+      spriteId: 460c5e4861f904a4f97da1e3fd0c611e
+    - name: IceBook_Frame_17
+      frameIndex: 17
+      cellRect:
+        x: 29
+        y: 11
+        width: 24
+        height: 69
+      spriteId: 04697cdd28146514b8a36d9817959948
+    - name: IceBook_Frame_18
+      frameIndex: 18
+      cellRect:
+        x: 29
+        y: 6
+        width: 24
+        height: 67
+      spriteId: 369a7ed4540989f468146c5f5c35bfbf
+    - name: IceBook_Frame_0
+      frameIndex: 0
+      cellRect:
+        x: 36
+        y: 10
+        width: 13
+        height: 17
+      spriteId: e0329bbfee294ac4db29a377a4ace9f4
+    - name: IceBook_Frame_1
+      frameIndex: 1
+      cellRect:
+        x: 36
+        y: 10
+        width: 13
+        height: 22
+      spriteId: 61bb060a9493a2843ac34edfffe99af5
+    - name: IceBook_Frame_2
+      frameIndex: 2
+      cellRect:
+        x: 33
+        y: 10
+        width: 16
+        height: 21
+      spriteId: 0a5304921a458e94d938d6593ef3b378
+    - name: IceBook_Frame_19
+      frameIndex: 19
+      cellRect:
+        x: 33
+        y: 10
+        width: 16
+        height: 21
+      spriteId: 794e007ef27a5a3408512aaebd2b23ce
+    - name: IceBook_Frame_20
+      frameIndex: 20
+      cellRect:
+        x: 36
+        y: 10
+        width: 13
+        height: 22
+      spriteId: d11c338a69e02d24493305c6f8656d1e
+    - name: IceBook_Frame_21
+      frameIndex: 21
+      cellRect:
+        x: 36
+        y: 8
+        width: 17
+        height: 18
+      spriteId: 94320d21d12f4f146b40d3375105dfe9
+    - name: IceBook_Frame_22
+      frameIndex: 22
+      cellRect:
+        x: 36
+        y: 10
+        width: 18
+        height: 17
+      spriteId: 7e36a5e8ac1007644b85bb0ad736b111
+    - name: IceBook_Frame_23
+      frameIndex: 23
+      cellRect:
+        x: 36
+        y: 10
+        width: 17
+        height: 18
+      spriteId: 6ba13ca2f8ccf2149a998d77809de1b4
+    linkedCells: []
+    parentIndex: -1
+  platformSettings:
+  - name: DefaultTexturePlatform
+    overridden: 0
+    ignorePlatformSupport: 0
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    androidETC2FallbackOverride: 0
+  - name: Standalone
+    overridden: 0
+    ignorePlatformSupport: 0
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    androidETC2FallbackOverride: 0
+  - name: Server
+    overridden: 0
+    ignorePlatformSupport: 0
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    androidETC2FallbackOverride: 0
+  secondarySpriteTextures: []
+  spritePackingTag: 
+  canvasSize: {x: 80, y: 80}

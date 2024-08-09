@@ -142,7 +142,7 @@ GameObject:
   - component: {fileID: 2283366626253584678}
   - component: {fileID: 860916076366746873}
   - component: {fileID: 3681288054634301590}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: AOE
   m_TagString: Untagged
   m_Icon: {fileID: 0}

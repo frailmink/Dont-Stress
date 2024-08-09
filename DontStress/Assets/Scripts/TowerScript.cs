@@ -8,7 +8,7 @@ public class TowerScript : MonoBehaviour, IInteractable, IShopItem
     public int strength = 1;
     public int speed = 1;
 
-    public int towerPrice = 1;
+    public int towerPrice;
 
     public int price
     {

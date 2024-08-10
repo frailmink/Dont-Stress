@@ -16,6 +16,7 @@ public class WeaponScript : MonoBehaviour
     private Animator animator;
     private PlayerInput inputActions;
     private InputAction fire;
+    private InputAction rapidFire;
 
 
     void Awake()
@@ -36,6 +37,11 @@ public class WeaponScript : MonoBehaviour
         fire.Enable();
         fire.started += StartHoldingFire;
         fire.canceled += ReleaseFire;
+
+        rapidFire = inputActions.Player.RapidFire;
+        rapidFire.Enable();
+        rapidFire.performed += StartRapidFire;
+        rapidFire.canceled += StopRapidFire;
     }
 
     void OnDisable()

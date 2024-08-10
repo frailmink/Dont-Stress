@@ -118,8 +118,11 @@ public class PlacementScript : MonoBehaviour
             instance.GetComponent<SpriteRenderer>().color = originalColor;
             instance.GetComponent<BoxCollider2D>().enabled = true;
             script.EnableScript();
-            playerScript.currentTowerIndex = (playerScript.currentTowerIndex - 1 + playerScript.towers.Count) % playerScript.towers.Count;
             playerScript.towers.Remove(tower);
+            if (playerScript.towers.Count > 0)
+            {
+                playerScript.currentTowerIndex = (playerScript.currentTowerIndex - 1 + playerScript.towers.Count) % playerScript.towers.Count;
+            }
             placed = true;
             GlobalVariables.SetBuildingMode(false);
             Destroy(this.gameObject);

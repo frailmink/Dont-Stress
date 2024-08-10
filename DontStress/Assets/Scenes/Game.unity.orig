@@ -2721,9 +2721,6 @@ MonoBehaviour:
   shopItemDisplay: {fileID: 4836773271165846721, guid: 2d76b94811d831247a583c0f481e3f2d, type: 3}
   possibleItems:
   - {fileID: 8764541476008199230, guid: ef5d81c5f2dc8f543b5b3695ec700fbe, type: 3}
-  - {fileID: 607801719444412279, guid: 20d0af8320afbc34da190553c74b46d6, type: 3}
-  - {fileID: 607801719444412279, guid: 6959cfa3795bc8f4980601c5af4c1b57, type: 3}
-  - {fileID: 607801719444412279, guid: 864ce3686abd84b48ad745926f336cf6, type: 3}
   numItems: 6
   resetCost: 5
 --- !u!114 &523878396
@@ -6704,7 +6701,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1187663513
 Transform:
   m_ObjectHideFlags: 0
@@ -6828,7 +6825,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1216151754
 Transform:
   m_ObjectHideFlags: 0
@@ -11733,8 +11730,13 @@ MonoBehaviour:
   playerTransform: {fileID: 2092584917}
   weapon: {fileID: 1187663514}
   currentTowerIndex: 0
+<<<<<<< HEAD
+  teleportDistance: 5
+  teleportCooldown: 1
+=======
   teleportDistance: 10
   teleportCooldown: 0
+>>>>>>> origin/dev
   teleportManaCost: 20
   manaBar: {fileID: 1694860641}
 --- !u!212 &2092584916
@@ -11876,6 +11878,18 @@ MonoBehaviour:
   playerMovement: {fileID: 2092584915}
   playerCollider: {fileID: 2092584923}
   rb: {fileID: 2092584918}
+--- !u!114 &2092584921
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2092584914}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2433554aa97dd9b43897a215831a19c3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!95 &2092584922
 Animator:
   serializedVersion: 5

@@ -6,8 +6,16 @@ using UnityEngine.Tilemaps;
 
 public class PlayerScript : MonoBehaviour
 {
+    public GameObject upgradeUI;
+    public GameObject InteractionText;
+    public float interactionRadius = 3.5f;
+    private LayerMask interactionLayer;
+
     private Animator animator;
     public List<GameObject> towers;
+
+    public List<GameObject> books;
+    private int currentBook = 0;
 
     public GameObject buildManager;
     public Tilemap map;
@@ -21,6 +29,7 @@ public class PlayerScript : MonoBehaviour
     private InputAction move;
     private InputAction shoot;
     private InputAction build;
+    private InputAction interact;
     private InputAction nextTower;
     private InputAction previousTower;
 
@@ -43,7 +52,7 @@ public class PlayerScript : MonoBehaviour
 
     private void Awake()
     {
-
+        interactionLayer = LayerMask.GetMask("Tower");
         PlayerControls = new PlayerInput();
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();  // Get the Animator component
@@ -55,6 +64,12 @@ public class PlayerScript : MonoBehaviour
         }
     }
 
+    private void Start()
+    {
+        books[0].GetComponent<BookClass>().SetSelectedTrue();
+        InteractionText.SetActive(false);
+    }
+
     private void Update()
     {
         moveDirection = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
@@ -62,6 +77,7 @@ public class PlayerScript : MonoBehaviour
         Vector2 aimDirection = mousePosition - rb.position;
         float aimAngle = Mathf.Atan2(aimDirection.y, aimDirection.x) * Mathf.Rad2Deg - 90f;
 
+        CheckIfInteractionPossible();
         UpdateAnimatorParameters();
     }
 
@@ -101,22 +117,28 @@ public class PlayerScript : MonoBehaviour
         build.Enable();
         build.performed += Build;
 
+        interact = PlayerControls.Player.Interact;
+        interact.Enable();
+        interact.performed += Interact;
+
         nextTower = PlayerControls.Player.NextTower;
         nextTower.Enable();
         nextTower.performed += SwapToNextTower;
+        nextTower.performed += SwapToNextBook;
 
         previousTower = PlayerControls.Player.PreviousTower;
         previousTower.Enable();
-        previousTower.performed += SwapToPreviousTower; 
+        previousTower.performed += SwapToPreviousTower;
+        previousTower.performed += SwapToPreviousBook;
 
         teleport = PlayerControls.Player.Teleport;
         teleport.Enable();
         teleport.performed += Teleport;
 
-        rapidFire = PlayerControls.Player.RapidFire; 
-        rapidFire.Enable();
-        rapidFire.performed += weapon.StartRapidFire; 
-        rapidFire.canceled += weapon.StopRapidFire; 
+        // rapidFire = PlayerControls.Player.RapidFire; 
+        // rapidFire.Enable();
+        // rapidFire.performed += weapon.StartRapidFire; 
+        // rapidFire.canceled += weapon.StopRapidFire; 
     }
 
     private void OnDisable()
@@ -127,7 +149,40 @@ public class PlayerScript : MonoBehaviour
         nextTower.Disable();
         previousTower.Disable();
         teleport.Disable();
-        rapidFire.Disable(); 
+        // rapidFire.Disable();
+        interact.Disable();
+    }
+
+    void CheckIfInteractionPossible()
+    {
+        Collider2D hit = Physics2D.OverlapCircle(transform.position, interactionRadius, interactionLayer);
+
+        if (hit)
+        {
+            InteractionText.SetActive(true);
+        } else
+        {
+            InteractionText.SetActive(false);
+        }
+    }
+
+    void Interact(InputAction.CallbackContext context)
+    {
+        Collider2D[] hits = Physics2D.OverlapCircleAll(transform.position, interactionRadius, interactionLayer);
+        Collider2D closestHit = null;
+        float closestDistance = Mathf.Infinity;
+
+        foreach (var hit in hits)
+        {
+            float distance = Vector2.Distance(transform.position, hit.transform.position);
+            if (distance < closestDistance)
+            {
+                closestDistance = distance;
+                closestHit = hit;
+            }
+        }
+
+        closestHit?.GetComponentInChildren<IInteractable>()?.Interact(upgradeUI);
     }
 
     private void Build(InputAction.CallbackContext context)
@@ -151,7 +206,6 @@ public class PlayerScript : MonoBehaviour
         {
             // Cycle to the next tower index
             currentTowerIndex = (currentTowerIndex + 1) % towers.Count;
-            Debug.Log("Current Tower Index: " + currentTowerIndex);
             
             InstantiateBuildManager(); // Ensure build manager is updated
         }
@@ -163,9 +217,28 @@ public class PlayerScript : MonoBehaviour
         {
             // Cycle to the previous tower index
             currentTowerIndex = (currentTowerIndex - 1 + towers.Count) % towers.Count;
-            Debug.Log("Current Tower Index: " + currentTowerIndex);
 
             InstantiateBuildManager(); // Ensure build manager is updated
+        }
+    }
+
+    private void SwapToNextBook(InputAction.CallbackContext context)
+    {
+        if (!GlobalVariables.GetBuildingMode())
+        {
+            books[currentBook].GetComponent<BookClass>().SetSelectedFalse();
+            currentBook = (currentBook + 1) % books.Count;
+            books[currentBook].GetComponent<BookClass>().SetSelectedTrue();
+        }
+    }
+
+    private void SwapToPreviousBook(InputAction.CallbackContext context)
+    {
+        if (!GlobalVariables.GetBuildingMode())
+        {
+            books[currentBook].GetComponent<BookClass>().SetSelectedFalse();
+            currentBook = (currentBook - 1 + books.Count) % books.Count;
+            books[currentBook].GetComponent<BookClass>().SetSelectedTrue();
         }
     }
 
@@ -198,7 +271,6 @@ public class PlayerScript : MonoBehaviour
     {
         if (!canTeleport)
         {
-            Debug.Log("Teleportation is on cooldown.");
             return;
         }
 
@@ -212,19 +284,16 @@ public class PlayerScript : MonoBehaviour
             {
                 // aimDirection = transform.up;
                 teleportDirection = transform.up;
-                Debug.Log("Vector2.zero");
             }
 
             // Vector2 teleportPosition = rb.position + aimDirection * teleportDistance;
             Vector2 teleportPosition = rb.position + teleportDirection * teleportDistance;
 
-            // Debug.Log($"Attempting to teleport to position: {teleportPosition}");
-
             int layerMask = LayerMask.GetMask("NonObstructing");
             int playerLayer = LayerMask.NameToLayer("Player");
 
             Collider2D hitCollider = Physics2D.OverlapCircle(teleportPosition, 0.5f, ~layerMask);
-            if (hitCollider == null)
+            if (hitCollider == null && map.GetTile(new Vector3Int((int) teleportPosition.x, (int) teleportPosition.y, 0)) != null)
             {
                 rb.position = teleportPosition;
                 manaBar.SpendMana(teleportManaCost);
@@ -232,7 +301,8 @@ public class PlayerScript : MonoBehaviour
             }
             else
             {
-                Debug.Log($"Teleportation failed: destination obstructed by {hitCollider.name}.");
+                // Debug.Log($"Teleportation failed: destination obstructed by {hitCollider.name}.");
+                Debug.Log($"Teleportation failed: destination obstructed");
             }
         }
         else

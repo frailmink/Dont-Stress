@@ -19,7 +19,7 @@ public class PowerButtonPressScript : MonoBehaviour
 
     private void OnEnable()
     {
-        usePower = PlayerControls.Player.Power;
+        // usePower = PlayerControls.Player.Power;
         usePower.Enable();
         usePower.performed += RunPower;
     }

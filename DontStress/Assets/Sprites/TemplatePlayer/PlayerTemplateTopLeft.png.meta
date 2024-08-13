@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: b7465daa3680c2448947af6c0613133e
+guid: 17f83a2a7b23f884cba18c6c0266aa29
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -110,49 +110,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: TinySkellyWalkUp_0
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 384
-        width: 192
-        height: 192
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 359173e3397ee4f458def91a5ee18869
-      internalID: 623015800
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: TinySkellyWalkUp_1
-      rect:
-        serializedVersion: 2
-        x: 192
-        y: 384
-        width: 192
-        height: 192
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: b24d818b4762ba042af4147196a3264b
-      internalID: 1708577008
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: TinySkellyWalkUp_2
+      name: TinySkellyWalk+45Left_0
       rect:
         serializedVersion: 2
         x: 0
@@ -166,14 +124,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 359847400e385234cbcce7b84f3c2570
-      internalID: 104131871
+      spriteID: b463864e3632909469754e711b90b847
+      internalID: 1644858387
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: TinySkellyWalkUp_3
+      name: TinySkellyWalk+45Left_1
       rect:
         serializedVersion: 2
         x: 192
@@ -187,14 +145,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f3dfd065fd7b0104f88f99f1e785b929
-      internalID: 1496111273
+      spriteID: 7e03380c01ae21a4caabf5bbafee0c3a
+      internalID: 1035241053
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: TinySkellyWalkUp_4
+      name: TinySkellyWalk+45Left_2
       rect:
         serializedVersion: 2
         x: 0
@@ -208,14 +166,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 024ae28f3bd04914bad38cf6688682b0
-      internalID: -295746134
+      spriteID: 2b25964bc991cc842ab5c0382417f00b
+      internalID: 1132610638
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: TinySkellyWalkUp_5
+      name: TinySkellyWalk+45Left_3
       rect:
         serializedVersion: 2
         x: 192
@@ -229,8 +187,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7c9312e7d3f219244b027a77c65fb584
-      internalID: -221933442
+      spriteID: d3a91f7cb94533b4c91109a499ea90a9
+      internalID: 398046039
       vertices: []
       indices: 
       edges: []
@@ -246,12 +204,10 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      TinySkellyWalkUp_0: 623015800
-      TinySkellyWalkUp_1: 1708577008
-      TinySkellyWalkUp_2: 104131871
-      TinySkellyWalkUp_3: 1496111273
-      TinySkellyWalkUp_4: -295746134
-      TinySkellyWalkUp_5: -221933442
+      TinySkellyWalk+45Left_0: 1644858387
+      TinySkellyWalk+45Left_1: 1035241053
+      TinySkellyWalk+45Left_2: 1132610638
+      TinySkellyWalk+45Left_3: 398046039
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

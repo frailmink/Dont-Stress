@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.EventSystems;
+using System.IO;
+using System.Runtime.Serialization.Formatters.Binary;
 
 // public class MainMenuScript : MonoBehaviour
 // {
@@ -14,25 +16,54 @@ using UnityEngine.EventSystems;
 
 public class MainMenuScript : MonoBehaviour
 {
+    public GameObject continueButton;
+    public GameObject starterBook;
+
     public GameObject mainCamera;
     public GameObject eventSystems; 
     private bool gameSceneLoaded = false;
+    private bool oldGameAv = true;
 
     private void Awake()
     {
+        if (!File.Exists(GlobalVariables.saveDataPath))
+        {
+            oldGameAv = false;
+            continueButton.SetActive(false);
+        }
+
         ManageEventSystems();
         ManageAudioListeners();
     }
 
-    public void PlayGame()
+    public void ContinueGame()
     {
         // eventSystems.SetActive(false);
         // mainCamera.GetComponent<AudioListener>().enabled = false;
         // mainCamera.SetActive(false);
         // SceneManager.LoadSceneAsync("Game", LoadSceneMode.Additive);
-        SceneManager.LoadSceneAsync("Game");
+        string path = GlobalVariables.saveDataPath;
+        if (File.Exists(path))
+        {
+            BinaryFormatter formatter = new BinaryFormatter();
+            FileStream stream = new FileStream(path, FileMode.Open);
+
+            SaveDataClass data = formatter.Deserialize(stream) as SaveDataClass;
+            stream.Close();
+            SceneManager.LoadSceneAsync("StarterVillage");
+            gameSceneLoaded = true;
+        }
+    }
+
+    public void NewGame()
+    {
+        List<GameObject> starterBooks = new List<GameObject>();
+        starterBooks.Add(starterBook);
+        SaveSystem.SaveGame(starterBooks);
+        SceneManager.LoadSceneAsync("StarterVillage");
         gameSceneLoaded = true;
     }
+
     private void ResumeGame()
     {
         GlobalVariables.Paused = false;

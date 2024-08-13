@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class GlobalVariables : MonoBehaviour
 {
+    public static string saveDataPath = Application.persistentDataPath + "/player.txt";
+
     public static bool Paused = false;
     public static int squareWidth, squareHeight;
     private static bool buildingModeOn;

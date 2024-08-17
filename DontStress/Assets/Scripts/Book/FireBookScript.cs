@@ -19,12 +19,6 @@ public class FireBookScript : BookClass
         animator = GetComponent<Animator>();
     }
 
-    protected override void OnEnable()
-    {
-        base.OnEnable();
-        shoot.canceled += ReleaseFire;
-    }
-
     public override void UsePower()
     {
         animator.SetBool("IsHoldingFire", true);
@@ -40,14 +34,11 @@ public class FireBookScript : BookClass
         // bullet.GetComponent<Rigidbody2D>().AddForce(aimDirection * fireForce, ForceMode2D.Impulse);
     }
 
-    public void ReleaseFire(InputAction.CallbackContext context)
+    public override void ReleasePower()
     {
-        if (context.canceled)
-        {
-            animator.SetBool("IsHoldingFire", false);
-            // animator.SetFloat("Blend", 1.0f);
-            Fire();
-        }
+        animator.SetBool("IsHoldingFire", false);
+        // animator.SetFloat("Blend", 1.0f);
+        Fire();
     }
 
     private void Fire()

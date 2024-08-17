@@ -22,6 +22,7 @@ public abstract class BookClass : MonoBehaviour
 
     private bool selected = false;
     private bool canShoot = true;
+    private bool activated = false;
 
     private Vector3 mousePosition;
 
@@ -47,6 +48,7 @@ public abstract class BookClass : MonoBehaviour
         shoot = PlayerControls.Player.Attack;
         shoot.Enable();
         shoot.performed += Fire;
+        shoot.canceled += ReleaseFire;
     }
 
     protected virtual void OnDisable()
@@ -152,10 +154,21 @@ public abstract class BookClass : MonoBehaviour
     {
         if (canShoot && selected && !active)
         {
+            activated = true;
             UsePower();
             StartCoroutine(PowerCooldown());
         }
     }
+
+    protected void ReleaseFire(InputAction.CallbackContext context)
+    {
+        if (activated)
+        {
+            ReleasePower();
+            activated = false;
+        }
+    }
+
 
     public void SetSelectedTrue()
     {
@@ -179,4 +192,5 @@ public abstract class BookClass : MonoBehaviour
     }
 
     public abstract void UsePower();
+    public abstract void ReleasePower();
 }

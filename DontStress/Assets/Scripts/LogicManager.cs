@@ -31,8 +31,9 @@ public class LogicManager : MonoBehaviour
     private List<int> temp = new List<int> { 0, 1, 2, 3 };
 
     private int waveNumber = 1;
+    public DualGridTilemap dualGridTilemapscript;
     #endregion
-    
+
     private void OnEnable()
     {
         PlayerControls = new PlayerInput();
@@ -106,6 +107,7 @@ public class LogicManager : MonoBehaviour
         // EnemySpawner.health *= 1f;
         waveNumber++;
         WaveManager.Instance.AddWave();
+        dualGridTilemapscript.RefreshDisplayTilemap();
         GameObject[] enemySpawners = GameObject.FindGameObjectsWithTag("EnemySpawner");
 
         foreach (GameObject spawner in enemySpawners)
@@ -113,8 +115,8 @@ public class LogicManager : MonoBehaviour
             EnemySpawner script = spawner.GetComponent<EnemySpawner>();
             foreach (EnemySpawner.EnemyType enemyType in script.enemyTypes)
             {
-                enemyType.speed *= 1.1f;
-                enemyType.health *= 1.5f;
+                enemyType.speed *= 2f;//1.1f;
+                enemyType.health *= 2f;//1.5f;
             }
             Destroy(spawner);
         }
@@ -229,6 +231,7 @@ public class LogicManager : MonoBehaviour
                 }
             }
         }
+        dualGridTilemapscript.RefreshDisplayTilemap();
     }
 
     private Queue<Vector2> RandomPathEnd(Vector2 topRightCorner, Queue<Vector2> Q)
@@ -252,6 +255,7 @@ public class LogicManager : MonoBehaviour
         return tempQ;
     }
 
+
     private Queue<Vector2> CreatePath(Vector2 bottomLeftPoint, Vector2 direction, List<int> listOfX, List<int> listOfY, Vector2 pathEnd, Queue<Vector2> Q, int num)
     {
         Vector2 randomPoint = GetRandomPointOnSquareEdge(GlobalVariables.squareWidth, GlobalVariables.squareHeight, direction);
@@ -268,8 +272,7 @@ public class LogicManager : MonoBehaviour
         path.Enqueue(pathStart);
 
         path = PathManager.CreatePoints(listOfX, listOfY, path, pathEnd, pathStart, num, bottomLeftPoint);
-
-        // path = PathManager.OrderQueue(pathStart, pathEnd, path);
+        path = PathManager.OrderQueue(pathStart, pathEnd, path);
 
         path.Enqueue(pathEnd);
         Queue<Vector2> fullPath = PathManager.CreatePath(pathStart, pathEnd, map, path, pathTile, red, green);
@@ -279,18 +282,7 @@ public class LogicManager : MonoBehaviour
         return fullPath;
     }
 
-    private Queue<Vector2> EnqueueWholeQueue(Queue<Vector2> DequeuingQ, Queue<Vector2> QueueingQ)
-    {
-        Queue<Vector2> tempQ = QueueingQ;
-        while (DequeuingQ.Count > 0)
-        {
-            tempQ.Enqueue(DequeuingQ.Dequeue());
-        }
-
-        return tempQ;
-    }
-
-    Vector2 GetRandomPointOnSquareEdge(int width, int height, Vector2 direction)
+    private Vector2 GetRandomPointOnSquareEdge(int width, int height, Vector2 direction)
     {
         List<int> edges = RemoveEdge(direction);
 
@@ -299,9 +291,7 @@ public class LogicManager : MonoBehaviour
             return Vector2.zero;
         }
 
-        // Randomly select an edge from the remaining edges
         int randomEdge = edges[Random.Range(0, edges.Count)];
-
         int x = 0, y = 0;
 
         switch (randomEdge)
@@ -331,6 +321,17 @@ public class LogicManager : MonoBehaviour
         return new Vector2(x, y);
     }
 
+
+    private Queue<Vector2> EnqueueWholeQueue(Queue<Vector2> DequeuingQ, Queue<Vector2> QueueingQ)
+    {
+        Queue<Vector2> tempQ = QueueingQ;
+        while (DequeuingQ.Count > 0)
+        {
+            tempQ.Enqueue(DequeuingQ.Dequeue());
+        }
+
+        return tempQ;
+    }
     private List<int> RemoveEdge(Vector2 direction)
     {
         // edge (0: bottom, 1: right, 2: top, 3: left)
@@ -338,13 +339,16 @@ public class LogicManager : MonoBehaviour
         if (direction.x == 1)
         {
             temp.Remove(3);
-        } else if (direction.x == -1)
+        }
+        else if (direction.x == -1)
         {
             temp.Remove(1);
-        } else if (direction.y == 1)
+        }
+        else if (direction.y == 1)
         {
             temp.Remove(0);
-        } else
+        }
+        else
         {
             temp.Remove(2);
         }
@@ -366,6 +370,7 @@ public class LogicManager : MonoBehaviour
         }
         return Vector2.zero;
     }
+
 
     public void DrawBackground(int width, int height, Vector2 startCoord)
     {
